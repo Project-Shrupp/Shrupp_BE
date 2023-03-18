@@ -1,6 +1,9 @@
 package com.shrupp.shrupp.domain.post.dto.request;
 
-public record PostUpdateRequest(String content,
-                                String background,
-                                Long memberId) {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+public record PostUpdateRequest(@NotNull String content,
+                                @NotBlank String background,
+                                @NotNull Long memberId) {
 }
