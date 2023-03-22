@@ -4,6 +4,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record PostUpdateRequest(@NotNull String content,
-                                @NotBlank String background,
+                                @NotBlank String backgroundColor,
                                 @NotNull Long memberId) {
 }

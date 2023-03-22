@@ -1,6 +1,5 @@
 package com.shrupp.shrupp.domain.post.service;
 
-import com.shrupp.shrupp.domain.member.repository.MemberRepository;
 import com.shrupp.shrupp.domain.member.service.MemberService;
 import com.shrupp.shrupp.domain.post.domain.Post;
 import com.shrupp.shrupp.domain.post.dto.request.PostRegisterRequest;
@@ -11,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +32,7 @@ public class PostService {
 
     public Post update(Long id, PostUpdateRequest postUpdateRequest) {
         Post post = findById(id);
-        post.updatePost(postUpdateRequest.content(), postUpdateRequest.background());
+        post.updatePost(postUpdateRequest.content(), postUpdateRequest.backgroundColor());
 
         return post;
     }

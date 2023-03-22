@@ -8,13 +8,13 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public record PostRegisterRequest(@NotNull String content,
-                                  @NotBlank String background,
+                                  @NotBlank String backgroundColor,
                                   @NotNull Long memberId) {
 
     public Post toPostEntity(Member member) {
         return Post.builder()
                 .content(content)
-                .background(background)
+                .backgroundColor(backgroundColor)
                 .created(LocalDateTime.now())
                 .lastUpdated(LocalDateTime.now())
                 .member(member)
