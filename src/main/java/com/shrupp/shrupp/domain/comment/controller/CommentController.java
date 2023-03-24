@@ -2,8 +2,11 @@ package com.shrupp.shrupp.domain.comment.controller;
 
 import com.shrupp.shrupp.domain.comment.domain.Comment;
 import com.shrupp.shrupp.domain.comment.dto.request.CommentRegisterRequest;
+import com.shrupp.shrupp.domain.comment.dto.request.CommentReportRequest;
 import com.shrupp.shrupp.domain.comment.dto.request.CommentUpdateRequest;
+import com.shrupp.shrupp.domain.comment.dto.response.CommentReportResponse;
 import com.shrupp.shrupp.domain.comment.dto.response.CommentResponse;
+import com.shrupp.shrupp.domain.comment.service.CommentReportService;
 import com.shrupp.shrupp.domain.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +22,7 @@ import java.util.Objects;
 public class CommentController {
 
     private final CommentService commentService;
+    private final CommentReportService commentReportService;
 
     @GetMapping
     public ResponseEntity<List<CommentResponse>> commentList(@RequestParam Long postId) {
@@ -42,5 +46,11 @@ public class CommentController {
         commentService.deleteComment(id);
 
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/{commentId}/reports")
+    public ResponseEntity<CommentReportResponse> commentReport(@PathVariable Long commentId,
+                                                               @RequestBody @Validated CommentReportRequest commentReportRequest) {
+        return ResponseEntity.ok(commentReportService.report(commentId, commentReportRequest).toCommentReportResponse());
     }
 }
