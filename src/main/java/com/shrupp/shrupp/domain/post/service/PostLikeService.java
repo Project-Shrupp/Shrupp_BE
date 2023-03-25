@@ -43,4 +43,8 @@ public class PostLikeService {
         postLikeRepository.delete(postLike.get());
         return true;
     }
+
+    public Long getPostLikeCount(Long postId) {
+        return postLikeRepository.countPostLikesByPostId(postId);
+    }
 }
