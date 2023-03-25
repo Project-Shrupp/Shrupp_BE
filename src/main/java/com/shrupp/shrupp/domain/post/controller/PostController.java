@@ -5,6 +5,7 @@ import com.shrupp.shrupp.domain.post.dto.request.PostLikeRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostRegisterRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostReportRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostUpdateRequest;
+import com.shrupp.shrupp.domain.post.dto.response.PostLikeTallyResponse;
 import com.shrupp.shrupp.domain.post.dto.response.PostReportResponse;
 import com.shrupp.shrupp.domain.post.dto.response.PostResponse;
 import com.shrupp.shrupp.domain.post.dto.response.SimplePostResponse;
@@ -75,12 +76,17 @@ public class PostController {
     }
 
     @DeleteMapping("/{postId}/likes")
-    public ResponseEntity<String> postUnlike(@PathVariable Long postId,
+    public ResponseEntity<Objects> postUnlike(@PathVariable Long postId,
                                              @RequestBody @Validated PostLikeRequest postLikeRequest) {
         if (postLikeService.unlike(postId, postLikeRequest)) {
             return ResponseEntity.ok().build();
         }
 
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/{postId}/likes/count")
+    public ResponseEntity<PostLikeTallyResponse> postLikeCount(@PathVariable Long postId) {
+        return ResponseEntity.ok(new PostLikeTallyResponse(postLikeService.getPostLikeCount(postId)));
     }
 }
