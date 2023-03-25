@@ -29,6 +29,10 @@ public class CommentService {
         return commentRepository.findCommentsByPostId(postId);
     }
 
+    public Long getCommentCountByPostId(Long postId) {
+        return commentRepository.countCommentsByPostId(postId);
+    }
+
     public Comment addComment(CommentRegisterRequest commentRegisterRequest) {
         return commentRepository.save(commentRegisterRequest.toCommentEntity(
                 postService.findById(commentRegisterRequest.postId()),

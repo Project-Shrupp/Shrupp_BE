@@ -6,6 +6,7 @@ import com.shrupp.shrupp.domain.comment.dto.request.CommentReportRequest;
 import com.shrupp.shrupp.domain.comment.dto.request.CommentUpdateRequest;
 import com.shrupp.shrupp.domain.comment.dto.response.CommentReportResponse;
 import com.shrupp.shrupp.domain.comment.dto.response.CommentResponse;
+import com.shrupp.shrupp.domain.comment.dto.response.CommentTallyResponse;
 import com.shrupp.shrupp.domain.comment.service.CommentReportService;
 import com.shrupp.shrupp.domain.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,11 @@ public class CommentController {
         return ResponseEntity.ok(commentService.findCommentsByPostId(postId).stream()
                 .map(Comment::toCommentResponse)
                 .toList());
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<CommentTallyResponse> commentCount(@RequestParam Long postId) {
+        return ResponseEntity.ok(new CommentTallyResponse(commentService.getCommentCountByPostId(postId)));
     }
 
     @PostMapping
