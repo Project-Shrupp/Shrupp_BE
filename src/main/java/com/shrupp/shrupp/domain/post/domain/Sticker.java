@@ -16,7 +16,7 @@ public class Sticker {
     private String category;
     private Double xCoordinate;
     private Double yCoordinate;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
