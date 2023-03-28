@@ -15,8 +15,6 @@ public record PostRegisterRequest(@NotNull String content,
         return Post.builder()
                 .content(content)
                 .backgroundColor(backgroundColor)
-                .created(LocalDateTime.now())
-                .lastUpdated(LocalDateTime.now())
                 .member(member)
                 .build();
     }
