@@ -14,8 +14,6 @@ public record CommentRegisterRequest(@NotNull String content,
     public Comment toCommentEntity(Post post, Member member) {
         return Comment.builder()
                 .content(content)
-                .created(LocalDateTime.now())
-                .lastUpdated(LocalDateTime.now())
                 .post(post)
                 .member(member)
                 .build();
