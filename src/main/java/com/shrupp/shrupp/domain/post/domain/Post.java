@@ -4,20 +4,16 @@ import com.shrupp.shrupp.domain.member.domain.Member;
 import com.shrupp.shrupp.domain.post.dto.response.PostResponse;
 import com.shrupp.shrupp.domain.post.dto.response.SimplePostResponse;
 import com.shrupp.shrupp.global.audit.BaseTime;
-import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.LocalDateTime;
-
+import jakarta.persistence.*;
+import lombok.*;
 
 @Getter
-@NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
