@@ -11,9 +11,9 @@ import java.util.Map;
 
 @Getter
 public class LoginUser implements UserDetails, OAuth2User {
-    private Member member;
-    private Map<String, Object> attribute;
-    private Collection<? extends GrantedAuthority> authorities;
+    private final Member member;
+    private final Map<String, Object> attribute;
+    private final Collection<? extends GrantedAuthority> authorities;
 
     public LoginUser(Member member, Map<String, Object> attribute, Collection<? extends GrantedAuthority> authorities) {
         this.member = member;
