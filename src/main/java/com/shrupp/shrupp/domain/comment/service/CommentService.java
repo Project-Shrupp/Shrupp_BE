@@ -13,8 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class CommentService {
 
     private final CommentRepository commentRepository;
@@ -33,6 +34,7 @@ public class CommentService {
         return commentRepository.countCommentsByPostId(postId);
     }
 
+    @Transactional
     public Comment addComment(CommentRegisterRequest commentRegisterRequest) {
         return commentRepository.save(commentRegisterRequest.toCommentEntity(
                 postService.findById(commentRegisterRequest.postId()),
@@ -47,6 +49,7 @@ public class CommentService {
         return comment;
     }
 
+    @Transactional
     public void deleteComment(Long id) {
         commentRepository.deleteById(id);
     }

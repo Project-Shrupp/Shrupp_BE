@@ -7,31 +7,31 @@ import com.shrupp.shrupp.domain.member.repository.MemberRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberService {
 
     private final MemberRepository memberRepository;
 
+    @Transactional
     public Member saveIfNotExists(OAuth2Request oAuth2Request) {
-        return findByOAuth2Id(oAuth2Request.getAccountId())
+        return memberRepository.findByOauth2Account(oAuth2Request.getAccountId())
                 .orElseGet(() -> save(oAuth2Request));
     }
 
+    @Transactional
     public Member save(OAuth2Request oAuth2Request) {
         return memberRepository.save(new Member(oAuth2Request.getName(),
                 LocalDateTime.now(),
                 LocalDateTime.now(),
                 new Oauth2(oAuth2Request.getAuthProvider(), oAuth2Request.getAccountId())));
-    }
-
-    public Optional<Member> findByOAuth2Id(String account) {
-        return memberRepository.findByOauth2Account(account);
     }
 
     public Member findById(Long id) {

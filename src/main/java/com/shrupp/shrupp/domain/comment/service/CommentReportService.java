@@ -6,9 +6,11 @@ import com.shrupp.shrupp.domain.comment.repository.CommentReportRepository;
 import com.shrupp.shrupp.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-@RequiredArgsConstructor
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class CommentReportService {
 
     private final CommentReportRepository commentReportRepository;

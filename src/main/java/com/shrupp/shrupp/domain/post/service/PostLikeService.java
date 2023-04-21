@@ -8,10 +8,12 @@ import com.shrupp.shrupp.domain.post.dto.request.PostLikeRequest;
 import com.shrupp.shrupp.domain.post.repository.PostLikeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class PostLikeService {
 
@@ -19,6 +21,7 @@ public class PostLikeService {
     private final PostService postService;
     private final MemberService memberService;
 
+    @Transactional
     public boolean like(Long postId, PostLikeRequest postLikeRequest) {
         Post post = postService.findById(postId);
         Member member = memberService.findById(postLikeRequest.memberId());
@@ -31,6 +34,7 @@ public class PostLikeService {
         return true;
     }
 
+    @Transactional
     public boolean unlike(Long postId, PostLikeRequest postLikeRequest) {
         Post post = postService.findById(postId);
         Member member = memberService.findById(postLikeRequest.memberId());

@@ -8,10 +8,12 @@ import com.shrupp.shrupp.domain.post.repository.PostRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class PostService {
 
@@ -26,10 +28,12 @@ public class PostService {
         return postRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
+    @Transactional
     public Post save(PostRegisterRequest postRegisterRequest) {
         return postRepository.save(postRegisterRequest.toPostEntity(memberService.findById(postRegisterRequest.memberId())));
     }
 
+    @Transactional
     public Post update(Long id, PostUpdateRequest postUpdateRequest) {
         Post post = findById(id);
         post.updatePost(postUpdateRequest.content(), postUpdateRequest.backgroundColor());
@@ -37,6 +41,7 @@ public class PostService {
         return post;
     }
 
+    @Transactional
     public void delete(Long id) {
         postRepository.deleteById(id);
     }
