@@ -1,8 +1,7 @@
 package com.shrupp.shrupp.domain.comment.controller;
 
-import com.shrupp.shrupp.domain.comment.domain.Comment;
-import com.shrupp.shrupp.domain.comment.dto.request.CommentRegisterRequest;
 import com.shrupp.shrupp.domain.comment.dto.request.CommentReportRequest;
+import com.shrupp.shrupp.domain.comment.dto.request.CommentRegisterRequest;
 import com.shrupp.shrupp.domain.comment.dto.request.CommentUpdateRequest;
 import com.shrupp.shrupp.domain.comment.dto.response.CommentReportResponse;
 import com.shrupp.shrupp.domain.comment.dto.response.CommentResponse;
@@ -28,7 +27,7 @@ public class CommentController {
     @GetMapping
     public ResponseEntity<List<CommentResponse>> commentList(@RequestParam Long postId) {
         return ResponseEntity.ok(commentService.findCommentsByPostId(postId).stream()
-                .map(Comment::toCommentResponse)
+                .map(CommentResponse::of)
                 .toList());
     }
 
@@ -39,12 +38,12 @@ public class CommentController {
 
     @PostMapping
     public ResponseEntity<CommentResponse> commentAdd(@RequestBody @Validated CommentRegisterRequest commentRegisterRequest) {
-        return ResponseEntity.ok(commentService.addComment(commentRegisterRequest).toCommentResponse());
+        return ResponseEntity.ok(CommentResponse.of(commentService.addComment(commentRegisterRequest)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<CommentResponse> commentUpdate(@PathVariable Long id, @RequestBody @Validated CommentUpdateRequest commentUpdateRequest) {
-        return ResponseEntity.ok(commentService.updateComment(id, commentUpdateRequest).toCommentResponse());
+        return ResponseEntity.ok(CommentResponse.of(commentService.updateComment(id, commentUpdateRequest)));
     }
 
     @DeleteMapping("/{id}")
@@ -57,6 +56,6 @@ public class CommentController {
     @PostMapping("/{commentId}/reports")
     public ResponseEntity<CommentReportResponse> commentReport(@PathVariable Long commentId,
                                                                @RequestBody @Validated CommentReportRequest commentReportRequest) {
-        return ResponseEntity.ok(commentReportService.report(commentId, commentReportRequest).toCommentReportResponse());
+        return ResponseEntity.ok(CommentReportResponse.of(commentReportService.report(commentId, commentReportRequest)));
     }
 }

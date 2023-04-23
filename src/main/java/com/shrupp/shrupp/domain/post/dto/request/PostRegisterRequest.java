@@ -5,8 +5,6 @@ import com.shrupp.shrupp.domain.post.domain.Post;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import java.time.LocalDateTime;
-
 public record PostRegisterRequest(@NotNull String content,
                                   @NotBlank String backgroundColor,
                                   @NotNull Long memberId) {

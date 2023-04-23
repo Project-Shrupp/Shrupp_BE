@@ -1,7 +1,6 @@
 package com.shrupp.shrupp.domain.post.domain;
 
 import com.shrupp.shrupp.domain.member.domain.Member;
-import com.shrupp.shrupp.domain.post.dto.response.PostReportResponse;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,9 +27,5 @@ public class PostReport {
         this.reportType = reportType;
         this.post = post;
         this.member = member;
-    }
-
-    public PostReportResponse toPostReportResponse() {
-        return new PostReportResponse(reportType, post.getId(), member.getId());
     }
 }
