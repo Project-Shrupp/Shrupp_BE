@@ -25,7 +25,7 @@ public class PostService {
     }
 
     public Post findById(Long id) {
-        return postRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return postRepository.findByIdWithFetch(id).orElseThrow(EntityNotFoundException::new);
     }
 
     @Transactional

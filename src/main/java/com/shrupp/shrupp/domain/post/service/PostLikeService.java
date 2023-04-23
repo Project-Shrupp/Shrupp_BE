@@ -26,7 +26,7 @@ public class PostLikeService {
         Post post = postService.findById(postId);
         Member member = memberService.findById(postLikeRequest.memberId());
 
-        if (postLikeRepository.findPostLikeByPostAndMember(post, member).isPresent()) {
+        if (postLikeRepository.existsPostLikeByPostAndMember(post, member)) {
             return false;
         }
 

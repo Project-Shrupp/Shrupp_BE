@@ -25,7 +25,7 @@ public class StickerService {
     }
 
     public List<Sticker> findAll() {
-        return stickerRepository.findAll();
+        return stickerRepository.findAllFetchWithMember();
     }
 
     @Transactional

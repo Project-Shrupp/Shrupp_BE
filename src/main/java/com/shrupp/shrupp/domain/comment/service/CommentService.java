@@ -23,11 +23,11 @@ public class CommentService {
     private final MemberService memberService;
 
     public Comment findById(Long id) {
-        return commentRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        return commentRepository.findByIdFetchWithMember(id).orElseThrow(EntityNotFoundException::new);
     }
 
     public List<Comment> findCommentsByPostId(Long postId) {
-        return commentRepository.findCommentsByPostId(postId);
+        return commentRepository.findByPostIdFetchWithMember(postId);
     }
 
     public Long getCommentCountByPostId(Long postId) {
