@@ -1,6 +1,5 @@
 package com.shrupp.shrupp.domain.post.controller;
 
-import com.shrupp.shrupp.domain.post.domain.Post;
 import com.shrupp.shrupp.domain.post.dto.request.PostLikeRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostRegisterRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostReportRequest;
@@ -32,24 +31,24 @@ public class PostController {
     @GetMapping
     public ResponseEntity<List<SimplePostResponse>> postList() {
         return ResponseEntity.ok(postService.findAll().stream()
-                .map(Post::toSimplePostResponse)
+                .map(SimplePostResponse::of)
                 .toList());
     }
 
     @GetMapping("/{postId}")
     public ResponseEntity<PostResponse> postDetails(@PathVariable Long postId) {
-        return ResponseEntity.ok(postService.findById(postId).toPostResponse());
+        return ResponseEntity.ok(PostResponse.of(postService.findById(postId)));
     }
 
     @PostMapping
     public ResponseEntity<PostResponse> postAdd(@RequestBody @Validated PostRegisterRequest postRegisterRequest) {
-        return ResponseEntity.ok(postService.save(postRegisterRequest).toPostResponse());
+        return ResponseEntity.ok(PostResponse.of(postService.save(postRegisterRequest)));
     }
 
     @PutMapping("/{postId}")
     public ResponseEntity<PostResponse> postModify(@PathVariable Long postId,
                                                    @RequestBody @Validated PostUpdateRequest postUpdateRequest) {
-        return ResponseEntity.ok(postService.update(postId, postUpdateRequest).toPostResponse());
+        return ResponseEntity.ok(PostResponse.of(postService.update(postId, postUpdateRequest)));
     }
 
     @DeleteMapping("/{postId}")
@@ -62,7 +61,7 @@ public class PostController {
     @PostMapping("/{postId}/reports")
     public ResponseEntity<PostReportResponse> postReport(@PathVariable Long postId,
                                                          @RequestBody @Validated PostReportRequest postReportRequest) {
-        return ResponseEntity.ok(postReportService.report(postId, postReportRequest).toPostReportResponse());
+        return ResponseEntity.ok(PostReportResponse.of(postReportService.report(postId, postReportRequest)));
     }
 
     @PostMapping("/{postId}/likes")

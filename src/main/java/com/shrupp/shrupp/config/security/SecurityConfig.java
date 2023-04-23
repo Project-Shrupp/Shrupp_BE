@@ -1,7 +1,6 @@
 package com.shrupp.shrupp.config.security;
 
 import com.shrupp.shrupp.config.security.jwt.JwtAuthenticationFilter;
-import com.shrupp.shrupp.domain.member.domain.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

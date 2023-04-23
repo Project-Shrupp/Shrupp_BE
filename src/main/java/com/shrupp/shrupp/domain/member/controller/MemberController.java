@@ -3,7 +3,6 @@ package com.shrupp.shrupp.domain.member.controller;
 import com.shrupp.shrupp.domain.member.domain.Member;
 import com.shrupp.shrupp.domain.member.dto.response.MemberResponse;
 import com.shrupp.shrupp.domain.member.service.MemberService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

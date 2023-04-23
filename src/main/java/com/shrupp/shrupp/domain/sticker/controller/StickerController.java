@@ -1,9 +1,8 @@
-package com.shrupp.shrupp.domain.post.controller;
+package com.shrupp.shrupp.domain.sticker.controller;
 
-import com.shrupp.shrupp.domain.post.domain.Sticker;
-import com.shrupp.shrupp.domain.post.dto.request.StickerAddRequest;
-import com.shrupp.shrupp.domain.post.dto.response.StickerResponse;
-import com.shrupp.shrupp.domain.post.service.StickerService;
+import com.shrupp.shrupp.domain.sticker.dto.request.StickerAddRequest;
+import com.shrupp.shrupp.domain.sticker.dto.response.StickerResponse;
+import com.shrupp.shrupp.domain.sticker.service.StickerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -22,13 +21,13 @@ public class StickerController {
     @GetMapping
     public ResponseEntity<List<StickerResponse>> stickerList() {
         return ResponseEntity.ok(stickerService.findAll().stream()
-                .map(Sticker::toStickerResponse)
+                .map(StickerResponse::of)
                 .toList());
     }
 
     @PostMapping
     public ResponseEntity<StickerResponse> stickerAdd(@RequestBody @Validated StickerAddRequest stickerAddRequest) {
-        return ResponseEntity.ok(stickerService.save(stickerAddRequest).toStickerResponse());
+        return ResponseEntity.ok(StickerResponse.of(stickerService.save(stickerAddRequest)));
     }
 
     @DeleteMapping("/{stickerId}")

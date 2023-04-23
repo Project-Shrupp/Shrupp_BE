@@ -1,9 +1,9 @@
-package com.shrupp.shrupp.domain.post.service;
+package com.shrupp.shrupp.domain.sticker.service;
 
 import com.shrupp.shrupp.domain.member.service.MemberService;
-import com.shrupp.shrupp.domain.post.domain.Sticker;
-import com.shrupp.shrupp.domain.post.dto.request.StickerAddRequest;
-import com.shrupp.shrupp.domain.post.repository.StickerRepository;
+import com.shrupp.shrupp.domain.sticker.domain.Sticker;
+import com.shrupp.shrupp.domain.sticker.dto.request.StickerAddRequest;
+import com.shrupp.shrupp.domain.sticker.repository.StickerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,6 +1,5 @@
 package com.shrupp.shrupp.domain.comment.domain;
 
-import com.shrupp.shrupp.domain.comment.dto.response.CommentReportResponse;
 import com.shrupp.shrupp.domain.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -28,9 +27,5 @@ public class CommentReport {
         this.reportType = reportType;
         this.comment = comment;
         this.member = member;
-    }
-
-    public CommentReportResponse toCommentReportResponse() {
-        return new CommentReportResponse(reportType, comment.getId(), member.getId());
     }
 }

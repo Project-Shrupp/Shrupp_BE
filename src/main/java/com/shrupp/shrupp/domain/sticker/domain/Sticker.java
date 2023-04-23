@@ -1,11 +1,12 @@
-package com.shrupp.shrupp.domain.post.domain;
+package com.shrupp.shrupp.domain.sticker.domain;
 
 import com.shrupp.shrupp.domain.member.domain.Member;
-import com.shrupp.shrupp.domain.post.dto.response.StickerResponse;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
+@Getter
 @Entity
 public class Sticker {
     @Id
@@ -25,9 +26,5 @@ public class Sticker {
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
         this.member = member;
-    }
-
-    public StickerResponse toStickerResponse() {
-        return new StickerResponse(category, xCoordinate, yCoordinate, member.getId());
     }
 }

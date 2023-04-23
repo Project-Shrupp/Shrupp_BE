@@ -5,8 +5,6 @@ import com.shrupp.shrupp.domain.member.domain.Member;
 import com.shrupp.shrupp.domain.post.domain.Post;
 import jakarta.validation.constraints.NotNull;
 
-import java.time.LocalDateTime;
-
 public record CommentRegisterRequest(@NotNull String content,
                                      @NotNull Long memberId,
                                      @NotNull Long postId) {

@@ -1,6 +1,5 @@
 package com.shrupp.shrupp.domain.comment.domain;
 
-import com.shrupp.shrupp.domain.comment.dto.response.CommentResponse;
 import com.shrupp.shrupp.domain.member.domain.Member;
 import com.shrupp.shrupp.domain.post.domain.Post;
 import com.shrupp.shrupp.global.audit.BaseTime;
@@ -9,8 +8,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -42,10 +39,6 @@ public class Comment {
         this.baseTime = new BaseTime();
         this.post = post;
         this.member = member;
-    }
-
-    public CommentResponse toCommentResponse() {
-        return new CommentResponse(id, content, baseTime.getCreated(), baseTime.getLastUpdated(), member.getNickname());
     }
 
     public void updateComment(String content) {

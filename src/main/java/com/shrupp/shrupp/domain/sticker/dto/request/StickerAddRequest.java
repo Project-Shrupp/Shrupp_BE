@@ -1,7 +1,7 @@
-package com.shrupp.shrupp.domain.post.dto.request;
+package com.shrupp.shrupp.domain.sticker.dto.request;
 
 import com.shrupp.shrupp.domain.member.domain.Member;
-import com.shrupp.shrupp.domain.post.domain.Sticker;
+import com.shrupp.shrupp.domain.sticker.domain.Sticker;
 import jakarta.validation.constraints.NotNull;
 
 public record StickerAddRequest(@NotNull String category,
