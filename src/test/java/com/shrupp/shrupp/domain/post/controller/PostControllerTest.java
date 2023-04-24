@@ -50,7 +50,7 @@ class PostControllerTest extends RestDocsTest {
     @Test
     @DisplayName("게시글 생성")
     void registerPost() throws Exception {
-        Post expectedPost = new Post("123", "#fff", new Member("", LocalDateTime.now(), LocalDateTime.now(), null));
+        Post expectedPost = new Post("123", "#fff", new Member("", null));
         Field baseTimeField = Post.class.getDeclaredField("baseTime");
         baseTimeField.setAccessible(true);
         baseTimeField.set(expectedPost, new BaseTime(LocalDateTime.now(), LocalDateTime.now()));
@@ -83,7 +83,7 @@ class PostControllerTest extends RestDocsTest {
     @Test
     @DisplayName("게시글 목록 조회")
     void getPostList() throws Exception {
-        Post expectedPost = new Post("123", "#fff", new Member("", LocalDateTime.now(), LocalDateTime.now(), null));
+        Post expectedPost = new Post("123", "#fff", new Member("", null));
         Field baseTimeField = Post.class.getDeclaredField("baseTime");
         baseTimeField.setAccessible(true);
         baseTimeField.set(expectedPost, new BaseTime(LocalDateTime.now(), LocalDateTime.now()));
@@ -110,7 +110,7 @@ class PostControllerTest extends RestDocsTest {
     @Test
     @DisplayName("게시글 조회")
     void getPost() throws Exception {
-        Post expectedPost = new Post("123", "#fff", new Member("", LocalDateTime.now(), LocalDateTime.now(), null));
+        Post expectedPost = new Post("123", "#fff", new Member("", null));
         Field baseTimeField = Post.class.getDeclaredField("baseTime");
         baseTimeField.setAccessible(true);
         baseTimeField.set(expectedPost, new BaseTime(LocalDateTime.now(), LocalDateTime.now()));
@@ -139,7 +139,7 @@ class PostControllerTest extends RestDocsTest {
     @Test
     @DisplayName("게시글 수정")
     void modifyPost() throws Exception {
-        Post expectedPost = new Post("123", "#fff", new Member("", LocalDateTime.now(), LocalDateTime.now(), null));
+        Post expectedPost = new Post("123", "#fff", new Member("", null));
         Field baseTimeField = Post.class.getDeclaredField("baseTime");
         baseTimeField.setAccessible(true);
         baseTimeField.set(expectedPost, new BaseTime(LocalDateTime.now(), LocalDateTime.now()));
@@ -257,5 +257,26 @@ class PostControllerTest extends RestDocsTest {
                                 parameterWithName("postId").description("게시글 키")),
                         requestFields(
                                 fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("멤버 키"))));
+    }
+
+    @Test
+    @DisplayName("게시글 좋아요 여부 확인")
+    void checkPostLike() throws Exception {
+        given(postLikeService.liked(any(Long.class), any(Long.class))).willReturn(true);
+
+        ResultActions perform = mockMvc.perform(get("/api/v1/posts/{postId}/likes", 1L)
+                .contentType(MediaType.APPLICATION_JSON));
+
+        perform.andExpect(status().isOk())
+                .andExpect(jsonPath("$.liked").value(true));
+
+        perform.andDo(print())
+                .andDo(document("post-liked",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        pathParameters(
+                                parameterWithName("postId").description("게시글 키")),
+                        responseFields(
+                                fieldWithPath("liked").type(JsonFieldType.BOOLEAN).description("좋아요 여부").optional())));
     }
 }

@@ -47,8 +47,8 @@ class CommentControllerTest extends RestDocsTest {
     void registerComment() throws Exception {
         Comment expectedComment = Comment.builder()
                 .content("123")
-                .post(new Post("123", "#fff", new Member("member", LocalDateTime.now(), LocalDateTime.now(), null)))
-                .member(new Member("member", LocalDateTime.now(), LocalDateTime.now(), null))
+                .post(new Post("123", "#fff", new Member("member", null)))
+                .member(new Member("member", null))
                 .build();
         Field baseTimeField = Comment.class.getDeclaredField("baseTime");
         baseTimeField.setAccessible(true);
@@ -82,8 +82,8 @@ class CommentControllerTest extends RestDocsTest {
     void getCommentList() throws Exception {
         Comment expectedComment = Comment.builder()
                 .content("123")
-                .post(new Post("123", "#fff", new Member("member", LocalDateTime.now(), LocalDateTime.now(), null)))
-                .member(new Member("member", LocalDateTime.now(), LocalDateTime.now(), null))
+                .post(new Post("123", "#fff", new Member("member", null)))
+                .member(new Member("member", null))
                 .build();
         Field baseTimeField = Comment.class.getDeclaredField("baseTime");
         baseTimeField.setAccessible(true);
