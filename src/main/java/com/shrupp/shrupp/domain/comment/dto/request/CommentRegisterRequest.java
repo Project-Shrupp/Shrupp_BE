@@ -6,7 +6,6 @@ import com.shrupp.shrupp.domain.post.domain.Post;
 import jakarta.validation.constraints.NotNull;
 
 public record CommentRegisterRequest(@NotNull String content,
-                                     @NotNull Long memberId,
                                      @NotNull Long postId) {
 
     public Comment toCommentEntity(Post post, Member member) {

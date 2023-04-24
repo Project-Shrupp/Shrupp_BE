@@ -17,9 +17,9 @@ public class CommentReportService {
     private final CommentService commentService;
     private final MemberService memberService;
 
-    public CommentReport report(Long commentId, CommentReportRequest commentReportRequest) {
+    public CommentReport report(Long commentId, CommentReportRequest commentReportRequest, Long memberId) {
         return commentReportRepository.save(commentReportRequest.toCommentReport(
                 commentService.findById(commentId),
-                memberService.findById(commentReportRequest.memberId())));
+                memberService.findById(memberId)));
     }
 }

@@ -1,5 +1,6 @@
 package com.shrupp.shrupp.domain.comment.controller;
 
+import com.shrupp.shrupp.config.security.LoginUser;
 import com.shrupp.shrupp.domain.comment.dto.request.CommentReportRequest;
 import com.shrupp.shrupp.domain.comment.dto.request.CommentRegisterRequest;
 import com.shrupp.shrupp.domain.comment.dto.request.CommentUpdateRequest;
@@ -10,6 +11,7 @@ import com.shrupp.shrupp.domain.comment.service.CommentReportService;
 import com.shrupp.shrupp.domain.comment.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,25 +39,30 @@ public class CommentController {
     }
 
     @PostMapping
-    public ResponseEntity<CommentResponse> commentAdd(@RequestBody @Validated CommentRegisterRequest commentRegisterRequest) {
-        return ResponseEntity.ok(CommentResponse.of(commentService.addComment(commentRegisterRequest)));
+    public ResponseEntity<CommentResponse> commentAdd(@RequestBody @Validated CommentRegisterRequest commentRegisterRequest,
+                                                      @AuthenticationPrincipal LoginUser loginUser) {
+        return ResponseEntity.ok(CommentResponse.of(commentService.addComment(commentRegisterRequest, loginUser.getMember().getId())));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CommentResponse> commentUpdate(@PathVariable Long id, @RequestBody @Validated CommentUpdateRequest commentUpdateRequest) {
-        return ResponseEntity.ok(CommentResponse.of(commentService.updateComment(id, commentUpdateRequest)));
+    public ResponseEntity<CommentResponse> commentUpdate(@PathVariable Long id,
+                                                         @RequestBody @Validated CommentUpdateRequest commentUpdateRequest,
+                                                         @AuthenticationPrincipal LoginUser loginUser) {
+        return ResponseEntity.ok(CommentResponse.of(commentService.updateComment(id, commentUpdateRequest, loginUser.getMember().getId())));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Objects> commentDelete(@PathVariable Long id) {
-        commentService.deleteComment(id);
+    public ResponseEntity<Objects> commentDelete(@PathVariable Long id,
+                                                 @AuthenticationPrincipal LoginUser loginUser) {
+        commentService.deleteComment(id, loginUser.getMember().getId());
 
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/{commentId}/reports")
     public ResponseEntity<CommentReportResponse> commentReport(@PathVariable Long commentId,
-                                                               @RequestBody @Validated CommentReportRequest commentReportRequest) {
-        return ResponseEntity.ok(CommentReportResponse.of(commentReportService.report(commentId, commentReportRequest)));
+                                                               @RequestBody @Validated CommentReportRequest commentReportRequest,
+                                                               @AuthenticationPrincipal LoginUser loginUser) {
+        return ResponseEntity.ok(CommentReportResponse.of(commentReportService.report(commentId, commentReportRequest, loginUser.getMember().getId())));
     }
 }

@@ -24,25 +24,26 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public Post findById(Long id) {
-        return postRepository.findByIdWithFetch(id).orElseThrow(EntityNotFoundException::new);
+    public Post findById(Long postId) {
+        return postRepository.findByIdWithFetch(postId).orElseThrow(EntityNotFoundException::new);
     }
 
     @Transactional
-    public Post save(PostRegisterRequest postRegisterRequest) {
-        return postRepository.save(postRegisterRequest.toPostEntity(memberService.findById(postRegisterRequest.memberId())));
+    public Post savePost(PostRegisterRequest postRegisterRequest, Long memberId) {
+        return postRepository.save(postRegisterRequest.toPostEntity(memberService.findById(memberId)));
     }
 
     @Transactional
-    public Post update(Long id, PostUpdateRequest postUpdateRequest) {
-        Post post = findById(id);
+    public Post updatePost(Long postId, PostUpdateRequest postUpdateRequest, Long memberId) {
+        Post post = postRepository.findByIdWithFetchMemberId(postId, memberId)
+                .orElseThrow(EntityNotFoundException::new);
+
         post.updatePost(postUpdateRequest.content(), postUpdateRequest.backgroundColor());
-
         return post;
     }
 
     @Transactional
-    public void delete(Long id) {
-        postRepository.deleteById(id);
+    public void deletePost(Long postId, Long memberId) {
+        postRepository.deleteByIdAndMemberId(postId, memberId);
     }
 }

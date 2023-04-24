@@ -53,11 +53,11 @@ class CommentControllerTest extends RestDocsTest {
         Field baseTimeField = Comment.class.getDeclaredField("baseTime");
         baseTimeField.setAccessible(true);
         baseTimeField.set(expectedComment, new BaseTime(LocalDateTime.now(), LocalDateTime.now()));
-        given(commentService.addComment(any(CommentRegisterRequest.class))).willReturn(expectedComment);
+        given(commentService.addComment(any(CommentRegisterRequest.class), any(Long.class))).willReturn(expectedComment);
 
         ResultActions perform = mockMvc.perform(post("/api/v1/comments")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(toJson(new CommentRegisterRequest("123", 1L, 1L))));
+                .content(toJson(new CommentRegisterRequest("123", 1L))));
 
         perform.andExpect(status().isOk());
 
@@ -67,8 +67,7 @@ class CommentControllerTest extends RestDocsTest {
                         getDocumentResponse(),
                         requestFields(
                                 fieldWithPath("content").type(JsonFieldType.STRING).description("내용"),
-                                fieldWithPath("postId").type(JsonFieldType.NUMBER).description("게시글 키"),
-                                fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("멤버 키")),
+                                fieldWithPath("postId").type(JsonFieldType.NUMBER).description("게시글 키")),
                         responseFields(
                                 fieldWithPath("id").type(JsonFieldType.NUMBER).description("댓글 키").optional(),
                                 fieldWithPath("content").type(JsonFieldType.STRING).description("내용"),
@@ -133,7 +132,7 @@ class CommentControllerTest extends RestDocsTest {
     @Test
     @DisplayName("댓글 삭제")
     void deleteComment() throws Exception {
-        willDoNothing().given(commentService).deleteComment(1L);
+        willDoNothing().given(commentService).deleteComment(1L, 1L);
 
         ResultActions perform = mockMvc.perform(delete("/api/v1/comments/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON));
@@ -153,11 +152,11 @@ class CommentControllerTest extends RestDocsTest {
     void reportComment() throws Exception {
         Member member = new Member();
         CommentReport expectedCommentReport = new CommentReport("욕설/비하", new Comment("123", null, null), member);
-        given(commentReportService.report(any(Long.class), any(CommentReportRequest.class))).willReturn(expectedCommentReport);
+        given(commentReportService.report(any(Long.class), any(CommentReportRequest.class), any(Long.class))).willReturn(expectedCommentReport);
 
         ResultActions perform = mockMvc.perform(post("/api/v1/comments/{commentId}/reports", 1L)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(toJson(new CommentReportRequest("욕설/비하", 1L))));
+                .content(toJson(new CommentReportRequest("욕설/비하"))));
 
         perform.andExpect(status().isOk());
 
@@ -169,8 +168,7 @@ class CommentControllerTest extends RestDocsTest {
                                 parameterWithName("commentId").description("댓글 키")
                         ),
                         requestFields(
-                                fieldWithPath("reportType").type(JsonFieldType.STRING).description("신고 타입"),
-                                fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("신고자 키")),
+                                fieldWithPath("reportType").type(JsonFieldType.STRING).description("신고 타입")),
                         responseFields(
                                 fieldWithPath("reportType").type(JsonFieldType.STRING).description("신고 타입"),
                                 fieldWithPath("commentId").type(JsonFieldType.NUMBER).description("댓글 키").optional(),

@@ -17,9 +17,9 @@ public class PostReportService {
     private final PostService postService;
     private final MemberService memberService;
 
-    public PostReport report(Long postId, PostReportRequest postReportRequest) {
+    public PostReport report(Long postId, PostReportRequest postReportRequest, Long memberId) {
         return postReportRepository.save(postReportRequest.toPostReport(
                         postService.findById(postId),
-                        memberService.findById(postReportRequest.memberId())));
+                        memberService.findById(memberId)));
     }
 }

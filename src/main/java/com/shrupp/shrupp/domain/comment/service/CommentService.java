@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -35,22 +36,24 @@ public class CommentService {
     }
 
     @Transactional
-    public Comment addComment(CommentRegisterRequest commentRegisterRequest) {
+    public Comment addComment(CommentRegisterRequest commentRegisterRequest, Long memberId) {
         return commentRepository.save(commentRegisterRequest.toCommentEntity(
                 postService.findById(commentRegisterRequest.postId()),
-                memberService.findById(commentRegisterRequest.memberId())));
+                memberService.findById(memberId)));
     }
 
     @Transactional
-    public Comment updateComment(Long id, CommentUpdateRequest commentUpdateRequest) {
-        Comment comment = findById(id);
+    public Comment updateComment(Long id, CommentUpdateRequest commentUpdateRequest, Long memberId) {
+        Comment comment = commentRepository.findByIdFetchWithMemberId(id, memberId)
+                .orElseThrow(EntityNotFoundException::new);
+
         comment.updateComment(commentUpdateRequest.content());
 
         return comment;
     }
 
     @Transactional
-    public void deleteComment(Long id) {
-        commentRepository.deleteById(id);
+    public void deleteComment(Long id, Long memberId) {
+        commentRepository.deleteByIdAndMemberId(id, memberId);
     }
 }
