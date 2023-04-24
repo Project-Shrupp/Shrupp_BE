@@ -27,10 +27,7 @@ public class MemberService {
 
     @Transactional
     public Member save(OAuth2Request oAuth2Request) {
-        return memberRepository.save(new Member(oAuth2Request.getName(),
-                LocalDateTime.now(),
-                LocalDateTime.now(),
-                new Oauth2(oAuth2Request.getAuthProvider(), oAuth2Request.getAccountId())));
+        return memberRepository.save(new Member(oAuth2Request.getName(), new Oauth2(oAuth2Request.getAuthProvider(), oAuth2Request.getAccountId())));
     }
 
     public Member findById(Long id) {

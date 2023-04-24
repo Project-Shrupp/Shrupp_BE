@@ -26,7 +26,7 @@ public class PostLikeService {
         Post post = postService.findById(postId);
         Member member = memberService.findById(postLikeRequest.memberId());
 
-        if (postLikeRepository.existsPostLikeByPostAndMember(post, member)) {
+        if (postLikeRepository.existsPostLikeByPostIdAndMemberId(post.getId(), member.getId())) {
             return false;
         }
 
@@ -46,6 +46,10 @@ public class PostLikeService {
 
         postLikeRepository.delete(postLike.get());
         return true;
+    }
+
+    public boolean liked(Long postId, Long memberId) {
+        return postLikeRepository.existsPostLikeByPostIdAndMemberId(postId, memberId);
     }
 
     public Long getPostLikeCount(Long postId) {
