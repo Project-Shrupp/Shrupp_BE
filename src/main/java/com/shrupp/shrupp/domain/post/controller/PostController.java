@@ -1,18 +1,17 @@
 package com.shrupp.shrupp.domain.post.controller;
 
+import com.shrupp.shrupp.config.security.LoginUser;
 import com.shrupp.shrupp.domain.post.dto.request.PostLikeRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostRegisterRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostReportRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostUpdateRequest;
-import com.shrupp.shrupp.domain.post.dto.response.PostLikeTallyResponse;
-import com.shrupp.shrupp.domain.post.dto.response.PostReportResponse;
-import com.shrupp.shrupp.domain.post.dto.response.PostResponse;
-import com.shrupp.shrupp.domain.post.dto.response.SimplePostResponse;
+import com.shrupp.shrupp.domain.post.dto.response.*;
 import com.shrupp.shrupp.domain.post.service.PostLikeService;
 import com.shrupp.shrupp.domain.post.service.PostReportService;
 import com.shrupp.shrupp.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,6 +61,12 @@ public class PostController {
     public ResponseEntity<PostReportResponse> postReport(@PathVariable Long postId,
                                                          @RequestBody @Validated PostReportRequest postReportRequest) {
         return ResponseEntity.ok(PostReportResponse.of(postReportService.report(postId, postReportRequest)));
+    }
+
+    @GetMapping("/{postId}/likes")
+    public ResponseEntity<PostLikeResponse> getPostLike(@PathVariable Long postId,
+                                                        @AuthenticationPrincipal LoginUser loginUser) {
+        return ResponseEntity.ok(new PostLikeResponse(postLikeService.liked(postId, Long.parseLong(loginUser.getUsername()))));
     }
 
     @PostMapping("/{postId}/likes")

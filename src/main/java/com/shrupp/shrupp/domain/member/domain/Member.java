@@ -27,13 +27,14 @@ public class Member {
     @Embedded
     private BaseTime baseTime;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING)
-    private List<Role> role = new ArrayList<>(List.of(Role.ROLE_USER));
     @Embedded
     private Oauth2 oauth2;
 
-    public Member(String nickname, LocalDateTime created, LocalDateTime lastUpdated, Oauth2 oauth2) {
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Enumerated(EnumType.STRING)
+    private List<Role> role = new ArrayList<>(List.of(Role.ROLE_USER));
+
+    public Member(String nickname, Oauth2 oauth2) {
         this.nickname = nickname;
         this.baseTime = new BaseTime();
         this.oauth2 = oauth2;
