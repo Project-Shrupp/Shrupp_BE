@@ -66,7 +66,7 @@ public class PostController {
     @GetMapping("/{postId}/likes")
     public ResponseEntity<PostLikeResponse> getPostLike(@PathVariable Long postId,
                                                         @AuthenticationPrincipal LoginUser loginUser) {
-        return ResponseEntity.ok(new PostLikeResponse(postLikeService.liked(postId, Long.parseLong(loginUser.getUsername()))));
+        return ResponseEntity.ok(new PostLikeResponse(postLikeService.liked(postId, loginUser.getMember().getId())));
     }
 
     @PostMapping("/{postId}/likes")

@@ -1,4 +1,4 @@
-= Shrupp API
+= Comment API
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
