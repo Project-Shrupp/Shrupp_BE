@@ -1,7 +1,6 @@
 package com.shrupp.shrupp.domain.post.controller;
 
 import com.shrupp.shrupp.config.security.LoginUser;
-import com.shrupp.shrupp.domain.post.dto.request.PostLikeRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostRegisterRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostReportRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostUpdateRequest;
@@ -40,27 +39,31 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<PostResponse> postAdd(@RequestBody @Validated PostRegisterRequest postRegisterRequest) {
-        return ResponseEntity.ok(PostResponse.of(postService.save(postRegisterRequest)));
+    public ResponseEntity<PostResponse> postAdd(@RequestBody @Validated PostRegisterRequest postRegisterRequest,
+                                                @AuthenticationPrincipal LoginUser loginUser) {
+        return ResponseEntity.ok(PostResponse.of(postService.savePost(postRegisterRequest, loginUser.getMember().getId())));
     }
 
     @PutMapping("/{postId}")
     public ResponseEntity<PostResponse> postModify(@PathVariable Long postId,
-                                                   @RequestBody @Validated PostUpdateRequest postUpdateRequest) {
-        return ResponseEntity.ok(PostResponse.of(postService.update(postId, postUpdateRequest)));
+                                                   @RequestBody @Validated PostUpdateRequest postUpdateRequest,
+                                                   @AuthenticationPrincipal LoginUser loginUser) {
+        return ResponseEntity.ok(PostResponse.of(postService.updatePost(postId, postUpdateRequest, loginUser.getMember().getId())));
     }
 
     @DeleteMapping("/{postId}")
-    public ResponseEntity<Objects> postRemove(@PathVariable Long postId) {
-        postService.delete(postId);
+    public ResponseEntity<Objects> postRemove(@PathVariable Long postId,
+                                              @AuthenticationPrincipal LoginUser loginUser) {
+        postService.deletePost(postId, loginUser.getMember().getId());
 
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/{postId}/reports")
     public ResponseEntity<PostReportResponse> postReport(@PathVariable Long postId,
-                                                         @RequestBody @Validated PostReportRequest postReportRequest) {
-        return ResponseEntity.ok(PostReportResponse.of(postReportService.report(postId, postReportRequest)));
+                                                         @RequestBody @Validated PostReportRequest postReportRequest,
+                                                         @AuthenticationPrincipal LoginUser loginUser) {
+        return ResponseEntity.ok(PostReportResponse.of(postReportService.report(postId, postReportRequest, loginUser.getMember().getId())));
     }
 
     @GetMapping("/{postId}/likes")
@@ -71,8 +74,8 @@ public class PostController {
 
     @PostMapping("/{postId}/likes")
     public ResponseEntity<Objects> postLike(@PathVariable Long postId,
-                                            @RequestBody @Validated PostLikeRequest postLikeRequest) {
-        if (postLikeService.like(postId, postLikeRequest)) {
+                                            @AuthenticationPrincipal LoginUser loginUser) {
+        if (postLikeService.like(postId, loginUser.getMember().getId())) {
             return ResponseEntity.ok().build();
         }
 
@@ -81,8 +84,8 @@ public class PostController {
 
     @DeleteMapping("/{postId}/likes")
     public ResponseEntity<Objects> postUnlike(@PathVariable Long postId,
-                                             @RequestBody @Validated PostLikeRequest postLikeRequest) {
-        if (postLikeService.unlike(postId, postLikeRequest)) {
+                                              @AuthenticationPrincipal LoginUser loginUser) {
+        if (postLikeService.unlike(postId, loginUser.getMember().getId())) {
             return ResponseEntity.ok().build();
         }
 

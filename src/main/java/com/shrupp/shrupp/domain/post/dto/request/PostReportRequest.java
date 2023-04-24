@@ -5,8 +5,7 @@ import com.shrupp.shrupp.domain.post.domain.Post;
 import com.shrupp.shrupp.domain.post.domain.PostReport;
 import jakarta.validation.constraints.NotNull;
 
-public record PostReportRequest(@NotNull String reportType,
-                                @NotNull Long memberId) {
+public record PostReportRequest(@NotNull String reportType) {
 
     public PostReport toPostReport(Post post, Member member) {
         return new PostReport(reportType, post, member);

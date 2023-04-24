@@ -6,8 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record PostRegisterRequest(@NotNull String content,
-                                  @NotBlank String backgroundColor,
-                                  @NotNull Long memberId) {
+                                  @NotBlank String backgroundColor) {
 
     public Post toPostEntity(Member member) {
         return Post.builder()

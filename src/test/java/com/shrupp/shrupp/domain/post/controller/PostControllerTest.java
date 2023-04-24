@@ -3,7 +3,6 @@ package com.shrupp.shrupp.domain.post.controller;
 import com.shrupp.shrupp.domain.member.domain.Member;
 import com.shrupp.shrupp.domain.post.domain.Post;
 import com.shrupp.shrupp.domain.post.domain.PostReport;
-import com.shrupp.shrupp.domain.post.dto.request.PostLikeRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostRegisterRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostReportRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostUpdateRequest;
@@ -54,12 +53,12 @@ class PostControllerTest extends RestDocsTest {
         Field baseTimeField = Post.class.getDeclaredField("baseTime");
         baseTimeField.setAccessible(true);
         baseTimeField.set(expectedPost, new BaseTime(LocalDateTime.now(), LocalDateTime.now()));
-        given(postService.save(any(PostRegisterRequest.class))).willReturn(expectedPost);
+        given(postService.savePost(any(PostRegisterRequest.class), any(Long.class))).willReturn(expectedPost);
 
         ResultActions perform =
                 mockMvc.perform(post("/api/v1/posts")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(toJson(new PostRegisterRequest("123", "#fff", 1L))));
+                        .content(toJson(new PostRegisterRequest("123", "#fff"))));
 
         perform.andExpect(status().isOk())
                 .andExpect(jsonPath("$.content").value(expectedPost.getContent()));
@@ -70,8 +69,7 @@ class PostControllerTest extends RestDocsTest {
                         getDocumentResponse(),
                         requestFields(
                                 fieldWithPath("content").type(JsonFieldType.STRING).description("내용"),
-                                fieldWithPath("backgroundColor").type(JsonFieldType.STRING).description("배경 HEX"),
-                                fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("멤버 키")),
+                                fieldWithPath("backgroundColor").type(JsonFieldType.STRING).description("배경 HEX")),
                         responseFields(
                                 fieldWithPath("content").type(JsonFieldType.STRING).description("내용"),
                                 fieldWithPath("backgroundColor").type(JsonFieldType.STRING).description("배경 HEX"),
@@ -143,11 +141,11 @@ class PostControllerTest extends RestDocsTest {
         Field baseTimeField = Post.class.getDeclaredField("baseTime");
         baseTimeField.setAccessible(true);
         baseTimeField.set(expectedPost, new BaseTime(LocalDateTime.now(), LocalDateTime.now()));
-        given(postService.update(any(Long.class), any(PostUpdateRequest.class))).willReturn(expectedPost);
+        given(postService.updatePost(any(Long.class), any(PostUpdateRequest.class), any(Long.class))).willReturn(expectedPost);
 
         ResultActions perform = mockMvc.perform(put("/api/v1/posts/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(toJson(new PostUpdateRequest("123", "#fff", 1L))));
+                .content(toJson(new PostUpdateRequest("123", "#fff"))));
 
         perform.andExpect(status().isOk())
                 .andExpect(jsonPath("$.content").value(expectedPost.getContent()));
@@ -160,8 +158,7 @@ class PostControllerTest extends RestDocsTest {
                                 parameterWithName("id").description("게시글 키")),
                         requestFields(
                                 fieldWithPath("content").type(JsonFieldType.STRING).description("내용"),
-                                fieldWithPath("backgroundColor").type(JsonFieldType.STRING).description("배경 HEX"),
-                                fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("멤버 키")),
+                                fieldWithPath("backgroundColor").type(JsonFieldType.STRING).description("배경 HEX")),
                         responseFields(
                                 fieldWithPath("content").type(JsonFieldType.STRING).description("내용"),
                                 fieldWithPath("backgroundColor").type(JsonFieldType.STRING).description("배경 HEX"),
@@ -173,7 +170,7 @@ class PostControllerTest extends RestDocsTest {
     @Test
     @DisplayName("게시글 삭제")
     void deletePost() throws Exception {
-        willDoNothing().given(postService).delete(1L);
+        willDoNothing().given(postService).deletePost(1L, 1L);
 
         ResultActions perform = mockMvc.perform(delete("/api/v1/posts/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON));
@@ -192,11 +189,11 @@ class PostControllerTest extends RestDocsTest {
     @DisplayName("게시글 신고")
     void reportPost() throws Exception {
         PostReport expectedPostReport = new PostReport("욕설/비하", new Post("123", "#fff", null), new Member());
-        given(postReportService.report(any(Long.class), any(PostReportRequest.class))).willReturn(expectedPostReport);
+        given(postReportService.report(any(Long.class), any(PostReportRequest.class), any(Long.class))).willReturn(expectedPostReport);
 
         ResultActions perform = mockMvc.perform(post("/api/v1/posts/{postId}/reports", 1L)
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(toJson(new PostReportRequest("욕설/비하", 1L))));
+                .content(toJson(new PostReportRequest("욕설/비하"))));
 
         perform.andExpect(status().isOk())
                 .andExpect(jsonPath("$.reportType").value(expectedPostReport.getReportType()));
@@ -208,8 +205,7 @@ class PostControllerTest extends RestDocsTest {
                         pathParameters(
                                 parameterWithName("postId").description("게시글 키")),
                         requestFields(
-                                fieldWithPath("reportType").type(JsonFieldType.STRING).description("신고 타입"),
-                                fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("멤버 키")),
+                                fieldWithPath("reportType").type(JsonFieldType.STRING).description("신고 타입")),
                         responseFields(
                                 fieldWithPath("id").type(JsonFieldType.NUMBER).description("신고 키").optional(),
                                 fieldWithPath("reportType").type(JsonFieldType.STRING).description("신고 타입"),
@@ -220,43 +216,33 @@ class PostControllerTest extends RestDocsTest {
     @Test
     @DisplayName("게시글 좋아요")
     void likePost() throws Exception {
-        given(postLikeService.like(any(Long.class), any(PostLikeRequest.class))).willReturn(true);
+        given(postLikeService.like(any(Long.class), any(Long.class))).willReturn(true);
 
         ResultActions perform = mockMvc.perform(post("/api/v1/posts/{postId}/likes", 1L)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(toJson(new PostLikeRequest(1L))));
+                .contentType(MediaType.APPLICATION_JSON));
 
         perform.andExpect(status().isOk());
 
         perform.andDo(print())
                 .andDo(document("like-post",
                         getDocumentRequest(),
-                        getDocumentResponse(),
-                        pathParameters(
-                                parameterWithName("postId").description("게시글 키")),
-                        requestFields(
-                                fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("멤버 키"))));
+                        getDocumentResponse()));
     }
 
     @Test
     @DisplayName("게시글 좋아요 취소")
     void unlikePost() throws Exception {
-        given(postLikeService.unlike(any(Long.class), any(PostLikeRequest.class))).willReturn(true);
+        given(postLikeService.unlike(any(Long.class), any(Long.class))).willReturn(true);
 
         ResultActions perform = mockMvc.perform(delete("/api/v1/posts/{postId}/likes", 1L)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(toJson(new PostLikeRequest(1L))));
+                .contentType(MediaType.APPLICATION_JSON));
 
         perform.andExpect(status().isOk());
 
         perform.andDo(print())
                 .andDo(document("unlike-post",
                         getDocumentRequest(),
-                        getDocumentResponse(),
-                        pathParameters(
-                                parameterWithName("postId").description("게시글 키")),
-                        requestFields(
-                                fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("멤버 키"))));
+                        getDocumentResponse()));
     }
 
     @Test
