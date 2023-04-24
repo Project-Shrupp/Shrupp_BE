@@ -171,6 +171,7 @@ class CommentControllerTest extends RestDocsTest {
                                 fieldWithPath("reportType").type(JsonFieldType.STRING).description("신고 타입")),
                         responseFields(
                                 fieldWithPath("reportType").type(JsonFieldType.STRING).description("신고 타입"),
+                                fieldWithPath("created").type(JsonFieldType.STRING).description("생성일").optional(),
                                 fieldWithPath("commentId").type(JsonFieldType.NUMBER).description("댓글 키").optional(),
                                 fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("신고자 키").optional())));
     }

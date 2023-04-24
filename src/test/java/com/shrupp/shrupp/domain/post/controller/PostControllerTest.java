@@ -209,6 +209,7 @@ class PostControllerTest extends RestDocsTest {
                         responseFields(
                                 fieldWithPath("id").type(JsonFieldType.NUMBER).description("신고 키").optional(),
                                 fieldWithPath("reportType").type(JsonFieldType.STRING).description("신고 타입"),
+                                fieldWithPath("created").type(JsonFieldType.STRING).description("생성일").optional(),
                                 fieldWithPath("postId").type(JsonFieldType.NUMBER).description("게시글 키").optional(),
                                 fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("멤버 키").optional())));
     }
