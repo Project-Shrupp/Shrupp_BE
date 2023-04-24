@@ -78,3 +78,61 @@ include::{snippets}/delete-post/path-parameters.adoc[]
 === Response
 
 include::{snippets}/delete-post/http-response.adoc[]
+
+== 게시글 신고
+
+=== Request
+
+include::{snippets}/report-post/http-request.adoc[]
+
+include::{snippets}/report-post/path-parameters.adoc[]
+
+include::{snippets}/report-post/request-fields.adoc[]
+
+=== Response
+
+include::{snippets}/report-post/http-response.adoc[]
+
+include::{snippets}/report-post/response-fields.adoc[]
+
+== 게시글 좋아요
+
+=== Request
+
+include::{snippets}/like-post/http-request.adoc[]
+
+include::{snippets}/like-post/path-parameters.adoc[]
+
+include::{snippets}/like-post/request-fields.adoc[]
+
+=== Response
+
+include::{snippets}/like-post/http-response.adoc[]
+
+== 게시글 좋아요 취소
+
+=== Request
+
+include::{snippets}/unlike-post/http-request.adoc[]
+
+include::{snippets}/unlike-post/path-parameters.adoc[]
+
+include::{snippets}/unlike-post/request-fields.adoc[]
+
+=== Response
+
+include::{snippets}/unlike-post/http-response.adoc[]
+
+== 게시글 좋아요 여부
+
+=== Request
+
+include::{snippets}/post-liked/http-request.adoc[]
+
+include::{snippets}/post-liked/path-parameters.adoc[]
+
+=== Response
+
+include::{snippets}/post-liked/http-response.adoc[]
+
+include::{snippets}/post-liked/response-fields.adoc[]
