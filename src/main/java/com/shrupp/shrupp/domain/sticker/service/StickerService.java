@@ -19,9 +19,9 @@ public class StickerService {
     private final MemberService memberService;
 
     @Transactional
-    public Sticker save(StickerAddRequest stickerAddRequest) {
+    public Sticker save(StickerAddRequest stickerAddRequest, Long memberId) {
         return stickerRepository.save(stickerAddRequest.toStickerEntity(
-                memberService.findById(stickerAddRequest.memberId())));
+                memberService.findById(memberId)));
     }
 
     public List<Sticker> findAll() {

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.18">
-<title>Shrupp API</title>
+<title>Post API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -440,7 +440,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>Shrupp API</h1>
+<h1>Post API</h1>
 <div class="details">
 <span id="revnumber">version 0.0.1-SNAPSHOT</span>
 </div>
@@ -514,7 +514,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/v1/posts HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 71
+Content-Length: 75
 Host: localhost:8080
 
 {
@@ -562,13 +562,13 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 170
+Content-Length: 178
 
 {
   "content" : "123",
   "backgroundColor" : "#fff",
-  "created" : "2023-04-24T13:56:55.039933",
-  "lastUpdated" : "2023-04-24T13:56:55.039944",
+  "created" : "2023-04-24T15:41:07.6516273",
+  "lastUpdated" : "2023-04-24T15:41:07.6516273",
   "memberNickname" : ""
 }</code></pre>
 </div>
@@ -636,13 +636,13 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 116
+Content-Length: 122
 
 [ {
   "id" : null,
   "content" : "123",
   "backgroundColor" : "#fff",
-  "created" : "2023-04-24T13:56:55.156093"
+  "created" : "2023-04-24T15:41:07.7726248"
 } ]</code></pre>
 </div>
 </div>
@@ -723,13 +723,13 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 170
+Content-Length: 178
 
 {
   "content" : "123",
   "backgroundColor" : "#fff",
-  "created" : "2023-04-24T13:56:55.224368",
-  "lastUpdated" : "2023-04-24T13:56:55.224383",
+  "created" : "2023-04-24T15:41:07.8326239",
+  "lastUpdated" : "2023-04-24T15:41:07.8326239",
   "memberNickname" : ""
 }</code></pre>
 </div>
@@ -787,7 +787,7 @@ Content-Length: 170
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PUT /api/v1/posts/1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 71
+Content-Length: 75
 Host: localhost:8080
 
 {
@@ -854,13 +854,13 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 170
+Content-Length: 178
 
 {
   "content" : "123",
   "backgroundColor" : "#fff",
-  "created" : "2023-04-24T13:56:55.277923",
-  "lastUpdated" : "2023-04-24T13:56:55.277935",
+  "created" : "2023-04-24T15:41:07.8866233",
+  "lastUpdated" : "2023-04-24T15:41:07.8866233",
   "memberNickname" : ""
 }</code></pre>
 </div>
@@ -960,7 +960,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/v1/posts/1/reports HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 54
+Content-Length: 57
 Host: localhost:8080
 
 {
@@ -1021,7 +1021,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 76
+Content-Length: 80
 
 {
   "reportType" : "욕설/비하",
@@ -1078,7 +1078,7 @@ Content-Length: 76
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/v1/posts/1/likes HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 20
+Content-Length: 22
 Host: localhost:8080
 
 {
@@ -1146,7 +1146,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /api/v1/posts/1/likes HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 20
+Content-Length: 22
 Host: localhost:8080
 
 {
@@ -1243,7 +1243,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 20
+Content-Length: 22
 
 {
   "liked" : true
@@ -1278,7 +1278,7 @@ Content-Length: 20
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2023-04-24 13:51:51 +0900
+Last updated 2023-04-24 15:15:21 +0900
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
