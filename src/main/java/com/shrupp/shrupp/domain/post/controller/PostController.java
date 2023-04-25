@@ -9,6 +9,10 @@ import com.shrupp.shrupp.domain.post.service.PostLikeService;
 import com.shrupp.shrupp.domain.post.service.PostReportService;
 import com.shrupp.shrupp.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/posts")
@@ -27,8 +32,9 @@ public class PostController {
     private final PostLikeService postLikeService;
 
     @GetMapping
-    public ResponseEntity<List<SimplePostResponse>> postList() {
-        return ResponseEntity.ok(postService.findAll().stream()
+    public ResponseEntity<List<SimplePostResponse>> postList(
+            @PageableDefault(page = 0, size = 20, sort = "created", direction = Sort.Direction.DESC) Pageable pageable) {
+        return ResponseEntity.ok(postService.findAllByPaging(pageable).stream()
                 .map(SimplePostResponse::of)
                 .toList());
     }
