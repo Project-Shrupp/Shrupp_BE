@@ -53,4 +53,8 @@ public class PostService {
     public void deletePost(Long postId, Long memberId) {
         postRepository.deleteByIdAndMemberId(postId, memberId);
     }
+
+    public Long getPostCount() {
+        return postRepository.count();
+    }
 }

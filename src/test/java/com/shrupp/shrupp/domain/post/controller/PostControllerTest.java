@@ -1,5 +1,6 @@
 package com.shrupp.shrupp.domain.post.controller;
 
+import com.shrupp.shrupp.domain.comment.service.CommentService;
 import com.shrupp.shrupp.domain.member.domain.Member;
 import com.shrupp.shrupp.domain.post.domain.Post;
 import com.shrupp.shrupp.domain.post.domain.PostReport;
@@ -46,6 +47,8 @@ class PostControllerTest extends RestDocsTest {
     private PostReportService postReportService;
     @MockBean
     private PostLikeService postLikeService;
+    @MockBean
+    private CommentService commentService;
 
     @Test
     @DisplayName("게시글 생성")
@@ -107,7 +110,9 @@ class PostControllerTest extends RestDocsTest {
                                 fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("게시글 키").optional(),
                                 fieldWithPath("[].content").type(JsonFieldType.STRING).description("내용"),
                                 fieldWithPath("[].backgroundColor").type(JsonFieldType.STRING).description("배경 HEX"),
-                                fieldWithPath("[].created").type(JsonFieldType.STRING).description("생성일"))));
+                                fieldWithPath("[].created").type(JsonFieldType.STRING).description("생성일"),
+                                fieldWithPath("[].postLikeTally.count").type(JsonFieldType.NUMBER).description("좋아요 개수"),
+                                fieldWithPath("[].commentTally.count").type(JsonFieldType.NUMBER).description("댓글 개수"))));
     }
 
     @Test
@@ -220,6 +225,25 @@ class PostControllerTest extends RestDocsTest {
     }
 
     @Test
+    @DisplayName("게시글 개수 조회")
+    void postCount() throws Exception {
+        given(postService.getPostCount()).willReturn(1L);
+
+        ResultActions perform = mockMvc.perform(get("/api/v1/posts/count")
+                .contentType(MediaType.APPLICATION_JSON));
+
+        perform.andExpect(status().isOk())
+                .andExpect(jsonPath("$.count").value(1L));
+
+        perform.andDo(print())
+                .andDo(document("post-count",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        responseFields(
+                                fieldWithPath("count").type(JsonFieldType.NUMBER).description("게시글 개수"))));
+    }
+
+    @Test
     @DisplayName("게시글 좋아요")
     void likePost() throws Exception {
         given(postLikeService.like(any(Long.class), any(Long.class))).willReturn(true);
@@ -274,5 +298,26 @@ class PostControllerTest extends RestDocsTest {
                                 parameterWithName("postId").description("게시글 키")),
                         responseFields(
                                 fieldWithPath("liked").type(JsonFieldType.BOOLEAN).description("좋아요 여부").optional())));
+    }
+
+    @Test
+    @DisplayName("게시글 좋아요 개수")
+    void postLikeCount() throws Exception {
+        given(postLikeService.getPostLikeCount(any(Long.class))).willReturn(1L);
+
+        ResultActions perform = mockMvc.perform(get("/api/v1/posts/{postId}/likes/count", 1L)
+                .contentType(MediaType.APPLICATION_JSON));
+
+        perform.andExpect(status().isOk())
+                .andExpect(jsonPath("$.count").value(1L));
+
+        perform.andDo(print())
+                .andDo(document("post-like-count",
+                        getDocumentRequest(),
+                        getDocumentResponse(),
+                        pathParameters(
+                                parameterWithName("postId").description("게시글 키")),
+                        responseFields(
+                                fieldWithPath("count").type(JsonFieldType.NUMBER).description("좋아요 개수"))));
     }
 }

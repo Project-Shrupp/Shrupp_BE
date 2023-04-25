@@ -97,6 +97,18 @@ include::{snippets}/report-post/http-response.adoc[]
 
 include::{snippets}/report-post/response-fields.adoc[]
 
+== 게시글 개수
+
+=== Request
+
+include::{snippets}/post-count/http-request.adoc[]
+
+=== Response
+
+include::{snippets}/post-count/http-response.adoc[]
+
+include::{snippets}/post-count/response-fields.adoc[]
+
 == 게시글 좋아요
 
 === Request
@@ -134,3 +146,17 @@ include::{snippets}/post-liked/path-parameters.adoc[]
 include::{snippets}/post-liked/http-response.adoc[]
 
 include::{snippets}/post-liked/response-fields.adoc[]
+
+== 게시글 좋아요 개수
+
+=== Request
+
+include::{snippets}/post-like-count/http-request.adoc[]
+
+include::{snippets}/post-like-count/path-parameters.adoc[]
+
+=== Response
+
+include::{snippets}/post-like-count/http-response.adoc[]
+
+include::{snippets}/post-like-count/response-fields.adoc[]

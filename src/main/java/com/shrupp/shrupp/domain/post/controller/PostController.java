@@ -1,6 +1,8 @@
 package com.shrupp.shrupp.domain.post.controller;
 
 import com.shrupp.shrupp.config.security.LoginUser;
+import com.shrupp.shrupp.domain.comment.dto.response.CommentTallyResponse;
+import com.shrupp.shrupp.domain.comment.service.CommentService;
 import com.shrupp.shrupp.domain.post.dto.request.PostRegisterRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostReportRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostUpdateRequest;
@@ -9,7 +11,6 @@ import com.shrupp.shrupp.domain.post.service.PostLikeService;
 import com.shrupp.shrupp.domain.post.service.PostReportService;
 import com.shrupp.shrupp.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/posts")
@@ -30,13 +30,22 @@ public class PostController {
     private final PostService postService;
     private final PostReportService postReportService;
     private final PostLikeService postLikeService;
+    private final CommentService commentService;
 
     @GetMapping
     public ResponseEntity<List<SimplePostResponse>> postList(
             @PageableDefault(page = 0, size = 20, sort = "created", direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.ok(postService.findAllByPaging(pageable).stream()
-                .map(SimplePostResponse::of)
+                .map(post ->
+                        SimplePostResponse.of(post,
+                        new PostLikeTallyResponse(postLikeService.getPostLikeCount(post.getId())),
+                        new CommentTallyResponse(commentService.getCommentCountByPostId(post.getId()))))
                 .toList());
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<PostTallyResponse> postCount() {
+        return ResponseEntity.ok(new PostTallyResponse(postService.getPostCount()));
     }
 
     @GetMapping("/{postId}")
