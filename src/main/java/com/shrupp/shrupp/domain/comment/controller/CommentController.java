@@ -44,17 +44,17 @@ public class CommentController {
         return ResponseEntity.ok(CommentResponse.of(commentService.addComment(commentRegisterRequest, loginUser.getMember().getId())));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<CommentResponse> commentUpdate(@PathVariable Long id,
+    @PutMapping("/{commentId}")
+    public ResponseEntity<CommentResponse> commentUpdate(@PathVariable Long commentId,
                                                          @RequestBody @Validated CommentUpdateRequest commentUpdateRequest,
                                                          @AuthenticationPrincipal LoginUser loginUser) {
-        return ResponseEntity.ok(CommentResponse.of(commentService.updateComment(id, commentUpdateRequest, loginUser.getMember().getId())));
+        return ResponseEntity.ok(CommentResponse.of(commentService.updateComment(commentId, commentUpdateRequest, loginUser.getMember().getId())));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Objects> commentDelete(@PathVariable Long id,
+    @DeleteMapping("/{commentId}")
+    public ResponseEntity<Objects> commentDelete(@PathVariable Long commentId,
                                                  @AuthenticationPrincipal LoginUser loginUser) {
-        commentService.deleteComment(id, loginUser.getMember().getId());
+        commentService.deleteComment(commentId, loginUser.getMember().getId());
 
         return ResponseEntity.ok().build();
     }

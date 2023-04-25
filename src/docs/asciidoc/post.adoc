@@ -105,8 +105,6 @@ include::{snippets}/like-post/http-request.adoc[]
 
 include::{snippets}/like-post/path-parameters.adoc[]
 
-include::{snippets}/like-post/request-fields.adoc[]
-
 === Response
 
 include::{snippets}/like-post/http-response.adoc[]
@@ -118,8 +116,6 @@ include::{snippets}/like-post/http-response.adoc[]
 include::{snippets}/unlike-post/http-request.adoc[]
 
 include::{snippets}/unlike-post/path-parameters.adoc[]
-
-include::{snippets}/unlike-post/request-fields.adoc[]
 
 === Response
 

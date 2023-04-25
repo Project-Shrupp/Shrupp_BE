@@ -94,7 +94,7 @@ class StickerControllerTest extends RestDocsTest {
     void deleteSticker() throws Exception {
         willDoNothing().given(stickerService).deleteById(1L);
 
-        ResultActions perform = mockMvc.perform(delete("/api/v1/stickers/{id}", 1L)
+        ResultActions perform = mockMvc.perform(delete("/api/v1/stickers/{stickerId}", 1L)
                 .contentType(MediaType.APPLICATION_JSON));
 
         perform.andExpect(status().isOk());
@@ -104,6 +104,6 @@ class StickerControllerTest extends RestDocsTest {
                         getDocumentRequest(),
                         getDocumentResponse(),
                         pathParameters(
-                                parameterWithName("id").description("스티커 키"))));
+                                parameterWithName("stickerId").description("스티커 키"))));
     }
 }

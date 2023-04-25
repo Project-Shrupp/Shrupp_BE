@@ -165,8 +165,7 @@ class CommentControllerTest extends RestDocsTest {
                         getDocumentRequest(),
                         getDocumentResponse(),
                         pathParameters(
-                                parameterWithName("commentId").description("댓글 키")
-                        ),
+                                parameterWithName("commentId").description("댓글 키")),
                         requestFields(
                                 fieldWithPath("reportType").type(JsonFieldType.STRING).description("신고 타입")),
                         responseFields(
