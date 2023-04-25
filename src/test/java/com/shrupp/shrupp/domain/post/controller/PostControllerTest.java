@@ -15,6 +15,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
@@ -31,8 +33,7 @@ import static org.mockito.BDDMockito.willDoNothing;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
-import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -85,10 +86,10 @@ class PostControllerTest extends RestDocsTest {
         Field baseTimeField = Post.class.getDeclaredField("baseTime");
         baseTimeField.setAccessible(true);
         baseTimeField.set(expectedPost, new BaseTime(LocalDateTime.now(), LocalDateTime.now()));
-        given(postService.findAll()).willReturn(List.of(expectedPost));
+        given(postService.findAllByPaging(any(Pageable.class))).willReturn(new PageImpl<>(List.of(expectedPost)));
 
         ResultActions perform =
-                mockMvc.perform(get("/api/v1/posts")
+                mockMvc.perform(get("/api/v1/posts?page=0&size=20&sort=created,desc")
                         .contentType(MediaType.APPLICATION_JSON));
 
         perform.andExpect(status().isOk())
@@ -98,6 +99,10 @@ class PostControllerTest extends RestDocsTest {
                 .andDo(document("get-post-list",
                         getDocumentRequest(),
                         getDocumentResponse(),
+                        queryParameters(
+                                parameterWithName("page").description("페이지 번호"),
+                                parameterWithName("size").description("게시글 개수"),
+                                parameterWithName("sort").description("정렬기준[,차순]")),
                         responseFields(
                                 fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("게시글 키").optional(),
                                 fieldWithPath("[].content").type(JsonFieldType.STRING).description("내용"),

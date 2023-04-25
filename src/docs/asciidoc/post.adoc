@@ -31,6 +31,8 @@ include::{snippets}/save-post/response-fields.adoc[]
 
 include::{snippets}/get-post-list/http-request.adoc[]
 
+include::{snippets}/get-post-list/query-parameters.adoc[]
+
 === Response
 
 include::{snippets}/get-post-list/http-response.adoc[]

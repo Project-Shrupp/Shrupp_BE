@@ -7,6 +7,9 @@ import com.shrupp.shrupp.domain.post.dto.request.PostUpdateRequest;
 import com.shrupp.shrupp.domain.post.repository.PostRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +25,10 @@ public class PostService {
 
     public List<Post> findAll() {
         return postRepository.findAll();
+    }
+
+    public Slice<Post> findAllByPaging(Pageable pageable) {
+        return postRepository.findPagingAll(pageable);
     }
 
     public Post findById(Long postId) {
