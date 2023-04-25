@@ -596,7 +596,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/v1/posts HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 53
+Content-Length: 56
 Host: localhost:8080
 
 {
@@ -638,13 +638,13 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 170
+Content-Length: 178
 
 {
   "content" : "123",
   "backgroundColor" : "#fff",
-  "created" : "2023-04-24T22:45:00.325142",
-  "lastUpdated" : "2023-04-24T22:45:00.325152",
+  "created" : "2023-04-25T15:06:03.5059044",
+  "lastUpdated" : "2023-04-25T15:06:03.5059044",
   "memberNickname" : ""
 }</code></pre>
 </div>
@@ -700,11 +700,37 @@ Content-Length: 170
 <h3 id="_request_2"><a class="link" href="#_request_2">Request</a></h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/v1/posts HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/v1/posts?page=0&amp;size=20&amp;sort=created,desc HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: localhost:8080</code></pre>
 </div>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">페이지 번호</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>size</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">게시글 개수</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">정렬기준[,차순]</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect2">
 <h3 id="_response_2"><a class="link" href="#_response_2">Response</a></h3>
@@ -712,13 +738,13 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 116
+Content-Length: 121
 
 [ {
   "id" : null,
   "content" : "123",
   "backgroundColor" : "#fff",
-  "created" : "2023-04-24T22:45:00.420657"
+  "created" : "2023-04-25T15:06:03.611904"
 } ]</code></pre>
 </div>
 </div>
@@ -799,13 +825,13 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 170
+Content-Length: 176
 
 {
   "content" : "123",
   "backgroundColor" : "#fff",
-  "created" : "2023-04-24T22:45:00.475713",
-  "lastUpdated" : "2023-04-24T22:45:00.475726",
+  "created" : "2023-04-25T15:06:03.679904",
+  "lastUpdated" : "2023-04-25T15:06:03.679904",
   "memberNickname" : ""
 }</code></pre>
 </div>
@@ -863,7 +889,7 @@ Content-Length: 170
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PUT /api/v1/posts/1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 53
+Content-Length: 56
 Host: localhost:8080
 
 {
@@ -924,13 +950,13 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 170
+Content-Length: 178
 
 {
   "content" : "123",
   "backgroundColor" : "#fff",
-  "created" : "2023-04-24T22:45:00.516953",
-  "lastUpdated" : "2023-04-24T22:45:00.516967",
+  "created" : "2023-04-25T15:06:03.7319033",
+  "lastUpdated" : "2023-04-25T15:06:03.7319033",
   "memberNickname" : ""
 }</code></pre>
 </div>
@@ -1030,7 +1056,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/v1/posts/1/reports HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 36
+Content-Length: 38
 Host: localhost:8080
 
 {
@@ -1085,7 +1111,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 96
+Content-Length: 101
 
 {
   "reportType" : "욕설/비하",
@@ -1152,10 +1178,10 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Unresolved directive in src/docs/asciidoc/post.adoc - include::/Users/seowonho/shrupp/build/generated-snippets/like-post/path-parameters.adoc[]</p>
+<p>Unresolved directive in src/docs/asciidoc/post.adoc - include::C:\Users\SSAFY\IdeaProjects\Shrupp_BE\build\generated-snippets/like-post/path-parameters.adoc[]</p>
 </div>
 <div class="paragraph">
-<p>Unresolved directive in src/docs/asciidoc/post.adoc - include::/Users/seowonho/shrupp/build/generated-snippets/like-post/request-fields.adoc[]</p>
+<p>Unresolved directive in src/docs/asciidoc/post.adoc - include::C:\Users\SSAFY\IdeaProjects\Shrupp_BE\build\generated-snippets/like-post/request-fields.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
@@ -1181,10 +1207,10 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Unresolved directive in src/docs/asciidoc/post.adoc - include::/Users/seowonho/shrupp/build/generated-snippets/unlike-post/path-parameters.adoc[]</p>
+<p>Unresolved directive in src/docs/asciidoc/post.adoc - include::C:\Users\SSAFY\IdeaProjects\Shrupp_BE\build\generated-snippets/unlike-post/path-parameters.adoc[]</p>
 </div>
 <div class="paragraph">
-<p>Unresolved directive in src/docs/asciidoc/post.adoc - include::/Users/seowonho/shrupp/build/generated-snippets/unlike-post/request-fields.adoc[]</p>
+<p>Unresolved directive in src/docs/asciidoc/post.adoc - include::C:\Users\SSAFY\IdeaProjects\Shrupp_BE\build\generated-snippets/unlike-post/request-fields.adoc[]</p>
 </div>
 </div>
 <div class="sect2">
@@ -1235,7 +1261,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 20
+Content-Length: 22
 
 {
   "liked" : true
@@ -1278,7 +1304,7 @@ Content-Length: 20
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/v1/comments HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 39
+Content-Length: 42
 Host: localhost:8080
 
 {
@@ -1320,13 +1346,13 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 161
+Content-Length: 169
 
 {
   "id" : null,
   "content" : "123",
-  "created" : "2023-04-24T22:44:59.951509",
-  "lastUpdated" : "2023-04-24T22:44:59.951525",
+  "created" : "2023-04-25T15:06:03.1509045",
+  "lastUpdated" : "2023-04-25T15:06:03.1509045",
   "memberNickname" : "member"
 }</code></pre>
 </div>
@@ -1412,13 +1438,13 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 165
+Content-Length: 173
 
 [ {
   "id" : null,
   "content" : "123",
-  "created" : "2023-04-24T22:44:59.990561",
-  "lastUpdated" : "2023-04-24T22:44:59.990577",
+  "created" : "2023-04-25T15:06:03.1919045",
+  "lastUpdated" : "2023-04-25T15:06:03.1919045",
   "memberNickname" : "member"
 } ]</code></pre>
 </div>
@@ -1504,7 +1530,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 17
+Content-Length: 19
 
 {
   "count" : 1
@@ -1586,7 +1612,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/v1/comments/1/reports HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 36
+Content-Length: 38
 Host: localhost:8080
 
 {
@@ -1641,7 +1667,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 99
+Content-Length: 104
 
 {
   "reportType" : "욕설/비하",
@@ -1702,7 +1728,7 @@ Content-Length: 99
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/v1/stickers HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 72
+Content-Length: 76
 Host: localhost:8080
 
 {
@@ -1750,7 +1776,7 @@ Host: localhost:8080
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 87
+Content-Length: 92
 
 {
   "id" : null,
@@ -1818,7 +1844,7 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 91
+Content-Length: 96
 
 [ {
   "id" : null,
@@ -1913,7 +1939,7 @@ Host: localhost:8080</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2023-04-24 22:24:24 +0900
+Last updated 2023-04-24 15:46:21 +0900
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>
