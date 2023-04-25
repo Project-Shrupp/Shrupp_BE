@@ -643,8 +643,8 @@ Content-Length: 178
 {
   "content" : "123",
   "backgroundColor" : "#fff",
-  "created" : "2023-04-25T15:06:03.5059044",
-  "lastUpdated" : "2023-04-25T15:06:03.5059044",
+  "created" : "2023-04-25T15:39:26.1139682",
+  "lastUpdated" : "2023-04-25T15:39:26.1139682",
   "memberNickname" : ""
 }</code></pre>
 </div>
@@ -738,13 +738,13 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 121
+Content-Length: 122
 
 [ {
   "id" : null,
   "content" : "123",
   "backgroundColor" : "#fff",
-  "created" : "2023-04-25T15:06:03.611904"
+  "created" : "2023-04-25T15:39:26.2239677"
 } ]</code></pre>
 </div>
 </div>
@@ -800,7 +800,7 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 1. /api/v1/posts/{id}</caption>
+<caption class="title">Table 1. /api/v1/posts/{postId}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -813,7 +813,7 @@ Host: localhost:8080</code></pre>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>postId</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">게시글 키</p></td>
 </tr>
 </tbody>
@@ -825,13 +825,13 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 176
+Content-Length: 178
 
 {
   "content" : "123",
   "backgroundColor" : "#fff",
-  "created" : "2023-04-25T15:06:03.679904",
-  "lastUpdated" : "2023-04-25T15:06:03.679904",
+  "created" : "2023-04-25T15:39:26.2929652",
+  "lastUpdated" : "2023-04-25T15:39:26.2929652",
   "memberNickname" : ""
 }</code></pre>
 </div>
@@ -899,7 +899,7 @@ Host: localhost:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 2. /api/v1/posts/{id}</caption>
+<caption class="title">Table 2. /api/v1/posts/{postId}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -912,7 +912,7 @@ Host: localhost:8080
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>postId</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">게시글 키</p></td>
 </tr>
 </tbody>
@@ -955,8 +955,8 @@ Content-Length: 178
 {
   "content" : "123",
   "backgroundColor" : "#fff",
-  "created" : "2023-04-25T15:06:03.7319033",
-  "lastUpdated" : "2023-04-25T15:06:03.7319033",
+  "created" : "2023-04-25T15:39:26.3449657",
+  "lastUpdated" : "2023-04-25T15:39:26.3449657",
   "memberNickname" : ""
 }</code></pre>
 </div>
@@ -1018,7 +1018,7 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 3. /api/v1/posts/{id}</caption>
+<caption class="title">Table 3. /api/v1/posts/{postId}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1031,7 +1031,7 @@ Host: localhost:8080</code></pre>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>postId</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">게시글 키</p></td>
 </tr>
 </tbody>
@@ -1177,12 +1177,25 @@ Content-Type: application/json;charset=UTF-8
 Host: localhost:8080</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Unresolved directive in src/docs/asciidoc/post.adoc - include::C:\Users\SSAFY\IdeaProjects\Shrupp_BE\build\generated-snippets/like-post/path-parameters.adoc[]</p>
-</div>
-<div class="paragraph">
-<p>Unresolved directive in src/docs/asciidoc/post.adoc - include::C:\Users\SSAFY\IdeaProjects\Shrupp_BE\build\generated-snippets/like-post/request-fields.adoc[]</p>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 5. /api/v1/posts/{postId}/likes</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>postId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">게시글 키</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect2">
 <h3 id="_response_7"><a class="link" href="#_response_7">Response</a></h3>
@@ -1206,12 +1219,25 @@ Content-Type: application/json;charset=UTF-8
 Host: localhost:8080</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>Unresolved directive in src/docs/asciidoc/post.adoc - include::C:\Users\SSAFY\IdeaProjects\Shrupp_BE\build\generated-snippets/unlike-post/path-parameters.adoc[]</p>
-</div>
-<div class="paragraph">
-<p>Unresolved directive in src/docs/asciidoc/post.adoc - include::C:\Users\SSAFY\IdeaProjects\Shrupp_BE\build\generated-snippets/unlike-post/request-fields.adoc[]</p>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 6. /api/v1/posts/{postId}/likes</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>postId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">게시글 키</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect2">
 <h3 id="_response_8"><a class="link" href="#_response_8">Response</a></h3>
@@ -1236,7 +1262,7 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 5. /api/v1/posts/{postId}/likes</caption>
+<caption class="title">Table 7. /api/v1/posts/{postId}/likes</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1351,8 +1377,8 @@ Content-Length: 169
 {
   "id" : null,
   "content" : "123",
-  "created" : "2023-04-25T15:06:03.1509045",
-  "lastUpdated" : "2023-04-25T15:06:03.1509045",
+  "created" : "2023-04-25T15:39:25.7539673",
+  "lastUpdated" : "2023-04-25T15:39:25.7539673",
   "memberNickname" : "member"
 }</code></pre>
 </div>
@@ -1443,8 +1469,8 @@ Content-Length: 173
 [ {
   "id" : null,
   "content" : "123",
-  "created" : "2023-04-25T15:06:03.1919045",
-  "lastUpdated" : "2023-04-25T15:06:03.1919045",
+  "created" : "2023-04-25T15:39:25.7969677",
+  "lastUpdated" : "2023-04-25T15:39:25.7969677",
   "memberNickname" : "member"
 } ]</code></pre>
 </div>
@@ -1574,7 +1600,7 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 6. /api/v1/comments/{id}</caption>
+<caption class="title">Table 8. /api/v1/comments/{id}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1621,7 +1647,7 @@ Host: localhost:8080
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 7. /api/v1/comments/{commentId}/reports</caption>
+<caption class="title">Table 9. /api/v1/comments/{commentId}/reports</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1906,7 +1932,7 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 8. /api/v1/stickers/{id}</caption>
+<caption class="title">Table 10. /api/v1/stickers/{stickerId}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1919,7 +1945,7 @@ Host: localhost:8080</code></pre>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>stickerId</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">스티커 키</p></td>
 </tr>
 </tbody>

@@ -119,7 +119,7 @@ class PostControllerTest extends RestDocsTest {
         baseTimeField.set(expectedPost, new BaseTime(LocalDateTime.now(), LocalDateTime.now()));
         given(postService.findById(any(Long.class))).willReturn(expectedPost);
 
-        ResultActions perform = mockMvc.perform(get("/api/v1/posts/{id}", 1L)
+        ResultActions perform = mockMvc.perform(get("/api/v1/posts/{postId}", 1L)
                 .contentType(MediaType.APPLICATION_JSON));
 
         perform.andExpect(status().isOk())
@@ -130,7 +130,7 @@ class PostControllerTest extends RestDocsTest {
                         getDocumentRequest(),
                         getDocumentResponse(),
                         pathParameters(
-                                parameterWithName("id").description("게시글 키")),
+                                parameterWithName("postId").description("게시글 키")),
                         responseFields(
                                 fieldWithPath("content").type(JsonFieldType.STRING).description("내용"),
                                 fieldWithPath("backgroundColor").type(JsonFieldType.STRING).description("배경 HEX"),
@@ -148,7 +148,7 @@ class PostControllerTest extends RestDocsTest {
         baseTimeField.set(expectedPost, new BaseTime(LocalDateTime.now(), LocalDateTime.now()));
         given(postService.updatePost(any(Long.class), any(PostUpdateRequest.class), any(Long.class))).willReturn(expectedPost);
 
-        ResultActions perform = mockMvc.perform(put("/api/v1/posts/{id}", 1L)
+        ResultActions perform = mockMvc.perform(put("/api/v1/posts/{postId}", 1L)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(toJson(new PostUpdateRequest("123", "#fff"))));
 
@@ -160,7 +160,7 @@ class PostControllerTest extends RestDocsTest {
                         getDocumentRequest(),
                         getDocumentResponse(),
                         pathParameters(
-                                parameterWithName("id").description("게시글 키")),
+                                parameterWithName("postId").description("게시글 키")),
                         requestFields(
                                 fieldWithPath("content").type(JsonFieldType.STRING).description("내용"),
                                 fieldWithPath("backgroundColor").type(JsonFieldType.STRING).description("배경 HEX")),
@@ -177,7 +177,7 @@ class PostControllerTest extends RestDocsTest {
     void deletePost() throws Exception {
         willDoNothing().given(postService).deletePost(1L, 1L);
 
-        ResultActions perform = mockMvc.perform(delete("/api/v1/posts/{id}", 1L)
+        ResultActions perform = mockMvc.perform(delete("/api/v1/posts/{postId}", 1L)
                 .contentType(MediaType.APPLICATION_JSON));
 
         perform.andExpect(status().isOk());
@@ -187,7 +187,7 @@ class PostControllerTest extends RestDocsTest {
                         getDocumentRequest(),
                         getDocumentResponse(),
                         pathParameters(
-                                parameterWithName("id").description("게시글 키"))));
+                                parameterWithName("postId").description("게시글 키"))));
     }
 
     @Test
@@ -232,7 +232,9 @@ class PostControllerTest extends RestDocsTest {
         perform.andDo(print())
                 .andDo(document("like-post",
                         getDocumentRequest(),
-                        getDocumentResponse()));
+                        getDocumentResponse(),
+                        pathParameters(
+                                parameterWithName("postId").description("게시글 키"))));
     }
 
     @Test
@@ -248,7 +250,9 @@ class PostControllerTest extends RestDocsTest {
         perform.andDo(print())
                 .andDo(document("unlike-post",
                         getDocumentRequest(),
-                        getDocumentResponse()));
+                        getDocumentResponse(),
+                        pathParameters(
+                                parameterWithName("postId").description("게시글 키"))));
     }
 
     @Test
