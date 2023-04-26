@@ -4,7 +4,7 @@ WORKDIR /build
 COPY build.gradle settings.gradle /build/
 RUN gradle build -x test --parallel --continue > /dev/null 2>&1 || true
 
-COPY src /build
+COPY . /build
 RUN gradle build -x test --parallel
 
 # APP
