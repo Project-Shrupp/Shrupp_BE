@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         requests ->
                                 requests.requestMatchers("/auth2/**", "/h2-console/**").permitAll()
-                                        .requestMatchers("/api/v1/**").hasRole("USER")
+                                        .requestMatchers("/api/**").hasRole("USER")
                                         .anyRequest().authenticated())
                 .oauth2Login(setOAuth2Config())
                 .sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
