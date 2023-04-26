@@ -1,0 +1,50 @@
+= Sticker API
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+
+== 스티커 추가
+
+=== Request
+
+include::{snippets}/add-sticker/http-request.adoc[]
+
+include::{snippets}/add-sticker/request-fields.adoc[]
+
+=== Response
+
+include::{snippets}/add-sticker/http-response.adoc[]
+
+include::{snippets}/add-sticker/response-fields.adoc[]
+
+== 스티커 목록 조회
+
+=== Request
+
+include::{snippets}/get-sticker-list/http-request.adoc[]
+
+=== Response
+
+include::{snippets}/get-sticker-list/http-response.adoc[]
+
+include::{snippets}/get-sticker-list/response-fields.adoc[]
+
+== 스티커 삭제
+
+=== Request
+
+include::{snippets}/delete-sticker/http-request.adoc[]
+
+include::{snippets}/delete-sticker/path-parameters.adoc[]
+
+=== Response
+
+include::{snippets}/delete-sticker/http-response.adoc[]

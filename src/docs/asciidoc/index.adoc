@@ -1,0 +1,21 @@
+= Shrupp API
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+NOTE: 코드 개선이 완벽히 되지 않아 id 값에 null이 들어가는 경우가 있습니다. id(키) 값은 기본적으로 Long(Number) 타입입니다.
+
+= 게시글
+
+include::{docdir}/src/docs/asciidoc/post.adoc[]
+
+= 댓글
+
+include::{docdir}/src/docs/asciidoc/comment.adoc[]
+
+= 스티커
+
+include::{docdir}/src/docs/asciidoc/sticker.adoc[]

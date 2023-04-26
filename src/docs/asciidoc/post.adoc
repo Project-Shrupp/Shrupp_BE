@@ -1,0 +1,162 @@
+= Post API
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+
+== 게시글 등록
+
+=== Request
+
+include::{snippets}/save-post/http-request.adoc[]
+
+include::{snippets}/save-post/request-fields.adoc[]
+
+=== Response
+
+include::{snippets}/save-post/http-response.adoc[]
+
+include::{snippets}/save-post/response-fields.adoc[]
+
+== 게시글 리스트 조회
+
+=== Request
+
+include::{snippets}/get-post-list/http-request.adoc[]
+
+include::{snippets}/get-post-list/query-parameters.adoc[]
+
+=== Response
+
+include::{snippets}/get-post-list/http-response.adoc[]
+
+include::{snippets}/get-post-list/response-fields.adoc[]
+
+== 게시글 단일 조회
+
+=== Request
+
+include::{snippets}/get-post/http-request.adoc[]
+
+include::{snippets}/get-post/path-parameters.adoc[]
+
+=== Response
+
+include::{snippets}/get-post/http-response.adoc[]
+
+include::{snippets}/get-post/response-fields.adoc[]
+
+== 게시글 수정
+
+=== Request
+
+include::{snippets}/modify-post/http-request.adoc[]
+
+include::{snippets}/modify-post/path-parameters.adoc[]
+
+include::{snippets}/modify-post/request-fields.adoc[]
+
+=== Response
+
+include::{snippets}/modify-post/http-response.adoc[]
+
+include::{snippets}/modify-post/response-fields.adoc[]
+
+== 게시글 삭제
+
+=== Request
+
+include::{snippets}/delete-post/http-request.adoc[]
+
+include::{snippets}/delete-post/path-parameters.adoc[]
+
+=== Response
+
+include::{snippets}/delete-post/http-response.adoc[]
+
+== 게시글 신고
+
+=== Request
+
+include::{snippets}/report-post/http-request.adoc[]
+
+include::{snippets}/report-post/path-parameters.adoc[]
+
+include::{snippets}/report-post/request-fields.adoc[]
+
+=== Response
+
+include::{snippets}/report-post/http-response.adoc[]
+
+include::{snippets}/report-post/response-fields.adoc[]
+
+== 게시글 개수
+
+=== Request
+
+include::{snippets}/post-count/http-request.adoc[]
+
+=== Response
+
+include::{snippets}/post-count/http-response.adoc[]
+
+include::{snippets}/post-count/response-fields.adoc[]
+
+== 게시글 좋아요
+
+=== Request
+
+include::{snippets}/like-post/http-request.adoc[]
+
+include::{snippets}/like-post/path-parameters.adoc[]
+
+=== Response
+
+include::{snippets}/like-post/http-response.adoc[]
+
+== 게시글 좋아요 취소
+
+=== Request
+
+include::{snippets}/unlike-post/http-request.adoc[]
+
+include::{snippets}/unlike-post/path-parameters.adoc[]
+
+=== Response
+
+include::{snippets}/unlike-post/http-response.adoc[]
+
+== 게시글 좋아요 여부
+
+=== Request
+
+include::{snippets}/post-liked/http-request.adoc[]
+
+include::{snippets}/post-liked/path-parameters.adoc[]
+
+=== Response
+
+include::{snippets}/post-liked/http-response.adoc[]
+
+include::{snippets}/post-liked/response-fields.adoc[]
+
+== 게시글 좋아요 개수
+
+=== Request
+
+include::{snippets}/post-like-count/http-request.adoc[]
+
+include::{snippets}/post-like-count/path-parameters.adoc[]
+
+=== Response
+
+include::{snippets}/post-like-count/http-response.adoc[]
+
+include::{snippets}/post-like-count/response-fields.adoc[]
