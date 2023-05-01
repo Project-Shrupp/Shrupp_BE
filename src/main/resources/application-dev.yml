@@ -38,4 +38,4 @@ jwt:
 client:
   host: 15.164.136.198
   url: http://localhost:3000
-  endpoint:
+  endpoint: user/kakao/callback
