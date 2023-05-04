@@ -13,11 +13,14 @@ import java.util.Date;
 @Component
 @RequiredArgsConstructor
 public class JwtProvider {
-    private final Key key;
 
+    private static final Long AUTH_TOKEN_VALIDATION_SECOND = 60L * 1000;
     private static final Long ACCESS_TOKEN_VALIDATION_SECOND = 60L * 60 * 24 * 1000;
     private static final Long REFRESH_TOKEN_VALIDATION_SECOND = 60L * 60 * 24 * 14 * 1000;
     private static final String BEARER_TYPE = "bearer";
+
+    private final Key key;
+    private final JwtValidator jwtValidator;
 
     public JwtToken createJwtToken(LoginUser loginUser) {
         Claims claims = getClaims(loginUser);
@@ -26,6 +29,14 @@ public class JwtProvider {
         String refreshToken = getToken(loginUser, claims, REFRESH_TOKEN_VALIDATION_SECOND);
 
         return new JwtToken(accessToken, refreshToken, BEARER_TYPE);
+    }
+
+    public JwtToken createJwtTokenByAuthToken(String authToken) {
+        return createJwtToken(jwtValidator.getLoginUser(authToken));
+    }
+
+    public String createAuthToken(LoginUser loginUser) {
+        return getToken(loginUser, getClaims(loginUser), AUTH_TOKEN_VALIDATION_SECOND);
     }
 
     public Claims getClaims(LoginUser loginUser) {
