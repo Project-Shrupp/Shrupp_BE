@@ -28,9 +28,14 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     private String redirectEndPoint;
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
+        StringBuilder sb = new StringBuilder();
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
-        jwtSetupService.addJwtTokensToCookie(response, loginUser);
-        getRedirectStrategy().sendRedirect(request, response, clientUrl + "/" + redirectEndPoint);
+//        jwtSetupService.addJwtTokensToCookie(response, loginUser);
+        String authToken = jwtSetupService.createAuthToken(loginUser);
+        sb.append(clientUrl)
+                .append("/").append(redirectEndPoint)
+                .append("?token=").append(authToken);
+        getRedirectStrategy().sendRedirect(request, response, sb.toString());
     }
 }

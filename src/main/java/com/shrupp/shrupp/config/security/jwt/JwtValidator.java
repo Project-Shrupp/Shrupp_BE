@@ -31,11 +31,17 @@ public class JwtValidator {
         return new UsernamePasswordAuthenticationToken(loginUser, "", loginUser.getAuthorities());
     }
 
-    private Claims getTokenClaims(String accessToken) {
+    public LoginUser getLoginUser(String token) {
+        Claims claims = getTokenClaims(token);
+        Member member = memberService.findById(Long.parseLong(claims.get("id", String.class)));
+        return loginUserMapper.toLoginUser(member);
+    }
+
+    private Claims getTokenClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
-                .parseClaimsJws(accessToken)
+                .parseClaimsJws(token)
                 .getBody();
     }
 }

@@ -34,6 +34,14 @@ public class JwtSetupService {
         response.addHeader("Set-Cookie", refreshTokenCookie.toString());
     }
 
+    public JwtToken createJwtTokenByAuthToken(String authToken) {
+        return jwtProvider.createJwtTokenByAuthToken(authToken);
+    }
+
+    public String createAuthToken(LoginUser loginUser) {
+        return jwtProvider.createAuthToken(loginUser);
+    }
+
     private ResponseCookie setCookie(String key, String value) {
         return ResponseCookie.from(key, value)
                 .path("/")
