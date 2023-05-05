@@ -3,6 +3,7 @@ package com.shrupp.shrupp.domain.post.controller;
 import com.shrupp.shrupp.config.security.LoginUser;
 import com.shrupp.shrupp.domain.comment.dto.response.CommentTallyResponse;
 import com.shrupp.shrupp.domain.comment.service.CommentService;
+import com.shrupp.shrupp.domain.post.domain.Post;
 import com.shrupp.shrupp.domain.post.dto.request.PostRegisterRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostReportRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostUpdateRequest;
@@ -49,21 +50,27 @@ public class PostController {
     }
 
     @GetMapping("/{postId}")
-    public ResponseEntity<PostResponse> postDetails(@PathVariable Long postId) {
-        return ResponseEntity.ok(PostResponse.of(postService.findById(postId)));
+    public ResponseEntity<PostResponse> postDetails(@PathVariable Long postId,
+                                                    @AuthenticationPrincipal LoginUser loginUser) {
+        Post post = postService.findById(postId);
+        return ResponseEntity.ok(PostResponse.of(post, isWriter(loginUser, post)));
+    }
+
+    private static boolean isWriter(LoginUser loginUser, Post post) {
+        return post.getMember().getId().equals(loginUser.getMember().getId());
     }
 
     @PostMapping
     public ResponseEntity<PostResponse> postAdd(@RequestBody @Validated PostRegisterRequest postRegisterRequest,
                                                 @AuthenticationPrincipal LoginUser loginUser) {
-        return ResponseEntity.ok(PostResponse.of(postService.savePost(postRegisterRequest, loginUser.getMember().getId())));
+        return ResponseEntity.ok(PostResponse.of(postService.savePost(postRegisterRequest, loginUser.getMember().getId()), true));
     }
 
     @PutMapping("/{postId}")
     public ResponseEntity<PostResponse> postModify(@PathVariable Long postId,
                                                    @RequestBody @Validated PostUpdateRequest postUpdateRequest,
                                                    @AuthenticationPrincipal LoginUser loginUser) {
-        return ResponseEntity.ok(PostResponse.of(postService.updatePost(postId, postUpdateRequest, loginUser.getMember().getId())));
+        return ResponseEntity.ok(PostResponse.of(postService.updatePost(postId, postUpdateRequest, loginUser.getMember().getId()), true));
     }
 
     @DeleteMapping("/{postId}")
