@@ -20,7 +20,7 @@ public class LogAspect {
     public void allController() { }
 
     @Around("allController()")
-    public Object createControllerLog(ProceedingJoinPoint joinPoint) {
+    public Object createControllerLog(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("[REQUEST] Controller: {} | Method: {} | Arguments: {}",
                 joinPoint.getTarget().getClass().getSimpleName(),
                 joinPoint.getSignature().toShortString(),
@@ -28,13 +28,9 @@ public class LogAspect {
                         ((CodeSignature) (joinPoint.getSignature())).getParameterNames(),
                         joinPoint.getArgs()));
 
-        try {
-            Object result = joinPoint.proceed();
-            log.info("[REQUEST] Result: {}", result.getClass().getSimpleName());
-            return result;
-        } catch (Throwable e) {
-            return null;
-        }
+        Object result = joinPoint.proceed();
+        log.info("[REQUEST] Result: {}", result.getClass().getSimpleName());
+        return result;
     }
 
     private String toParametersString(String[] parameterNames, Object[] args) {
