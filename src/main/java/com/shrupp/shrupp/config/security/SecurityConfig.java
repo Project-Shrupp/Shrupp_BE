@@ -41,7 +41,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests(
                         requests ->
-                                requests.requestMatchers("/auth2/**", "api/v1/auth").permitAll()
+                                requests.requestMatchers("/auth2/**", "/api/v1/auth").permitAll()
                                         .requestMatchers("/api/**").hasRole("USER")
                                         .anyRequest().authenticated())
                 .oauth2Login(setOAuth2Config())
