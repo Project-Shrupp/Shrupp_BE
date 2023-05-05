@@ -45,9 +45,13 @@ class CommentControllerTest extends RestDocsTest {
     @Test
     @DisplayName("댓글 생성")
     void registerComment() throws Exception {
+        Member expectMember = new Member("", null);
+        Field memberId = Member.class.getDeclaredField("id");
+        memberId.setAccessible(true);
+        memberId.set(expectMember, 1L);
         Comment expectedComment = Comment.builder()
                 .content("123")
-                .post(new Post("123", "#fff", new Member("member", null)))
+                .post(new Post("123", "#fff", expectMember))
                 .member(new Member("member", null))
                 .build();
         Field baseTimeField = Comment.class.getDeclaredField("baseTime");
@@ -73,16 +77,21 @@ class CommentControllerTest extends RestDocsTest {
                                 fieldWithPath("content").type(JsonFieldType.STRING).description("내용"),
                                 fieldWithPath("created").type(JsonFieldType.STRING).description("생성일"),
                                 fieldWithPath("lastUpdated").type(JsonFieldType.STRING).description("수정일"),
-                                fieldWithPath("memberNickname").type(JsonFieldType.STRING).description("멤버 닉네임"))));
+                                fieldWithPath("memberNickname").type(JsonFieldType.STRING).description("멤버 닉네임"),
+                                fieldWithPath("isWriter").type(JsonFieldType.BOOLEAN).description("작성자 여부"))));
     }
 
     @Test
     @DisplayName("댓글 리스트 조회")
     void getCommentList() throws Exception {
+        Member expectMember = new Member("", null);
+        Field memberId = Member.class.getDeclaredField("id");
+        memberId.setAccessible(true);
+        memberId.set(expectMember, 1L);
         Comment expectedComment = Comment.builder()
                 .content("123")
-                .post(new Post("123", "#fff", new Member("member", null)))
-                .member(new Member("member", null))
+                .post(new Post("123", "#fff", expectMember))
+                .member(expectMember)
                 .build();
         Field baseTimeField = Comment.class.getDeclaredField("baseTime");
         baseTimeField.setAccessible(true);
@@ -105,7 +114,8 @@ class CommentControllerTest extends RestDocsTest {
                                 fieldWithPath("[].content").type(JsonFieldType.STRING).description("내용"),
                                 fieldWithPath("[].created").type(JsonFieldType.STRING).description("생성일"),
                                 fieldWithPath("[].lastUpdated").type(JsonFieldType.STRING).description("수정일"),
-                                fieldWithPath("[].memberNickname").type(JsonFieldType.STRING).description("멤버 닉네임"))));
+                                fieldWithPath("[].memberNickname").type(JsonFieldType.STRING).description("멤버 닉네임"),
+                                fieldWithPath("[].isWriter").type(JsonFieldType.BOOLEAN).description("작성자 여부"))));
     }
 
     @Test
