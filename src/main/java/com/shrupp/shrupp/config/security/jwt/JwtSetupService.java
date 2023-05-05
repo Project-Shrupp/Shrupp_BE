@@ -46,7 +46,6 @@ public class JwtSetupService {
         return ResponseCookie.from(key, value)
                 .path("/")
                 .httpOnly(true)
-                .domain(clientHost)
                 .build();
     }
 }
