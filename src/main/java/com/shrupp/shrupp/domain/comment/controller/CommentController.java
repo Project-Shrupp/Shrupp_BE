@@ -1,6 +1,7 @@
 package com.shrupp.shrupp.domain.comment.controller;
 
 import com.shrupp.shrupp.config.security.LoginUser;
+import com.shrupp.shrupp.domain.comment.domain.Comment;
 import com.shrupp.shrupp.domain.comment.dto.request.CommentReportRequest;
 import com.shrupp.shrupp.domain.comment.dto.request.CommentRegisterRequest;
 import com.shrupp.shrupp.domain.comment.dto.request.CommentUpdateRequest;
@@ -27,10 +28,15 @@ public class CommentController {
     private final CommentReportService commentReportService;
 
     @GetMapping
-    public ResponseEntity<List<CommentResponse>> commentList(@RequestParam Long postId) {
+    public ResponseEntity<List<CommentResponse>> commentList(@RequestParam Long postId,
+                                                             @AuthenticationPrincipal LoginUser loginUser) {
         return ResponseEntity.ok(commentService.findCommentsByPostId(postId).stream()
-                .map(CommentResponse::of)
+                .map(comment -> CommentResponse.of(comment, isWriter(loginUser, comment)))
                 .toList());
+    }
+
+    private static boolean isWriter(LoginUser loginUser, Comment comment) {
+        return comment.getMember().getId().equals(loginUser.getMember().getId());
     }
 
     @GetMapping("/count")
@@ -41,14 +47,14 @@ public class CommentController {
     @PostMapping
     public ResponseEntity<CommentResponse> commentAdd(@RequestBody @Validated CommentRegisterRequest commentRegisterRequest,
                                                       @AuthenticationPrincipal LoginUser loginUser) {
-        return ResponseEntity.ok(CommentResponse.of(commentService.addComment(commentRegisterRequest, loginUser.getMember().getId())));
+        return ResponseEntity.ok(CommentResponse.of(commentService.addComment(commentRegisterRequest, loginUser.getMember().getId()), true));
     }
 
     @PutMapping("/{commentId}")
     public ResponseEntity<CommentResponse> commentUpdate(@PathVariable Long commentId,
                                                          @RequestBody @Validated CommentUpdateRequest commentUpdateRequest,
                                                          @AuthenticationPrincipal LoginUser loginUser) {
-        return ResponseEntity.ok(CommentResponse.of(commentService.updateComment(commentId, commentUpdateRequest, loginUser.getMember().getId())));
+        return ResponseEntity.ok(CommentResponse.of(commentService.updateComment(commentId, commentUpdateRequest, loginUser.getMember().getId()), true));
     }
 
     @DeleteMapping("/{commentId}")

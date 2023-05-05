@@ -19,3 +19,7 @@ include::{docdir}/src/docs/asciidoc/comment.adoc[]
 = 스티커
 
 include::{docdir}/src/docs/asciidoc/sticker.adoc[]
+
+= 멤버
+
+include::{docdir}/src/docs/asciidoc/member.adoc[]

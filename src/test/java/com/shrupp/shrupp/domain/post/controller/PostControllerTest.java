@@ -79,7 +79,8 @@ class PostControllerTest extends RestDocsTest {
                                 fieldWithPath("backgroundColor").type(JsonFieldType.STRING).description("배경 HEX"),
                                 fieldWithPath("created").type(JsonFieldType.STRING).description("생성일"),
                                 fieldWithPath("lastUpdated").type(JsonFieldType.STRING).description("수정일"),
-                                fieldWithPath("memberNickname").type(JsonFieldType.STRING).description("멤버 닉네임"))));
+                                fieldWithPath("memberNickname").type(JsonFieldType.STRING).description("멤버 닉네임"),
+                                fieldWithPath("isWriter").type(JsonFieldType.BOOLEAN).description("작성자 여부"))));
     }
 
     @Test
@@ -118,7 +119,11 @@ class PostControllerTest extends RestDocsTest {
     @Test
     @DisplayName("게시글 조회")
     void getPost() throws Exception {
-        Post expectedPost = new Post("123", "#fff", new Member("", null));
+        Member expectMember = new Member("", null);
+        Field memberId = Member.class.getDeclaredField("id");
+        memberId.setAccessible(true);
+        memberId.set(expectMember, 1L);
+        Post expectedPost = new Post("123", "#fff", expectMember);
         Field baseTimeField = Post.class.getDeclaredField("baseTime");
         baseTimeField.setAccessible(true);
         baseTimeField.set(expectedPost, new BaseTime(LocalDateTime.now(), LocalDateTime.now()));
@@ -141,13 +146,18 @@ class PostControllerTest extends RestDocsTest {
                                 fieldWithPath("backgroundColor").type(JsonFieldType.STRING).description("배경 HEX"),
                                 fieldWithPath("created").type(JsonFieldType.STRING).description("생성일"),
                                 fieldWithPath("lastUpdated").type(JsonFieldType.STRING).description("수정일"),
-                                fieldWithPath("memberNickname").type(JsonFieldType.STRING).description("멤버 닉네임"))));
+                                fieldWithPath("memberNickname").type(JsonFieldType.STRING).description("멤버 닉네임"),
+                                fieldWithPath("isWriter").type(JsonFieldType.BOOLEAN).description("작성자 여부"))));
     }
 
     @Test
     @DisplayName("게시글 수정")
     void modifyPost() throws Exception {
-        Post expectedPost = new Post("123", "#fff", new Member("", null));
+        Member expectMember = new Member("", null);
+        Field memberId = Member.class.getDeclaredField("id");
+        memberId.setAccessible(true);
+        memberId.set(expectMember, 1L);
+        Post expectedPost = new Post("123", "#fff", expectMember);
         Field baseTimeField = Post.class.getDeclaredField("baseTime");
         baseTimeField.setAccessible(true);
         baseTimeField.set(expectedPost, new BaseTime(LocalDateTime.now(), LocalDateTime.now()));
@@ -174,7 +184,8 @@ class PostControllerTest extends RestDocsTest {
                                 fieldWithPath("backgroundColor").type(JsonFieldType.STRING).description("배경 HEX"),
                                 fieldWithPath("created").type(JsonFieldType.STRING).description("생성일"),
                                 fieldWithPath("lastUpdated").type(JsonFieldType.STRING).description("수정일"),
-                                fieldWithPath("memberNickname").type(JsonFieldType.STRING).description("멤버 닉네임"))));
+                                fieldWithPath("memberNickname").type(JsonFieldType.STRING).description("멤버 닉네임"),
+                                fieldWithPath("isWriter").type(JsonFieldType.BOOLEAN).description("작성자 여부"))));
     }
 
     @Test

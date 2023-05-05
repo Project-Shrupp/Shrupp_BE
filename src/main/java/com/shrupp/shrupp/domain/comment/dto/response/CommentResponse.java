@@ -10,16 +10,18 @@ public record CommentResponse(Long id,
                               String content,
                               LocalDateTime created,
                               LocalDateTime lastUpdated,
-                              String memberNickname) {
+                              String memberNickname,
+                              Boolean isWriter) {
 
 
-    public static CommentResponse of(Comment comment) {
+    public static CommentResponse of(Comment comment, Boolean isWriter) {
         return CommentResponse.builder()
                 .id(comment.getId())
                 .content(comment.getContent())
                 .created(comment.getBaseTime().getCreated())
                 .lastUpdated(comment.getBaseTime().getLastUpdated())
                 .memberNickname(comment.getMember().getNickname())
+                .isWriter(isWriter)
                 .build();
     }
 }
