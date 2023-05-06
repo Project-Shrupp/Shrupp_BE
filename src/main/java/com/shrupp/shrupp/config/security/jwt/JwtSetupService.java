@@ -45,7 +45,7 @@ public class JwtSetupService {
     private ResponseCookie setCookie(String key, String value) {
         return ResponseCookie.from(key, value)
                 .path("/")
-                .domain(".shrupp.net")
+                .domain(clientHost)
                 .httpOnly(true)
                 .sameSite("None")
                 .secure(true)
