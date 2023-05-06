@@ -44,7 +44,7 @@ server:
   port: 443
   ssl:
     enabled: true
-    key-store: classpath:shrupp정ssl.p12
+    key-store: classpath:shruppssl.p12
     key-store-password: zhsvnfkdlxm12
     key-store-type: PKCS12
     key-alias: shruppssl
