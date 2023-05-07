@@ -36,12 +36,13 @@ public class PostController {
 
     @GetMapping
     public ResponseEntity<List<PreviewPostResponse>> postList(
-            @PageableDefault(page = 0, size = 20, sort = "created", direction = Sort.Direction.DESC) Pageable pageable) {
+            @PageableDefault(page = 0, size = 20, sort = "created", direction = Sort.Direction.DESC) Pageable pageable,
+            @AuthenticationPrincipal LoginUser loginUser) {
 
         Page<Post> postsByPaging = postService.findAllByPaging(pageable);
         return ResponseEntity.ok(postsByPaging.stream()
                 .map(post ->
-                        PreviewPostResponse.of(post,
+                        PreviewPostResponse.of(post, isWriter(loginUser, post),
                         new PostLikeTallyResponse(postLikeService.getPostLikeCount(post.getId())),
                         new CommentTallyResponse(commentService.getCommentCountByPostId(post.getId())),
                                 postsByPaging.getTotalElements(),
