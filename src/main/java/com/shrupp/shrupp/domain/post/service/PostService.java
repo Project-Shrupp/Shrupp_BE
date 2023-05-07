@@ -27,7 +27,7 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public Slice<Post> findAllByPaging(Pageable pageable) {
+    public Page<Post> findAllByPaging(Pageable pageable) {
         return postRepository.findPagingAll(pageable);
     }
 

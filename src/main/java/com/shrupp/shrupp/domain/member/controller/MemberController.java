@@ -21,7 +21,7 @@ public class MemberController {
     @GetMapping
     public ResponseEntity<List<MemberResponse>> memberList() {
         return ResponseEntity.ok(memberService.findAll().stream()
-                .map(Member::toMemberResponse)
+                .map(MemberResponse::of)
                 .toList());
     }
 }

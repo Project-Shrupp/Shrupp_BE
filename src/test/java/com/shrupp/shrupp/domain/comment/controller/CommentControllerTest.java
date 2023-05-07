@@ -54,9 +54,12 @@ class CommentControllerTest extends RestDocsTest {
                 .post(new Post("123", "#fff", expectMember))
                 .member(new Member("member", null))
                 .build();
-        Field baseTimeField = Comment.class.getDeclaredField("baseTime");
-        baseTimeField.setAccessible(true);
-        baseTimeField.set(expectedComment, new BaseTime(LocalDateTime.now(), LocalDateTime.now()));
+        Field created = Comment.class.getSuperclass().getDeclaredField("created");
+        Field lastUpdated = Comment.class.getSuperclass().getDeclaredField("lastUpdated");
+        created.setAccessible(true);
+        lastUpdated.setAccessible(true);
+        created.set(expectedComment, LocalDateTime.now());
+        lastUpdated.set(expectedComment, LocalDateTime.now());
         given(commentService.addComment(any(CommentRegisterRequest.class), any(Long.class))).willReturn(expectedComment);
 
         ResultActions perform = mockMvc.perform(post("/api/v1/comments")
@@ -93,9 +96,6 @@ class CommentControllerTest extends RestDocsTest {
                 .post(new Post("123", "#fff", expectMember))
                 .member(expectMember)
                 .build();
-        Field baseTimeField = Comment.class.getDeclaredField("baseTime");
-        baseTimeField.setAccessible(true);
-        baseTimeField.set(expectedComment, new BaseTime(LocalDateTime.now(), LocalDateTime.now()));
         given(commentService.findCommentsByPostId(any(Long.class))).willReturn(List.of(expectedComment));
 
         ResultActions perform = mockMvc.perform(get("/api/v1/comments?postId=1")
@@ -112,8 +112,8 @@ class CommentControllerTest extends RestDocsTest {
                         responseFields(
                                 fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("댓글 키").optional(),
                                 fieldWithPath("[].content").type(JsonFieldType.STRING).description("내용"),
-                                fieldWithPath("[].created").type(JsonFieldType.STRING).description("생성일"),
-                                fieldWithPath("[].lastUpdated").type(JsonFieldType.STRING).description("수정일"),
+                                fieldWithPath("[].created").type(JsonFieldType.STRING).description("생성일").optional(),
+                                fieldWithPath("[].lastUpdated").type(JsonFieldType.STRING).description("수정일").optional(),
                                 fieldWithPath("[].memberNickname").type(JsonFieldType.STRING).description("멤버 닉네임"),
                                 fieldWithPath("[].isWriter").type(JsonFieldType.BOOLEAN).description("작성자 여부"))));
     }

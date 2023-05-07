@@ -20,7 +20,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query(value = "select p from Post p",
             countQuery = "select count(p) from Post p")
-    Slice<Post> findPagingAll(Pageable pageable);
+    Page<Post> findPagingAll(Pageable pageable);
 
     void deleteByIdAndMemberId(Long id, Long memberId);
 }

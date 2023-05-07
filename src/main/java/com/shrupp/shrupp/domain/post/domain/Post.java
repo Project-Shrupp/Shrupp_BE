@@ -10,7 +10,7 @@ import lombok.*;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Post {
+public class Post extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +19,8 @@ public class Post {
     private String content;
     private String backgroundColor;
 
-    @Embedded
-    private BaseTime baseTime;
+//    @Embedded
+//    private BaseTime baseTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -32,7 +32,7 @@ public class Post {
                 Member member) {
         this.content = content;
         this.backgroundColor = backgroundColor;
-        this.baseTime = new BaseTime();
+//        this.baseTime = new BaseTime();
         this.member = member;
     }
 

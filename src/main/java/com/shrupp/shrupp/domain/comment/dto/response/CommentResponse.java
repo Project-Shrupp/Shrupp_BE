@@ -18,8 +18,8 @@ public record CommentResponse(Long id,
         return CommentResponse.builder()
                 .id(comment.getId())
                 .content(comment.getContent())
-                .created(comment.getBaseTime().getCreated())
-                .lastUpdated(comment.getBaseTime().getLastUpdated())
+                .created(comment.getCreated())
+                .lastUpdated(comment.getLastUpdated())
                 .memberNickname(comment.getMember().getNickname())
                 .isWriter(isWriter)
                 .build();
