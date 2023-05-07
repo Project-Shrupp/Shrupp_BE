@@ -11,18 +11,21 @@ public record PreviewPostResponse(Long id,
                                   String content,
                                   String backgroundColor,
                                   LocalDateTime created,
+                                  Boolean isWriter,
                                   PostLikeTallyResponse postLikeTally,
                                   CommentTallyResponse commentTally,
                                   Long totalCount,
                                   Boolean isLastPage) {
 
-    public static PreviewPostResponse of(Post post, PostLikeTallyResponse postLikeTally, CommentTallyResponse commentTally,
+    public static PreviewPostResponse of(Post post, Boolean isWriter,
+                                         PostLikeTallyResponse postLikeTally, CommentTallyResponse commentTally,
                                          Long totalCount, Boolean isLastPage) {
         return PreviewPostResponse.builder()
                 .id(post.getId())
                 .content(post.getContent())
                 .backgroundColor(post.getBackgroundColor())
                 .created(post.getCreated())
+                .isWriter(isWriter)
                 .postLikeTally(postLikeTally)
                 .commentTally(commentTally)
                 .totalCount(totalCount)
