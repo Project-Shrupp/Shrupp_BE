@@ -1,16 +1,23 @@
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: "jdbc:mysql://localhost:3306/shrupp?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=true&serverTimezone=UTC"
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
   h2:
     console:
       enabled: true
 
   jpa:
     hibernate:
-      ddl-auto: create
-    show_sql: true
-    open-in-view: false
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.MySQLDialect
     properties:
       hibernate:
         format_sql: true
+    show_sql: true
+    open-in-view: false
 
   security:
     oauth2:
