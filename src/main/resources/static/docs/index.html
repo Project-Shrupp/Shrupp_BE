@@ -669,8 +669,8 @@ Content-Length: 191
 {
   "content" : "123",
   "backgroundColor" : "#fff",
-  "created" : "2023-05-07T17:51:44.059803",
-  "lastUpdated" : "2023-05-07T17:51:44.059824",
+  "created" : "2023-05-07T18:02:59.839887",
+  "lastUpdated" : "2023-05-07T18:02:59.839902",
   "memberNickname" : "",
   "isWriter" : true
 }</code></pre>
@@ -773,7 +773,7 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 177
+Content-Length: 220
 
 [ {
   "id" : null,
@@ -785,7 +785,9 @@ Content-Length: 177
   },
   "commentTally" : {
     "count" : 0
-  }
+  },
+  "totalCount" : 1,
+  "isLastPage" : true
 } ]</code></pre>
 </div>
 </div>
@@ -832,6 +834,16 @@ Content-Length: 177
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].commentTally.count</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">댓글 개수</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].totalCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">총 게시글 개수</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].isLastPage</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">마지막 페이지 여부</p></td>
 </tr>
 </tbody>
 </table>
@@ -1589,8 +1601,8 @@ Content-Length: 182
 {
   "id" : null,
   "content" : "123",
-  "created" : "2023-05-07T17:51:43.189342",
-  "lastUpdated" : "2023-05-07T17:51:43.189379",
+  "created" : "2023-05-07T18:02:59.254211",
+  "lastUpdated" : "2023-05-07T18:02:59.254236",
   "memberNickname" : "member",
   "isWriter" : true
 }</code></pre>

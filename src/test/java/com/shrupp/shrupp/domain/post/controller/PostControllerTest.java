@@ -113,7 +113,9 @@ class PostControllerTest extends RestDocsTest {
                                 fieldWithPath("[].backgroundColor").type(JsonFieldType.STRING).description("배경 HEX"),
                                 fieldWithPath("[].created").type(JsonFieldType.STRING).description("생성일").optional(),
                                 fieldWithPath("[].postLikeTally.count").type(JsonFieldType.NUMBER).description("좋아요 개수"),
-                                fieldWithPath("[].commentTally.count").type(JsonFieldType.NUMBER).description("댓글 개수"))));
+                                fieldWithPath("[].commentTally.count").type(JsonFieldType.NUMBER).description("댓글 개수"),
+                                fieldWithPath("[].totalCount").type(JsonFieldType.NUMBER).description("총 게시글 개수"),
+                                fieldWithPath("[].isLastPage").type(JsonFieldType.BOOLEAN).description("마지막 페이지 여부"))));
     }
 
     @Test
