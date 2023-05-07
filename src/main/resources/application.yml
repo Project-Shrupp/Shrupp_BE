@@ -41,12 +41,3 @@ client:
   host: localhost
   url: https://localhost:3000
   endpoint: success
-
-server:
-  port: 443
-  ssl:
-    enabled: true
-    key-store: classpath:shruppssl.p12
-    key-store-password: zhsvnfkdlxm12
-    key-store-type: PKCS12
-    key-alias: shruppssl
