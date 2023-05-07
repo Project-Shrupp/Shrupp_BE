@@ -9,16 +9,13 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
-public class PostReport {
+public class PostReport extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
     private String reportType;
-
-    @Embedded
-    private BaseTime baseTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
@@ -30,7 +27,6 @@ public class PostReport {
 
     public PostReport(String reportType, Post post, Member member) {
         this.reportType = reportType;
-        this.baseTime = new BaseTime();
         this.post = post;
         this.member = member;
     }

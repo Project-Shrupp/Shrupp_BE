@@ -16,16 +16,13 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Member {
+public class Member extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
     private String nickname;
-
-    @Embedded
-    private BaseTime baseTime;
 
     @Embedded
     private Oauth2 oauth2;
@@ -36,7 +33,6 @@ public class Member {
 
     public Member(String nickname, Oauth2 oauth2) {
         this.nickname = nickname;
-        this.baseTime = new BaseTime();
         this.oauth2 = oauth2;
     }
 
@@ -45,9 +41,5 @@ public class Member {
                 .map(Role::name)
                 .map(SimpleGrantedAuthority::new)
                 .toList();
-    }
-
-    public MemberResponse toMemberResponse() {
-        return new MemberResponse(nickname, baseTime.getCreated());
     }
 }

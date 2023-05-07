@@ -13,15 +13,12 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Comment {
+public class Comment extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
     private String content;
-
-    @Embedded
-    private BaseTime baseTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
@@ -36,7 +33,6 @@ public class Comment {
                    Post post,
                    Member member) {
         this.content = content;
-        this.baseTime = new BaseTime();
         this.post = post;
         this.member = member;
     }

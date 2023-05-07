@@ -9,14 +9,11 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
-public class CommentReport {
+public class CommentReport extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-
-    @Embedded
-    private BaseTime baseTime;
 
     private String reportType;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -29,7 +26,6 @@ public class CommentReport {
 
     public CommentReport(String reportType, Comment comment, Member member) {
         this.reportType = reportType;
-        this.baseTime = new BaseTime();
         this.comment = comment;
         this.member = member;
     }

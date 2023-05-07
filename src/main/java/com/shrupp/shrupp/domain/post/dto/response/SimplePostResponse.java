@@ -19,7 +19,7 @@ public record SimplePostResponse(Long id,
                 .id(post.getId())
                 .content(post.getContent())
                 .backgroundColor(post.getBackgroundColor())
-                .created(post.getBaseTime().getCreated())
+                .created(post.getCreated())
                 .postLikeTally(postLikeTally)
                 .commentTally(commentTally)
                 .build();

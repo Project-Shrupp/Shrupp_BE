@@ -10,7 +10,7 @@ public record CommentReportResponse(String reportType,
                                     Long memberId) {
 
     public static CommentReportResponse of(CommentReport commentReport) {
-        return new CommentReportResponse(commentReport.getReportType(), commentReport.getBaseTime().getCreated(),
+        return new CommentReportResponse(commentReport.getReportType(), commentReport.getCreated(),
                 commentReport.getComment().getId(), commentReport.getMember().getId());
     }
 }

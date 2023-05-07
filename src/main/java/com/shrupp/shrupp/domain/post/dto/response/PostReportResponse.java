@@ -10,7 +10,7 @@ public record PostReportResponse(String reportType,
                                  Long memberId) {
 
     public static PostReportResponse of(PostReport postReport) {
-        return new PostReportResponse(postReport.getReportType(), postReport.getBaseTime().getCreated(),
+        return new PostReportResponse(postReport.getReportType(), postReport.getCreated(),
                 postReport.getPost().getId(), postReport.getMember().getId());
     }
 }

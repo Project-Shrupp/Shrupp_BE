@@ -2,6 +2,7 @@ package com.shrupp.shrupp.global.audit;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
+@MappedSuperclass
 public class BaseTime {
 
     @CreatedDate

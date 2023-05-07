@@ -17,8 +17,8 @@ public record PostResponse(String content,
         return PostResponse.builder()
                 .content(post.getContent())
                 .backgroundColor(post.getBackgroundColor())
-                .created(post.getBaseTime().getCreated())
-                .lastUpdated(post.getBaseTime().getLastUpdated())
+                .created(post.getCreated())
+                .lastUpdated(post.getLastUpdated())
                 .memberNickname(post.getMember().getNickname())
                 .isWriter(isWriter)
                 .build();
