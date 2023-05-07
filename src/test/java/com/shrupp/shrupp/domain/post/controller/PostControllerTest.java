@@ -54,9 +54,12 @@ class PostControllerTest extends RestDocsTest {
     @DisplayName("게시글 생성")
     void registerPost() throws Exception {
         Post expectedPost = new Post("123", "#fff", new Member("", null));
-        Field baseTimeField = Post.class.getDeclaredField("baseTime");
-        baseTimeField.setAccessible(true);
-        baseTimeField.set(expectedPost, new BaseTime(LocalDateTime.now(), LocalDateTime.now()));
+        Field created = Post.class.getSuperclass().getDeclaredField("created");
+        Field lastUpdated = Post.class.getSuperclass().getDeclaredField("lastUpdated");
+        created.setAccessible(true);
+        lastUpdated.setAccessible(true);
+        created.set(expectedPost, LocalDateTime.now());
+        lastUpdated.set(expectedPost, LocalDateTime.now());
         given(postService.savePost(any(PostRegisterRequest.class), any(Long.class))).willReturn(expectedPost);
 
         ResultActions perform =
@@ -87,9 +90,6 @@ class PostControllerTest extends RestDocsTest {
     @DisplayName("게시글 목록 조회")
     void getPostList() throws Exception {
         Post expectedPost = new Post("123", "#fff", new Member("", null));
-        Field baseTimeField = Post.class.getDeclaredField("baseTime");
-        baseTimeField.setAccessible(true);
-        baseTimeField.set(expectedPost, new BaseTime(LocalDateTime.now(), LocalDateTime.now()));
         given(postService.findAllByPaging(any(Pageable.class))).willReturn(new PageImpl<>(List.of(expectedPost)));
 
         ResultActions perform =
@@ -111,7 +111,7 @@ class PostControllerTest extends RestDocsTest {
                                 fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("게시글 키").optional(),
                                 fieldWithPath("[].content").type(JsonFieldType.STRING).description("내용"),
                                 fieldWithPath("[].backgroundColor").type(JsonFieldType.STRING).description("배경 HEX"),
-                                fieldWithPath("[].created").type(JsonFieldType.STRING).description("생성일"),
+                                fieldWithPath("[].created").type(JsonFieldType.STRING).description("생성일").optional(),
                                 fieldWithPath("[].postLikeTally.count").type(JsonFieldType.NUMBER).description("좋아요 개수"),
                                 fieldWithPath("[].commentTally.count").type(JsonFieldType.NUMBER).description("댓글 개수"))));
     }
@@ -124,9 +124,6 @@ class PostControllerTest extends RestDocsTest {
         memberId.setAccessible(true);
         memberId.set(expectMember, 1L);
         Post expectedPost = new Post("123", "#fff", expectMember);
-        Field baseTimeField = Post.class.getDeclaredField("baseTime");
-        baseTimeField.setAccessible(true);
-        baseTimeField.set(expectedPost, new BaseTime(LocalDateTime.now(), LocalDateTime.now()));
         given(postService.findById(any(Long.class))).willReturn(expectedPost);
 
         ResultActions perform = mockMvc.perform(get("/api/v1/posts/{postId}", 1L)
@@ -144,8 +141,8 @@ class PostControllerTest extends RestDocsTest {
                         responseFields(
                                 fieldWithPath("content").type(JsonFieldType.STRING).description("내용"),
                                 fieldWithPath("backgroundColor").type(JsonFieldType.STRING).description("배경 HEX"),
-                                fieldWithPath("created").type(JsonFieldType.STRING).description("생성일"),
-                                fieldWithPath("lastUpdated").type(JsonFieldType.STRING).description("수정일"),
+                                fieldWithPath("created").type(JsonFieldType.STRING).description("생성일").optional(),
+                                fieldWithPath("lastUpdated").type(JsonFieldType.STRING).description("수정일").optional(),
                                 fieldWithPath("memberNickname").type(JsonFieldType.STRING).description("멤버 닉네임"),
                                 fieldWithPath("isWriter").type(JsonFieldType.BOOLEAN).description("작성자 여부"))));
     }
@@ -158,9 +155,6 @@ class PostControllerTest extends RestDocsTest {
         memberId.setAccessible(true);
         memberId.set(expectMember, 1L);
         Post expectedPost = new Post("123", "#fff", expectMember);
-        Field baseTimeField = Post.class.getDeclaredField("baseTime");
-        baseTimeField.setAccessible(true);
-        baseTimeField.set(expectedPost, new BaseTime(LocalDateTime.now(), LocalDateTime.now()));
         given(postService.updatePost(any(Long.class), any(PostUpdateRequest.class), any(Long.class))).willReturn(expectedPost);
 
         ResultActions perform = mockMvc.perform(put("/api/v1/posts/{postId}", 1L)
@@ -182,8 +176,8 @@ class PostControllerTest extends RestDocsTest {
                         responseFields(
                                 fieldWithPath("content").type(JsonFieldType.STRING).description("내용"),
                                 fieldWithPath("backgroundColor").type(JsonFieldType.STRING).description("배경 HEX"),
-                                fieldWithPath("created").type(JsonFieldType.STRING).description("생성일"),
-                                fieldWithPath("lastUpdated").type(JsonFieldType.STRING).description("수정일"),
+                                fieldWithPath("created").type(JsonFieldType.STRING).description("생성일").optional(),
+                                fieldWithPath("lastUpdated").type(JsonFieldType.STRING).description("수정일").optional(),
                                 fieldWithPath("memberNickname").type(JsonFieldType.STRING).description("멤버 닉네임"),
                                 fieldWithPath("isWriter").type(JsonFieldType.BOOLEAN).description("작성자 여부"))));
     }
