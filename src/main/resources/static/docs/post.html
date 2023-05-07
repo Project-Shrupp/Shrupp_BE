@@ -576,8 +576,8 @@ Content-Length: 191
 {
   "content" : "123",
   "backgroundColor" : "#fff",
-  "created" : "2023-05-07T18:02:59.839887",
-  "lastUpdated" : "2023-05-07T18:02:59.839902",
+  "created" : "2023-05-08T00:58:10.988533",
+  "lastUpdated" : "2023-05-08T00:58:10.988552",
   "memberNickname" : "",
   "isWriter" : true
 }</code></pre>
@@ -680,13 +680,14 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 220
+Content-Length: 241
 
 [ {
   "id" : null,
   "content" : "123",
   "backgroundColor" : "#fff",
   "created" : null,
+  "isWriter" : true,
   "postLikeTally" : {
     "count" : 0
   },
@@ -731,6 +732,11 @@ Content-Length: 220
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].created</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">생성일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].isWriter</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">작성자 여부</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].postLikeTally.count</code></p></td>
