@@ -12,6 +12,7 @@ import com.shrupp.shrupp.domain.post.service.PostLikeService;
 import com.shrupp.shrupp.domain.post.service.PostReportService;
 import com.shrupp.shrupp.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -34,13 +35,17 @@ public class PostController {
     private final CommentService commentService;
 
     @GetMapping
-    public ResponseEntity<List<SimplePostResponse>> postList(
+    public ResponseEntity<List<PreviewPostResponse>> postList(
             @PageableDefault(page = 0, size = 20, sort = "created", direction = Sort.Direction.DESC) Pageable pageable) {
-        return ResponseEntity.ok(postService.findAllByPaging(pageable).stream()
+
+        Page<Post> postsByPaging = postService.findAllByPaging(pageable);
+        return ResponseEntity.ok(postsByPaging.stream()
                 .map(post ->
-                        SimplePostResponse.of(post,
+                        PreviewPostResponse.of(post,
                         new PostLikeTallyResponse(postLikeService.getPostLikeCount(post.getId())),
-                        new CommentTallyResponse(commentService.getCommentCountByPostId(post.getId()))))
+                        new CommentTallyResponse(commentService.getCommentCountByPostId(post.getId())),
+                                postsByPaging.getTotalElements(),
+                                postsByPaging.isLast()))
                 .toList());
     }
 
