@@ -33,6 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         token.ifPresent(
                 t -> {
+                    log.info("[JwtAuthenticationFilter] AccessToken: {}", t);
                     Authentication authentication = jwtValidator.getAuthentication(t);
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 });
