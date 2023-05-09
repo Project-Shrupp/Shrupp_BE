@@ -21,8 +21,8 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private static final String AUTHORIZATION_TAG = "Authorization=";
-    private static final String REFRESH_TAG = "Refresh=";
+    private static final String AUTHORIZATION_TAG = "Authorization";
+
 
     private final JwtValidator jwtValidator;
 
@@ -43,18 +43,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private String getTokensFromHeader(HttpServletRequest request) {
-        String cookie = request.getHeader("Cookie");
-        if (cookie == null) {
-            return null;
-        }
-
-        String[] cookieElements = cookie.replaceFirst("[Cc]ookie:\\s+", "").split(";\\s+");
-        for (String cookieElement : cookieElements) {
-            if (cookieElement.startsWith(AUTHORIZATION_TAG)) {
-                return cookieElement.replaceFirst(AUTHORIZATION_TAG, "");
-            }
-        }
-        return null;
+        return request.getHeader(AUTHORIZATION_TAG);
     }
 
     private String getTokensFromCookies(Cookie[] cookies) {
