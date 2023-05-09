@@ -43,9 +43,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private String getTokensFromHeader(HttpServletRequest request) {
-        String cookie = request.getHeader("Cookie").replaceFirst("[Cc]ookie:\\s+", "");
+        String cookie = request.getHeader("Cookie");
+        if (cookie == null) {
+            return null;
+        }
 
-        String[] cookieElements = cookie.split(";\\s+");
+        String[] cookieElements = cookie.replaceFirst("[Cc]ookie:\\s+", "").split(";\\s+");
         for (String cookieElement : cookieElements) {
             if (cookieElement.startsWith(AUTHORIZATION_TAG)) {
                 return cookieElement.replaceFirst(AUTHORIZATION_TAG, "");
