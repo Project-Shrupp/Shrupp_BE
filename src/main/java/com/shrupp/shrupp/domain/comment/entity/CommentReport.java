@@ -15,7 +15,9 @@ public class CommentReport extends BaseTime {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(nullable = false)
     private String reportType;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comment_id")
     private Comment comment;

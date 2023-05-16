@@ -20,6 +20,7 @@ public class Member extends BaseTime {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(length = 30, nullable = false)
     private String nickname;
 
     @Embedded

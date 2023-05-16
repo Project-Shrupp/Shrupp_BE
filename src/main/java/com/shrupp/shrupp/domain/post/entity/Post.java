@@ -16,7 +16,11 @@ public class Post extends BaseTime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @Column(columnDefinition = "TEXT")
     private String content;
+
+    @Column(length = 30)
     private String backgroundColor;
 
     @ManyToOne(fetch = FetchType.LAZY)

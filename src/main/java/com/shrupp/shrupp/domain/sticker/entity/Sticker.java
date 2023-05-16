@@ -14,9 +14,13 @@ public class Sticker {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(nullable = false)
     private String category;
 
+    @Column(nullable = false)
     private Double xCoordinate;
+
+    @Column(nullable = false)
     private Double yCoordinate;
 
     @ManyToOne(fetch = FetchType.LAZY)
