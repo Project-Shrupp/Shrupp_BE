@@ -1,7 +1,7 @@
 package com.shrupp.shrupp.domain.comment.controller;
 
 import com.shrupp.shrupp.config.security.LoginUser;
-import com.shrupp.shrupp.domain.comment.domain.Comment;
+import com.shrupp.shrupp.domain.comment.entity.Comment;
 import com.shrupp.shrupp.domain.comment.dto.request.CommentReportRequest;
 import com.shrupp.shrupp.domain.comment.dto.request.CommentRegisterRequest;
 import com.shrupp.shrupp.domain.comment.dto.request.CommentUpdateRequest;

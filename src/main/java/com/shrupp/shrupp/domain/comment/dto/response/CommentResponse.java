@@ -1,6 +1,6 @@
 package com.shrupp.shrupp.domain.comment.dto.response;
 
-import com.shrupp.shrupp.domain.comment.domain.Comment;
+import com.shrupp.shrupp.domain.comment.entity.Comment;
 import lombok.Builder;
 
 import java.time.LocalDateTime;

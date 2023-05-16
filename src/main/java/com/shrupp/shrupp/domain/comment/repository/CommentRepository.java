@@ -1,6 +1,6 @@
 package com.shrupp.shrupp.domain.comment.repository;
 
-import com.shrupp.shrupp.domain.comment.domain.Comment;
+import com.shrupp.shrupp.domain.comment.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

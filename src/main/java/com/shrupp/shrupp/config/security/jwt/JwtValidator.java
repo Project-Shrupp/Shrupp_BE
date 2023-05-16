@@ -2,7 +2,7 @@ package com.shrupp.shrupp.config.security.jwt;
 
 import com.shrupp.shrupp.config.security.LoginUser;
 import com.shrupp.shrupp.config.security.oauth2.mapper.LoginUserMapper;
-import com.shrupp.shrupp.domain.member.domain.Member;
+import com.shrupp.shrupp.domain.member.entity.Member;
 import com.shrupp.shrupp.domain.member.service.MemberService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

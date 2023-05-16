@@ -1,7 +1,7 @@
 package com.shrupp.shrupp.domain.post.service;
 
 import com.shrupp.shrupp.domain.member.service.MemberService;
-import com.shrupp.shrupp.domain.post.domain.PostReport;
+import com.shrupp.shrupp.domain.post.entity.PostReport;
 import com.shrupp.shrupp.domain.post.dto.request.PostReportRequest;
 import com.shrupp.shrupp.domain.post.repository.PostReportRepository;
 import lombok.RequiredArgsConstructor;

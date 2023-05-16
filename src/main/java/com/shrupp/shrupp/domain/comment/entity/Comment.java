@@ -1,7 +1,7 @@
-package com.shrupp.shrupp.domain.comment.domain;
+package com.shrupp.shrupp.domain.comment.entity;
 
-import com.shrupp.shrupp.domain.member.domain.Member;
-import com.shrupp.shrupp.domain.post.domain.Post;
+import com.shrupp.shrupp.domain.member.entity.Member;
+import com.shrupp.shrupp.domain.post.entity.Post;
 import com.shrupp.shrupp.global.audit.BaseTime;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -18,6 +18,8 @@ public class Comment extends BaseTime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @Column(length = 5000, nullable = false)
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)

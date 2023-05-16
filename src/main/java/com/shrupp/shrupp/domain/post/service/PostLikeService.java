@@ -1,9 +1,9 @@
 package com.shrupp.shrupp.domain.post.service;
 
-import com.shrupp.shrupp.domain.member.domain.Member;
+import com.shrupp.shrupp.domain.member.entity.Member;
 import com.shrupp.shrupp.domain.member.service.MemberService;
-import com.shrupp.shrupp.domain.post.domain.Post;
-import com.shrupp.shrupp.domain.post.domain.PostLike;
+import com.shrupp.shrupp.domain.post.entity.Post;
+import com.shrupp.shrupp.domain.post.entity.PostLike;
 import com.shrupp.shrupp.domain.post.repository.PostLikeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

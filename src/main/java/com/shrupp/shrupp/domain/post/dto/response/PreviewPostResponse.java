@@ -1,7 +1,7 @@
 package com.shrupp.shrupp.domain.post.dto.response;
 
 import com.shrupp.shrupp.domain.comment.dto.response.CommentTallyResponse;
-import com.shrupp.shrupp.domain.post.domain.Post;
+import com.shrupp.shrupp.domain.post.entity.Post;
 import lombok.Builder;
 
 import java.time.LocalDateTime;

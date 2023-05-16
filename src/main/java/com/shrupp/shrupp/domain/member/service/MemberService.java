@@ -1,15 +1,14 @@
 package com.shrupp.shrupp.domain.member.service;
 
 import com.shrupp.shrupp.config.security.oauth2.OAuth2Request;
-import com.shrupp.shrupp.domain.member.domain.Member;
-import com.shrupp.shrupp.domain.member.domain.Oauth2;
+import com.shrupp.shrupp.domain.member.entity.Member;
+import com.shrupp.shrupp.domain.member.entity.Oauth2;
 import com.shrupp.shrupp.domain.member.repository.MemberRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service

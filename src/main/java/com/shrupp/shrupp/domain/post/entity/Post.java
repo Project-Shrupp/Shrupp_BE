@@ -1,6 +1,6 @@
-package com.shrupp.shrupp.domain.post.domain;
+package com.shrupp.shrupp.domain.post.entity;
 
-import com.shrupp.shrupp.domain.member.domain.Member;
+import com.shrupp.shrupp.domain.member.entity.Member;
 import com.shrupp.shrupp.global.audit.BaseTime;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import jakarta.persistence.*;
@@ -16,11 +16,12 @@ public class Post extends BaseTime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    private String content;
-    private String backgroundColor;
 
-//    @Embedded
-//    private BaseTime baseTime;
+    @Column(columnDefinition = "TEXT")
+    private String content;
+
+    @Column(length = 30)
+    private String backgroundColor;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -32,7 +33,6 @@ public class Post extends BaseTime {
                 Member member) {
         this.content = content;
         this.backgroundColor = backgroundColor;
-//        this.baseTime = new BaseTime();
         this.member = member;
     }
 

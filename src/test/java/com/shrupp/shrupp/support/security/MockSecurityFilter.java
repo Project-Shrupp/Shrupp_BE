@@ -2,8 +2,8 @@ package com.shrupp.shrupp.support.security;
 
 import com.shrupp.shrupp.config.security.LoginUser;
 import com.shrupp.shrupp.config.security.oauth2.AuthProvider;
-import com.shrupp.shrupp.domain.member.domain.Member;
-import com.shrupp.shrupp.domain.member.domain.Oauth2;
+import com.shrupp.shrupp.domain.member.entity.Member;
+import com.shrupp.shrupp.domain.member.entity.Oauth2;
 import jakarta.servlet.*;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

@@ -1,6 +1,6 @@
-package com.shrupp.shrupp.domain.comment.domain;
+package com.shrupp.shrupp.domain.comment.entity;
 
-import com.shrupp.shrupp.domain.member.domain.Member;
+import com.shrupp.shrupp.domain.member.entity.Member;
 import com.shrupp.shrupp.global.audit.BaseTime;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -15,7 +15,9 @@ public class CommentReport extends BaseTime {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(nullable = false)
     private String reportType;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comment_id")
     private Comment comment;

@@ -1,6 +1,6 @@
 package com.shrupp.shrupp.domain.sticker.dto.response;
 
-import com.shrupp.shrupp.domain.sticker.domain.Sticker;
+import com.shrupp.shrupp.domain.sticker.entity.Sticker;
 import lombok.Builder;
 
 @Builder

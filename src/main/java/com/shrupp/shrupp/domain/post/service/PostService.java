@@ -1,7 +1,7 @@
 package com.shrupp.shrupp.domain.post.service;
 
 import com.shrupp.shrupp.domain.member.service.MemberService;
-import com.shrupp.shrupp.domain.post.domain.Post;
+import com.shrupp.shrupp.domain.post.entity.Post;
 import com.shrupp.shrupp.domain.post.dto.request.PostRegisterRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostUpdateRequest;
 import com.shrupp.shrupp.domain.post.repository.PostRepository;
@@ -9,7 +9,6 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

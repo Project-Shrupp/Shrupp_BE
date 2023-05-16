@@ -1,6 +1,6 @@
 package com.shrupp.shrupp.domain.comment.service;
 
-import com.shrupp.shrupp.domain.comment.domain.Comment;
+import com.shrupp.shrupp.domain.comment.entity.Comment;
 import com.shrupp.shrupp.domain.comment.dto.request.CommentRegisterRequest;
 import com.shrupp.shrupp.domain.comment.dto.request.CommentUpdateRequest;
 import com.shrupp.shrupp.domain.comment.repository.CommentRepository;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)

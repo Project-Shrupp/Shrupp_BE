@@ -1,6 +1,6 @@
-package com.shrupp.shrupp.domain.sticker.domain;
+package com.shrupp.shrupp.domain.sticker.entity;
 
-import com.shrupp.shrupp.domain.member.domain.Member;
+import com.shrupp.shrupp.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,9 +14,13 @@ public class Sticker {
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @Column(nullable = false)
     private String category;
 
+    @Column(nullable = false)
     private Double xCoordinate;
+
+    @Column(nullable = false)
     private Double yCoordinate;
 
     @ManyToOne(fetch = FetchType.LAZY)
