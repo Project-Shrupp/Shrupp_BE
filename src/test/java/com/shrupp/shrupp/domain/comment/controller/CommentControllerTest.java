@@ -10,8 +10,11 @@ import com.shrupp.shrupp.domain.member.domain.Member;
 import com.shrupp.shrupp.domain.post.domain.Post;
 import com.shrupp.shrupp.global.audit.BaseTime;
 import com.shrupp.shrupp.support.docs.RestDocsTest;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -37,30 +40,31 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(CommentController.class)
 class CommentControllerTest extends RestDocsTest {
 
+    @Mock
+    private Member member;
+    @Mock
+    private Comment comment;
     @MockBean
     private CommentService commentService;
     @MockBean
     private CommentReportService commentReportService;
 
+    @BeforeEach
+    void initMock() {
+        given(member.getId()).willReturn(1L);
+        given(member.getNickname()).willReturn("member");
+
+        given(comment.getId()).willReturn(1L);
+        given(comment.getContent()).willReturn("test");
+        given(comment.getCreated()).willReturn(LocalDateTime.now());
+        given(comment.getLastUpdated()).willReturn(LocalDateTime.now());
+        given(comment.getMember()).willReturn(member);
+    }
+
     @Test
     @DisplayName("댓글 생성")
     void registerComment() throws Exception {
-        Member expectMember = new Member("", null);
-        Field memberId = Member.class.getDeclaredField("id");
-        memberId.setAccessible(true);
-        memberId.set(expectMember, 1L);
-        Comment expectedComment = Comment.builder()
-                .content("123")
-                .post(new Post("123", "#fff", expectMember))
-                .member(new Member("member", null))
-                .build();
-        Field created = Comment.class.getSuperclass().getDeclaredField("created");
-        Field lastUpdated = Comment.class.getSuperclass().getDeclaredField("lastUpdated");
-        created.setAccessible(true);
-        lastUpdated.setAccessible(true);
-        created.set(expectedComment, LocalDateTime.now());
-        lastUpdated.set(expectedComment, LocalDateTime.now());
-        given(commentService.addComment(any(CommentRegisterRequest.class), any(Long.class))).willReturn(expectedComment);
+        given(commentService.addComment(any(CommentRegisterRequest.class), anyLong())).willReturn(comment);
 
         ResultActions perform = mockMvc.perform(post("/api/v1/comments")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -76,7 +80,7 @@ class CommentControllerTest extends RestDocsTest {
                                 fieldWithPath("content").type(JsonFieldType.STRING).description("내용"),
                                 fieldWithPath("postId").type(JsonFieldType.NUMBER).description("게시글 키")),
                         responseFields(
-                                fieldWithPath("id").type(JsonFieldType.NUMBER).description("댓글 키").optional(),
+                                fieldWithPath("id").type(JsonFieldType.NUMBER).description("댓글 키"),
                                 fieldWithPath("content").type(JsonFieldType.STRING).description("내용"),
                                 fieldWithPath("created").type(JsonFieldType.STRING).description("생성일"),
                                 fieldWithPath("lastUpdated").type(JsonFieldType.STRING).description("수정일"),
@@ -87,16 +91,7 @@ class CommentControllerTest extends RestDocsTest {
     @Test
     @DisplayName("댓글 리스트 조회")
     void getCommentList() throws Exception {
-        Member expectMember = new Member("", null);
-        Field memberId = Member.class.getDeclaredField("id");
-        memberId.setAccessible(true);
-        memberId.set(expectMember, 1L);
-        Comment expectedComment = Comment.builder()
-                .content("123")
-                .post(new Post("123", "#fff", expectMember))
-                .member(expectMember)
-                .build();
-        given(commentService.findCommentsByPostId(any(Long.class))).willReturn(List.of(expectedComment));
+        given(commentService.findCommentsByPostId(any(Long.class))).willReturn(List.of(comment));
 
         ResultActions perform = mockMvc.perform(get("/api/v1/comments?postId=1")
                 .contentType(MediaType.APPLICATION_JSON));
@@ -110,10 +105,10 @@ class CommentControllerTest extends RestDocsTest {
                         queryParameters(
                                 parameterWithName("postId").description("게시글 키")),
                         responseFields(
-                                fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("댓글 키").optional(),
+                                fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("댓글 키"),
                                 fieldWithPath("[].content").type(JsonFieldType.STRING).description("내용"),
-                                fieldWithPath("[].created").type(JsonFieldType.STRING).description("생성일").optional(),
-                                fieldWithPath("[].lastUpdated").type(JsonFieldType.STRING).description("수정일").optional(),
+                                fieldWithPath("[].created").type(JsonFieldType.STRING).description("생성일"),
+                                fieldWithPath("[].lastUpdated").type(JsonFieldType.STRING).description("수정일"),
                                 fieldWithPath("[].memberNickname").type(JsonFieldType.STRING).description("멤버 닉네임"),
                                 fieldWithPath("[].isWriter").type(JsonFieldType.BOOLEAN).description("작성자 여부"))));
     }
@@ -121,8 +116,8 @@ class CommentControllerTest extends RestDocsTest {
     @Test
     @DisplayName("댓글 개수 조회")
     void getCommentCount() throws Exception {
-        Long expectedCommentCount = 1L;
-        given(commentService.getCommentCountByPostId(any(Long.class))).willReturn(expectedCommentCount);
+        Long commentCount = 1L;
+        given(commentService.getCommentCountByPostId(any(Long.class))).willReturn(commentCount);
 
         ResultActions perform = mockMvc.perform(get("/api/v1/comments/count?postId=1")
                 .contentType(MediaType.APPLICATION_JSON));
@@ -160,9 +155,12 @@ class CommentControllerTest extends RestDocsTest {
     @Test
     @DisplayName("댓글 신고")
     void reportComment() throws Exception {
-        Member member = new Member();
-        CommentReport expectedCommentReport = new CommentReport("욕설/비하", new Comment("123", null, null), member);
-        given(commentReportService.report(any(Long.class), any(CommentReportRequest.class), any(Long.class))).willReturn(expectedCommentReport);
+        CommentReport commentReport = mock(CommentReport.class);
+        given(commentReport.getReportType()).willReturn("욕설/비하");
+        given(commentReport.getCreated()).willReturn(LocalDateTime.now());
+        given(commentReport.getComment()).willReturn(comment);
+        given(commentReport.getMember()).willReturn(member);
+        given(commentReportService.report(any(Long.class), any(CommentReportRequest.class), any(Long.class))).willReturn(commentReport);
 
         ResultActions perform = mockMvc.perform(post("/api/v1/comments/{commentId}/reports", 1L)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -180,8 +178,8 @@ class CommentControllerTest extends RestDocsTest {
                                 fieldWithPath("reportType").type(JsonFieldType.STRING).description("신고 타입")),
                         responseFields(
                                 fieldWithPath("reportType").type(JsonFieldType.STRING).description("신고 타입"),
-                                fieldWithPath("created").type(JsonFieldType.STRING).description("생성일").optional(),
-                                fieldWithPath("commentId").type(JsonFieldType.NUMBER).description("댓글 키").optional(),
-                                fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("신고자 키").optional())));
+                                fieldWithPath("created").type(JsonFieldType.STRING).description("생성일"),
+                                fieldWithPath("commentId").type(JsonFieldType.NUMBER).description("댓글 키"),
+                                fieldWithPath("memberId").type(JsonFieldType.NUMBER).description("신고자 키"))));
     }
 }

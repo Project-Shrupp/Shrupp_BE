@@ -7,8 +7,10 @@ import com.shrupp.shrupp.domain.sticker.domain.Sticker;
 import com.shrupp.shrupp.domain.sticker.dto.request.StickerAddRequest;
 import com.shrupp.shrupp.domain.sticker.service.StickerService;
 import com.shrupp.shrupp.support.docs.RestDocsTest;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -33,14 +35,28 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(StickerController.class)
 class StickerControllerTest extends RestDocsTest {
 
+    @Mock
+    private Member member;
+    @Mock
+    private Sticker sticker;
     @MockBean
     private StickerService stickerService;
+
+    @BeforeEach
+    void initMock() {
+        given(member.getId()).willReturn(1L);
+        given(member.getNickname()).willReturn("member");
+
+        given(sticker.getId()).willReturn(1L);
+        given(sticker.getCategory()).willReturn("smile");
+        given(sticker.getXCoordinate()).willReturn(0.2);
+        given(sticker.getYCoordinate()).willReturn(1.5);
+    }
 
     @Test
     @DisplayName("스티커 추가")
     void addSticker() throws Exception {
-        Sticker expectedSticker = new Sticker("smile", 0.2, 1.5, new Member("", new Oauth2(AuthProvider.KAKAO, "")));
-        given(stickerService.save(any(StickerAddRequest.class), any(Long.class))).willReturn(expectedSticker);
+        given(stickerService.save(any(StickerAddRequest.class), any(Long.class))).willReturn(sticker);
 
         ResultActions perform =
                 mockMvc.perform(post("/api/v1/stickers")
@@ -48,7 +64,7 @@ class StickerControllerTest extends RestDocsTest {
                         .content(toJson(new StickerAddRequest("smile", 0.2, 1.5))));
 
         perform.andExpect(status().isOk())
-                .andExpect(jsonPath("$.category").value(expectedSticker.getCategory()));
+                .andExpect(jsonPath("$.category").value(sticker.getCategory()));
 
         perform.andDo(print())
                 .andDo(document("add-sticker",
@@ -59,7 +75,7 @@ class StickerControllerTest extends RestDocsTest {
                                 fieldWithPath("xCoordinate").type(JsonFieldType.NUMBER).description("X 좌표"),
                                 fieldWithPath("yCoordinate").type(JsonFieldType.NUMBER).description("Y 좌표")),
                         responseFields(
-                                fieldWithPath("id").type(JsonFieldType.STRING).description("스티커 키").optional(),
+                                fieldWithPath("id").type(JsonFieldType.NUMBER).description("스티커 키"),
                                 fieldWithPath("category").type(JsonFieldType.STRING).description("스티커 종류"),
                                 fieldWithPath("xCoordinate").type(JsonFieldType.NUMBER).description("X 좌표"),
                                 fieldWithPath("yCoordinate").type(JsonFieldType.NUMBER).description("Y 좌표"))));
@@ -68,22 +84,21 @@ class StickerControllerTest extends RestDocsTest {
     @Test
     @DisplayName("스티커 목록 조회")
     void stickerList() throws Exception {
-        Sticker expectedSticker = new Sticker("smile", 0.2, 1.5, new Member("", new Oauth2(AuthProvider.KAKAO, "")));
-        given(stickerService.findAll()).willReturn(List.of(expectedSticker));
+        given(stickerService.findAll()).willReturn(List.of(sticker));
 
         ResultActions perform =
                 mockMvc.perform(get("/api/v1/stickers")
                 .contentType(MediaType.APPLICATION_JSON));
 
         perform.andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].category").value(expectedSticker.getCategory()));
+                .andExpect(jsonPath("$[0].category").value(sticker.getCategory()));
 
         perform.andDo(print())
                 .andDo(document("get-sticker-list",
                         getDocumentRequest(),
                         getDocumentResponse(),
                         responseFields(
-                                fieldWithPath("[].id").type(JsonFieldType.STRING).description("스티커 키").optional(),
+                                fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("스티커 키"),
                                 fieldWithPath("[].category").type(JsonFieldType.STRING).description("스티커 종류"),
                                 fieldWithPath("[].xCoordinate").type(JsonFieldType.NUMBER).description("X 좌표"),
                                 fieldWithPath("[].yCoordinate").type(JsonFieldType.NUMBER).description("Y 좌표"))));
