@@ -1,4 +1,4 @@
-package com.shrupp.shrupp.domain.member.domain;
+package com.shrupp.shrupp.domain.member.entity;
 
 import com.shrupp.shrupp.config.security.oauth2.AuthProvider;
 import jakarta.persistence.Column;

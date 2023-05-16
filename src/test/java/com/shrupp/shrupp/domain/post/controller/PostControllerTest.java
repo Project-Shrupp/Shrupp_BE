@@ -1,16 +1,15 @@
 package com.shrupp.shrupp.domain.post.controller;
 
 import com.shrupp.shrupp.domain.comment.service.CommentService;
-import com.shrupp.shrupp.domain.member.domain.Member;
-import com.shrupp.shrupp.domain.post.domain.Post;
-import com.shrupp.shrupp.domain.post.domain.PostReport;
+import com.shrupp.shrupp.domain.member.entity.Member;
+import com.shrupp.shrupp.domain.post.entity.Post;
+import com.shrupp.shrupp.domain.post.entity.PostReport;
 import com.shrupp.shrupp.domain.post.dto.request.PostRegisterRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostReportRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostUpdateRequest;
 import com.shrupp.shrupp.domain.post.service.PostLikeService;
 import com.shrupp.shrupp.domain.post.service.PostReportService;
 import com.shrupp.shrupp.domain.post.service.PostService;
-import com.shrupp.shrupp.global.audit.BaseTime;
 import com.shrupp.shrupp.support.docs.RestDocsTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -24,7 +23,6 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
 
-import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.util.List;
 

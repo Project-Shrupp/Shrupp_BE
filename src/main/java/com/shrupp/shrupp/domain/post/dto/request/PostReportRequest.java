@@ -1,8 +1,8 @@
 package com.shrupp.shrupp.domain.post.dto.request;
 
-import com.shrupp.shrupp.domain.member.domain.Member;
-import com.shrupp.shrupp.domain.post.domain.Post;
-import com.shrupp.shrupp.domain.post.domain.PostReport;
+import com.shrupp.shrupp.domain.member.entity.Member;
+import com.shrupp.shrupp.domain.post.entity.Post;
+import com.shrupp.shrupp.domain.post.entity.PostReport;
 import jakarta.validation.constraints.NotNull;
 
 public record PostReportRequest(@NotNull String reportType) {

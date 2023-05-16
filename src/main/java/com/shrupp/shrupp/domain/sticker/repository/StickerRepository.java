@@ -1,6 +1,6 @@
 package com.shrupp.shrupp.domain.sticker.repository;
 
-import com.shrupp.shrupp.domain.sticker.domain.Sticker;
+import com.shrupp.shrupp.domain.sticker.entity.Sticker;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

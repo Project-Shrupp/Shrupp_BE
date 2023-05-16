@@ -1,7 +1,7 @@
 package com.shrupp.shrupp.config.security.oauth2.mapper;
 
 import com.shrupp.shrupp.config.security.LoginUser;
-import com.shrupp.shrupp.domain.member.domain.Member;
+import com.shrupp.shrupp.domain.member.entity.Member;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;

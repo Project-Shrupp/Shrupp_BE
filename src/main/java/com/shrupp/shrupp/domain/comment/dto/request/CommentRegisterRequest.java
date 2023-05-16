@@ -1,8 +1,8 @@
 package com.shrupp.shrupp.domain.comment.dto.request;
 
-import com.shrupp.shrupp.domain.comment.domain.Comment;
-import com.shrupp.shrupp.domain.member.domain.Member;
-import com.shrupp.shrupp.domain.post.domain.Post;
+import com.shrupp.shrupp.domain.comment.entity.Comment;
+import com.shrupp.shrupp.domain.member.entity.Member;
+import com.shrupp.shrupp.domain.post.entity.Post;
 import jakarta.validation.constraints.NotNull;
 
 public record CommentRegisterRequest(@NotNull String content,

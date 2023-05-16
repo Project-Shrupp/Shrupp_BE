@@ -1,7 +1,7 @@
 package com.shrupp.shrupp.domain.sticker.service;
 
 import com.shrupp.shrupp.domain.member.service.MemberService;
-import com.shrupp.shrupp.domain.sticker.domain.Sticker;
+import com.shrupp.shrupp.domain.sticker.entity.Sticker;
 import com.shrupp.shrupp.domain.sticker.dto.request.StickerAddRequest;
 import com.shrupp.shrupp.domain.sticker.repository.StickerRepository;
 import lombok.RequiredArgsConstructor;

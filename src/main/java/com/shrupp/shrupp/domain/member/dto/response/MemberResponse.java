@@ -1,6 +1,6 @@
 package com.shrupp.shrupp.domain.member.dto.response;
 
-import com.shrupp.shrupp.domain.member.domain.Member;
+import com.shrupp.shrupp.domain.member.entity.Member;
 
 import java.time.LocalDateTime;
 

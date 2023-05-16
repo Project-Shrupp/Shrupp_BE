@@ -3,7 +3,7 @@ package com.shrupp.shrupp.domain.post.controller;
 import com.shrupp.shrupp.config.security.LoginUser;
 import com.shrupp.shrupp.domain.comment.dto.response.CommentTallyResponse;
 import com.shrupp.shrupp.domain.comment.service.CommentService;
-import com.shrupp.shrupp.domain.post.domain.Post;
+import com.shrupp.shrupp.domain.post.entity.Post;
 import com.shrupp.shrupp.domain.post.dto.request.PostRegisterRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostReportRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostUpdateRequest;

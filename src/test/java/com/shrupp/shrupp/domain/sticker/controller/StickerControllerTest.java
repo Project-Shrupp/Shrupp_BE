@@ -1,9 +1,7 @@
 package com.shrupp.shrupp.domain.sticker.controller;
 
-import com.shrupp.shrupp.config.security.oauth2.AuthProvider;
-import com.shrupp.shrupp.domain.member.domain.Member;
-import com.shrupp.shrupp.domain.member.domain.Oauth2;
-import com.shrupp.shrupp.domain.sticker.domain.Sticker;
+import com.shrupp.shrupp.domain.member.entity.Member;
+import com.shrupp.shrupp.domain.sticker.entity.Sticker;
 import com.shrupp.shrupp.domain.sticker.dto.request.StickerAddRequest;
 import com.shrupp.shrupp.domain.sticker.service.StickerService;
 import com.shrupp.shrupp.support.docs.RestDocsTest;

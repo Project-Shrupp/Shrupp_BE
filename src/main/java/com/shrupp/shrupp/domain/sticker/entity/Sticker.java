@@ -1,6 +1,6 @@
-package com.shrupp.shrupp.domain.sticker.domain;
+package com.shrupp.shrupp.domain.sticker.entity;
 
-import com.shrupp.shrupp.domain.member.domain.Member;
+import com.shrupp.shrupp.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

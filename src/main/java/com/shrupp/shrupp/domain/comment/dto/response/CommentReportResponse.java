@@ -1,6 +1,6 @@
 package com.shrupp.shrupp.domain.comment.dto.response;
 
-import com.shrupp.shrupp.domain.comment.domain.CommentReport;
+import com.shrupp.shrupp.domain.comment.entity.CommentReport;
 
 import java.time.LocalDateTime;
 

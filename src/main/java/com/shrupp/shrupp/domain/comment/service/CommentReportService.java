@@ -1,6 +1,6 @@
 package com.shrupp.shrupp.domain.comment.service;
 
-import com.shrupp.shrupp.domain.comment.domain.CommentReport;
+import com.shrupp.shrupp.domain.comment.entity.CommentReport;
 import com.shrupp.shrupp.domain.comment.dto.request.CommentReportRequest;
 import com.shrupp.shrupp.domain.comment.repository.CommentReportRepository;
 import com.shrupp.shrupp.domain.member.service.MemberService;

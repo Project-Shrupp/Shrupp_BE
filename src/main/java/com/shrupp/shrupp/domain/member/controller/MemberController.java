@@ -1,6 +1,5 @@
 package com.shrupp.shrupp.domain.member.controller;
 
-import com.shrupp.shrupp.domain.member.domain.Member;
 import com.shrupp.shrupp.domain.member.dto.response.MemberResponse;
 import com.shrupp.shrupp.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
