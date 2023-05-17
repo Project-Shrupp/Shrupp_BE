@@ -22,7 +22,7 @@ public class PostLikeService {
 
     @Transactional
     public boolean like(Long postId, Long memberId) {
-        if (postLikeRepository.existsPostLikeByPostIdAndMemberId(postId, memberId)) {
+        if (postLikeRepository.existsPostLikeByIdPostIdAndIdMemberId(postId, memberId)) {
             return false;
         }
 
@@ -35,7 +35,7 @@ public class PostLikeService {
 
     @Transactional
     public boolean unlike(Long postId, Long memberId) {
-        Optional<PostLike> postLike = postLikeRepository.findPostLikeByPostIdAndMemberId(postId, memberId);
+        Optional<PostLike> postLike = postLikeRepository.findPostLikeByIdPostIdAndIdMemberId(postId, memberId);
         if (postLike.isEmpty()) {
             return false;
         }
@@ -45,10 +45,10 @@ public class PostLikeService {
     }
 
     public boolean liked(Long postId, Long memberId) {
-        return postLikeRepository.existsPostLikeByPostIdAndMemberId(postId, memberId);
+        return postLikeRepository.existsPostLikeByIdPostIdAndIdMemberId(postId, memberId);
     }
 
     public Long getPostLikeCount(Long postId) {
-        return postLikeRepository.countPostLikesByPostId(postId);
+        return postLikeRepository.countPostLikesByIdPostId(postId);
     }
 }
