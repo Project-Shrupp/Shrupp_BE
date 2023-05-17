@@ -9,21 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class PostLike {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "post_id")
-    private Post post;
+    @EmbeddedId
+    private PostLikeId id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
 
     public PostLike(Post post, Member member) {
-        this.post = post;
-        this.member = member;
+        this.id = new PostLikeId(post, member);
     }
 }

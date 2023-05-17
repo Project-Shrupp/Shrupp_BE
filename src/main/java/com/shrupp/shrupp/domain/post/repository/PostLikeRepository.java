@@ -1,15 +1,16 @@
 package com.shrupp.shrupp.domain.post.repository;
 
 import com.shrupp.shrupp.domain.post.entity.PostLike;
+import com.shrupp.shrupp.domain.post.entity.PostLikeId;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface PostLikeRepository extends JpaRepository<PostLike, Long> {
+public interface PostLikeRepository extends JpaRepository<PostLike, PostLikeId> {
 
-    boolean existsPostLikeByPostIdAndMemberId(Long postId, Long memberId);
+    boolean existsPostLikeByIdPostIdAndIdMemberId(Long postId, Long memberId);
 
-    Optional<PostLike> findPostLikeByPostIdAndMemberId(Long postId, Long memberId);
+    Optional<PostLike> findPostLikeByIdPostIdAndIdMemberId(Long postId, Long memberId);
 
-    Long countPostLikesByPostId(Long postId);
+    Long countPostLikesByIdPostId(Long postId);
 }
