@@ -14,23 +14,24 @@ import java.util.List;
 import java.util.Objects;
 
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/stickers")
+@RequestMapping("/api/v1/posts/{postId}/stickers")
 @RestController
 public class StickerController {
 
     private final StickerService stickerService;
 
     @GetMapping
-    public ResponseEntity<List<StickerResponse>> stickerList() {
-        return ResponseEntity.ok(stickerService.findAll().stream()
+    public ResponseEntity<List<StickerResponse>> stickerList(@PathVariable Long postId) {
+        return ResponseEntity.ok(stickerService.findByPostId(postId).stream()
                 .map(StickerResponse::of)
                 .toList());
     }
 
     @PostMapping
     public ResponseEntity<StickerResponse> stickerAdd(@RequestBody @Validated StickerAddRequest stickerAddRequest,
+                                                      @PathVariable Long postId,
                                                       @AuthenticationPrincipal LoginUser loginUser) {
-        return ResponseEntity.ok(StickerResponse.of(stickerService.save(stickerAddRequest, loginUser.getMember().getId())));
+        return ResponseEntity.ok(StickerResponse.of(stickerService.save(stickerAddRequest, loginUser.getMember().getId(), postId)));
     }
 
     @DeleteMapping("/{stickerId}")

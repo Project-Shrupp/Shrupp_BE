@@ -54,10 +54,10 @@ class StickerControllerTest extends RestDocsTest {
     @Test
     @DisplayName("스티커 추가")
     void addSticker() throws Exception {
-        given(stickerService.save(any(StickerAddRequest.class), any(Long.class))).willReturn(sticker);
+        given(stickerService.save(any(StickerAddRequest.class), any(Long.class), any(Long.class))).willReturn(sticker);
 
         ResultActions perform =
-                mockMvc.perform(post("/api/v1/stickers")
+                mockMvc.perform(post("/api/v1/posts/{postId}/stickers", 1L)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(toJson(new StickerAddRequest("smile", 0.2, 1.5))));
 
@@ -68,6 +68,8 @@ class StickerControllerTest extends RestDocsTest {
                 .andDo(document("add-sticker",
                         getDocumentRequest(),
                         getDocumentResponse(),
+                        pathParameters(
+                                parameterWithName("postId").description("게시글 키")),
                         requestFields(
                                 fieldWithPath("category").type(JsonFieldType.STRING).description("스티커 종류"),
                                 fieldWithPath("xCoordinate").type(JsonFieldType.NUMBER).description("X 좌표"),
@@ -82,10 +84,10 @@ class StickerControllerTest extends RestDocsTest {
     @Test
     @DisplayName("스티커 목록 조회")
     void stickerList() throws Exception {
-        given(stickerService.findAll()).willReturn(List.of(sticker));
+        given(stickerService.findByPostId(any(Long.class))).willReturn(List.of(sticker));
 
         ResultActions perform =
-                mockMvc.perform(get("/api/v1/stickers")
+                mockMvc.perform(get("/api/v1/posts/{postId}/stickers", 1L)
                 .contentType(MediaType.APPLICATION_JSON));
 
         perform.andExpect(status().isOk())
@@ -95,6 +97,8 @@ class StickerControllerTest extends RestDocsTest {
                 .andDo(document("get-sticker-list",
                         getDocumentRequest(),
                         getDocumentResponse(),
+                        pathParameters(
+                                parameterWithName("postId").description("게시글 키")),
                         responseFields(
                                 fieldWithPath("[].id").type(JsonFieldType.NUMBER).description("스티커 키"),
                                 fieldWithPath("[].category").type(JsonFieldType.STRING).description("스티커 종류"),
@@ -107,7 +111,7 @@ class StickerControllerTest extends RestDocsTest {
     void deleteSticker() throws Exception {
         willDoNothing().given(stickerService).deleteById(1L);
 
-        ResultActions perform = mockMvc.perform(delete("/api/v1/stickers/{stickerId}", 1L)
+        ResultActions perform = mockMvc.perform(delete("/api/v1/posts/{postId}/stickers/{stickerId}", 1L, 1L)
                 .contentType(MediaType.APPLICATION_JSON));
 
         perform.andExpect(status().isOk());
@@ -117,6 +121,7 @@ class StickerControllerTest extends RestDocsTest {
                         getDocumentRequest(),
                         getDocumentResponse(),
                         pathParameters(
+                                parameterWithName("postId").description("게시글 키"),
                                 parameterWithName("stickerId").description("스티커 키"))));
     }
 }

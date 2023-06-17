@@ -1,6 +1,7 @@
 package com.shrupp.shrupp.domain.sticker.entity;
 
 import com.shrupp.shrupp.domain.member.entity.Member;
+import com.shrupp.shrupp.domain.post.entity.Post;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,10 +28,15 @@ public class Sticker {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public Sticker(String category, Double xCoordinate, Double yCoordinate, Member member) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_id")
+    private Post post;
+
+    public Sticker(String category, Double xCoordinate, Double yCoordinate, Member member, Post post) {
         this.category = category;
         this.xCoordinate = xCoordinate;
         this.yCoordinate = yCoordinate;
         this.member = member;
+        this.post = post;
     }
 }
