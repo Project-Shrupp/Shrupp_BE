@@ -17,6 +17,8 @@ endif::[]
 
 include::{snippets}/add-sticker/http-request.adoc[]
 
+include::{snippets}/add-sticker/path-parameters.adoc[]
+
 include::{snippets}/add-sticker/request-fields.adoc[]
 
 === Response
@@ -30,6 +32,8 @@ include::{snippets}/add-sticker/response-fields.adoc[]
 === Request
 
 include::{snippets}/get-sticker-list/http-request.adoc[]
+
+include::{snippets}/get-sticker-list/path-parameters.adoc[]
 
 === Response
 

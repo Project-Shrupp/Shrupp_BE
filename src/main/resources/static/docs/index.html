@@ -669,8 +669,8 @@ Content-Length: 197
 {
   "content" : "123",
   "backgroundColor" : "#fff",
-  "created" : "2023-05-14T02:14:52.022976",
-  "lastUpdated" : "2023-05-14T02:14:52.023195",
+  "created" : "2023-06-17T11:50:18.085722",
+  "lastUpdated" : "2023-06-17T11:50:18.085906",
   "memberNickname" : "member",
   "isWriter" : true
 }</code></pre>
@@ -779,7 +779,7 @@ Content-Length: 262
   "id" : 1,
   "content" : "123",
   "backgroundColor" : "#fff",
-  "created" : "2023-05-14T02:14:52.104893",
+  "created" : "2023-06-17T11:50:18.154743",
   "isWriter" : true,
   "postLikeTally" : {
     "count" : 0
@@ -897,13 +897,13 @@ Vary: Origin
 Vary: Access-Control-Request-Method
 Vary: Access-Control-Request-Headers
 Content-Type: application/json;charset=UTF-8
-Content-Length: 197
+Content-Length: 196
 
 {
   "content" : "123",
   "backgroundColor" : "#fff",
-  "created" : "2023-05-14T02:14:52.201126",
-  "lastUpdated" : "2023-05-14T02:14:52.201332",
+  "created" : "2023-06-17T11:50:18.279929",
+  "lastUpdated" : "2023-06-17T11:50:18.28008",
   "memberNickname" : "member",
   "isWriter" : true
 }</code></pre>
@@ -1036,8 +1036,8 @@ Content-Length: 197
 {
   "content" : "123",
   "backgroundColor" : "#fff",
-  "created" : "2023-05-14T02:14:52.253419",
-  "lastUpdated" : "2023-05-14T02:14:52.253546",
+  "created" : "2023-06-17T11:50:18.359907",
+  "lastUpdated" : "2023-06-17T11:50:18.360056",
   "memberNickname" : "member",
   "isWriter" : true
 }</code></pre>
@@ -1208,7 +1208,7 @@ Content-Length: 114
 
 {
   "reportType" : "욕설/비하",
-  "created" : "2023-05-14T02:14:52.319873",
+  "created" : "2023-06-17T11:50:18.453628",
   "postId" : 1,
   "memberId" : 1
 }</code></pre>
@@ -1602,8 +1602,8 @@ Content-Length: 180
 {
   "id" : 1,
   "content" : "test",
-  "created" : "2023-05-14T02:14:51.178127",
-  "lastUpdated" : "2023-05-14T02:14:51.178301",
+  "created" : "2023-06-17T11:50:17.128868",
+  "lastUpdated" : "2023-06-17T11:50:17.129046",
   "memberNickname" : "member",
   "isWriter" : true
 }</code></pre>
@@ -1703,8 +1703,8 @@ Content-Length: 184
 [ {
   "id" : 1,
   "content" : "test",
-  "created" : "2023-05-14T02:14:51.229908",
-  "lastUpdated" : "2023-05-14T02:14:51.230087",
+  "created" : "2023-06-17T11:50:17.194901",
+  "lastUpdated" : "2023-06-17T11:50:17.195178",
   "memberNickname" : "member",
   "isWriter" : true
 } ]</code></pre>
@@ -1946,7 +1946,7 @@ Content-Length: 117
 
 {
   "reportType" : "욕설/비하",
-  "created" : "2023-05-14T02:14:50.982149",
+  "created" : "2023-06-17T11:50:16.913733",
   "commentId" : 1,
   "memberId" : 1
 }</code></pre>
@@ -2001,7 +2001,7 @@ Content-Length: 117
 <h3 id="_request_17"><a class="link" href="#_request_17">Request</a></h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/v1/stickers HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/v1/posts/1/stickers HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Content-Length: 72
 Host: localhost:8080
@@ -2013,6 +2013,25 @@ Host: localhost:8080
 }</code></pre>
 </div>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 11. /api/v1/posts/{postId}/stickers</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>postId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">게시글 키</p></td>
+</tr>
+</tbody>
+</table>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -2110,11 +2129,30 @@ Content-Length: 84
 <h3 id="_request_18"><a class="link" href="#_request_18">Request</a></h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/v1/stickers HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/v1/posts/1/stickers HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: localhost:8080</code></pre>
 </div>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 12. /api/v1/posts/{postId}/stickers</caption>
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>postId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">게시글 키</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect2">
 <h3 id="_response_18"><a class="link" href="#_response_18">Response</a></h3>
@@ -2181,13 +2219,13 @@ Content-Length: 88
 <h3 id="_request_19"><a class="link" href="#_request_19">Request</a></h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /api/v1/stickers/1 HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">DELETE /api/v1/posts/1/stickers/1 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Host: localhost:8080</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 11. /api/v1/stickers/{stickerId}</caption>
+<caption class="title">Table 13. /api/v1/posts/{postId}/stickers/{stickerId}</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -2199,6 +2237,10 @@ Host: localhost:8080</code></pre>
 </tr>
 </thead>
 <tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>postId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">게시글 키</p></td>
+</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>stickerId</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">스티커 키</p></td>
