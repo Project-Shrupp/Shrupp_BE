@@ -36,8 +36,8 @@ jwt:
 
 client:
   host: .shrupp.net
-  url: https://shrupp.net
-#  url: http://localhost:3000
+#  url: https://shrupp.net
+  url: http://localhost:3000
   endpoint: success
 
 server:
