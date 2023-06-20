@@ -35,7 +35,7 @@ jwt:
   secret: shruppshruppshruppshruppshruppshruppshruppshruppshruppshruppshruppshruppshruppshruppshruppshruppshruppshruppshruppshrupp
 
 client:
-  host: .shrupp.net
+  host: localhost
 #  url: https://shrupp.net
   url: http://localhost:3000
   endpoint: success
