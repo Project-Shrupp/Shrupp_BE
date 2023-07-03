@@ -35,7 +35,7 @@ jobs:
         shell: bash
       
       - name: Build with Gradle
-        run: ./gradlew build -x test asciidoctor --parallel
+        run: ./gradlew clean build
         shell: bash
       
       - name: Make zip file
