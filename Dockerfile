@@ -4,6 +4,9 @@ WORKDIR /app
 
 COPY build/libs/shrupp-0.0.1-SNAPSHOT.jar .
 
+ARG DB_USERNAME
+ARG DB_PASSWORD
+
 USER nobody
 ENTRYPOINT [\
     "java",\
@@ -13,5 +16,7 @@ ENTRYPOINT [\
     "-Dspring.profiles.active=dev",\
     "-DKAKAO_CLIENT_ID=1b8ff0d13c094175ce585c92e1fafac6",\
     "-DKAKAO_CLIENT_SECRET=JTcr1zK63BVeiwCImZmQciLqY58Lw2wF",\
+    "-DDB_USERNAME=${DB_USERNAME}",\
+    "-DDB_PASSWORD=${DB_PASSWORD}",\
     "shrupp-0.0.1-SNAPSHOT.jar"\
 ]
