@@ -15,4 +15,8 @@ public class OAuth2Request {
         this.email = email;
         this.authProvider = authProvider;
     }
+
+    public void changeRandomNickname(String nickname) {
+        this.name = nickname;
+    }
 }
