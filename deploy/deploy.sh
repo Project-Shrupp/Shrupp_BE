@@ -6,6 +6,8 @@ docker stop shrupp
 docker rm shrupp
 docker rmi shrupp-image
 
+source ~/.bashrc
+
 docker build -t shrupp-image . \
 --build-arg DB_USERNAME=$DB_USERNAME \
 --build-arg DB_PASSWORD=$DB_PASSWORD \
