@@ -2,6 +2,7 @@ package com.shrupp.shrupp.domain.post.repository;
 
 import com.shrupp.shrupp.domain.post.entity.PostLike;
 import com.shrupp.shrupp.domain.post.entity.PostLikeId;
+import org.hibernate.annotations.OptimisticLock;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

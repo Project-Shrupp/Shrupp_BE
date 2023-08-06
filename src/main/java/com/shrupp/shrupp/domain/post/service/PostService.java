@@ -22,10 +22,6 @@ public class PostService {
     private final PostRepository postRepository;
     private final MemberService memberService;
 
-    public List<Post> findAll() {
-        return postRepository.findAll();
-    }
-
     public Page<Post> findAllByPaging(Pageable pageable) {
         return postRepository.findPagingAll(pageable);
     }
