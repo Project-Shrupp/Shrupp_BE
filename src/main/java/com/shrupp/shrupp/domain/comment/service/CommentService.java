@@ -52,7 +52,10 @@ public class CommentService {
     }
 
     @Transactional
-    public void deleteComment(Long id, Long memberId) {
-        commentRepository.deleteByIdAndMemberId(id, memberId);
+    public Comment deleteComment(Long id, Long memberId) {
+        Comment comment = commentRepository.findByIdAndMemberId(id, memberId)
+                .orElseThrow(EntityNotFoundException::new);
+        comment.delete();
+        return comment;
     }
 }

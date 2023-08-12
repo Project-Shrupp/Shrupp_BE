@@ -23,6 +23,9 @@ public class Post extends BaseTime {
     @Column(length = 30)
     private String backgroundColor;
 
+    @Column(nullable = false)
+    private Boolean deleted;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -34,10 +37,19 @@ public class Post extends BaseTime {
         this.content = content;
         this.backgroundColor = backgroundColor;
         this.member = member;
+        this.deleted = false;
     }
 
     public void updatePost(String content, String backgroundColor) {
         this.content = content;
         this.backgroundColor = backgroundColor;
+    }
+
+    public void delete() {
+        this.deleted = true;
+    }
+
+    public boolean isDeleted() {
+        return this.deleted;
     }
 }

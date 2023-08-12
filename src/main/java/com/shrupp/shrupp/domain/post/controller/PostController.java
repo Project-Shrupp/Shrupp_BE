@@ -35,9 +35,12 @@ public class PostController {
     private final CommentService commentService;
 
     @GetMapping
-    public ResponseEntity<List<PreviewPostResponse>> postList(
-            @PageableDefault(page = 0, size = 20, sort = "created", direction = Sort.Direction.DESC) Pageable pageable,
-            @AuthenticationPrincipal LoginUser loginUser) {
+    public ResponseEntity<List<PreviewPostResponse>> postList(@PageableDefault(
+                                                              page = 0,
+                                                              size = 20,
+                                                              sort = "created",
+                                                              direction = Sort.Direction.DESC) Pageable pageable,
+                                                              @AuthenticationPrincipal LoginUser loginUser) {
 
         Page<Post> postsByPaging = postService.findAllByPaging(pageable);
         return ResponseEntity.ok(postsByPaging.stream()
@@ -82,9 +85,12 @@ public class PostController {
     @DeleteMapping("/{postId}")
     public ResponseEntity<Objects> postRemove(@PathVariable Long postId,
                                               @AuthenticationPrincipal LoginUser loginUser) {
-        postService.deletePost(postId, loginUser.getMember().getId());
+        Post post = postService.deletePost(postId, loginUser.getMember().getId());
+        if (post.isDeleted()) {
+            return ResponseEntity.noContent().build();
+        }
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/{postId}/reports")

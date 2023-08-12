@@ -22,6 +22,9 @@ public class Comment extends BaseTime {
     @Column(length = 5000, nullable = false)
     private String content;
 
+    @Column(nullable = false)
+    private Boolean deleted;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
@@ -37,9 +40,18 @@ public class Comment extends BaseTime {
         this.content = content;
         this.post = post;
         this.member = member;
+        this.deleted = false;
     }
 
     public void updateComment(String content) {
         this.content = content;
+    }
+
+    public void delete() {
+        this.deleted = true;
+    }
+
+    public boolean isDeleted() {
+        return this.deleted;
     }
 }

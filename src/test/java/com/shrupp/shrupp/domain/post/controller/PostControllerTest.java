@@ -188,12 +188,13 @@ class PostControllerTest extends RestDocsTest {
     @Test
     @DisplayName("게시글 삭제")
     void deletePost() throws Exception {
-        willDoNothing().given(postService).deletePost(1L, 1L);
+        given(post.isDeleted()).willReturn(true);
+        given(postService.deletePost(any(Long.class), any(Long.class))).willReturn(post);
 
         ResultActions perform = mockMvc.perform(delete("/api/v1/posts/{postId}", 1L)
                 .contentType(MediaType.APPLICATION_JSON));
 
-        perform.andExpect(status().isOk());
+        perform.andExpect(status().isNoContent());
 
         perform.andDo(print())
                 .andDo(document("delete-post",

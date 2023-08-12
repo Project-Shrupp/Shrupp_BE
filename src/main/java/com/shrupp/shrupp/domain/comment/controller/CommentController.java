@@ -60,9 +60,11 @@ public class CommentController {
     @DeleteMapping("/{commentId}")
     public ResponseEntity<Objects> commentDelete(@PathVariable Long commentId,
                                                  @AuthenticationPrincipal LoginUser loginUser) {
-        commentService.deleteComment(commentId, loginUser.getMember().getId());
-
-        return ResponseEntity.ok().build();
+        Comment comment = commentService.deleteComment(commentId, loginUser.getMember().getId());
+        if (comment.isDeleted()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/{commentId}/reports")

@@ -9,9 +9,10 @@ import java.util.List;
 
 public interface StickerRepository extends JpaRepository<Sticker, Long> {
 
-    @Query("select s from Sticker s left join fetch s.member")
+    @Query("select s from Sticker s left join fetch s.member where s.member.deleted = false")
     List<Sticker> findAllFetchWithMember();
 
-    @Query("select s from Sticker s left join fetch s.member where s.post.id = :postId")
+    @Query("select s from Sticker s left join fetch s.member " +
+            "where s.member.deleted = false and s.post.deleted = false and s.post.id = :postId")
     List<Sticker> findByPostIdFetchWithMember(@Param("postId") Long postId);
 }

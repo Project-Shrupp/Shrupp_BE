@@ -133,12 +133,13 @@ class CommentControllerTest extends RestDocsTest {
     @Test
     @DisplayName("댓글 삭제")
     void deleteComment() throws Exception {
-        willDoNothing().given(commentService).deleteComment(1L, 1L);
+        given(comment.isDeleted()).willReturn(true);
+        given(commentService.deleteComment(any(Long.class), any(Long.class))).willReturn(comment);
 
         ResultActions perform = mockMvc.perform(delete("/api/v1/comments/{id}", 1L)
                 .contentType(MediaType.APPLICATION_JSON));
 
-        perform.andExpect(status().isOk());
+        perform.andExpect(status().isNoContent());
 
         perform.andDo(print())
                 .andDo(document("delete-comment",
