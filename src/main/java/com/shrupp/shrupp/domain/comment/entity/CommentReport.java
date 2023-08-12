@@ -18,6 +18,9 @@ public class CommentReport extends BaseTime {
     @Column(nullable = false)
     private String reportType;
 
+    @Column(nullable = false)
+    private Boolean deleted;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comment_id")
     private Comment comment;
@@ -30,5 +33,6 @@ public class CommentReport extends BaseTime {
         this.reportType = reportType;
         this.comment = comment;
         this.member = member;
+        this.deleted = false;
     }
 }

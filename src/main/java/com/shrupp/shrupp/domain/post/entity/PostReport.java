@@ -18,6 +18,9 @@ public class PostReport extends BaseTime {
     @Column(nullable = false)
     private String reportType;
 
+    @Column(nullable = false)
+    private Boolean deleted;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
@@ -30,5 +33,6 @@ public class PostReport extends BaseTime {
         this.reportType = reportType;
         this.post = post;
         this.member = member;
+        this.deleted = false;
     }
 }

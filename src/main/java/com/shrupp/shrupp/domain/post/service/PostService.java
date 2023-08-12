@@ -45,8 +45,12 @@ public class PostService {
     }
 
     @Transactional
-    public void deletePost(Long postId, Long memberId) {
-        postRepository.deleteByIdAndMemberId(postId, memberId);
+    public Post deletePost(Long postId, Long memberId) {
+        Post post = postRepository.findByDeletedFalseAndIdAndMemberId(postId, memberId)
+                .orElseThrow(EntityNotFoundException::new);
+
+        post.delete();
+        return post;
     }
 
     public Long getPostCount() {

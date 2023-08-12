@@ -30,9 +30,13 @@ public class Member extends BaseTime {
     @Enumerated(EnumType.STRING)
     private List<Role> role = new ArrayList<>(List.of(Role.ROLE_USER));
 
+    @Column(nullable = false)
+    private Boolean deleted;
+
     public Member(String nickname, Oauth2 oauth2) {
         this.nickname = nickname;
         this.oauth2 = oauth2;
+        this.deleted = false;
     }
 
     public List<SimpleGrantedAuthority> getRole() {
