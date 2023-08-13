@@ -19,7 +19,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "where p.deleted = false and p.member.deleted = false and p.id = :id and p.member.id = :memberId")
     Optional<Post> findByIdWithFetchMemberId(@Param("id") Long id, @Param("memberId") Long memberId);
 
-    @Query(value = "select p from Post p where p.deleted = false",
+    @Query(value = "select p from Post p join fetch p.member where p.deleted = false",
             countQuery = "select count(p) from Post p where p.deleted = false")
     Page<Post> findPagingAll(Pageable pageable);
 }
