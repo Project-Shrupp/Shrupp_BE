@@ -15,8 +15,8 @@ import java.util.Date;
 public class JwtProvider {
 
     private static final Long AUTH_TOKEN_VALIDATION_SECOND = 60L * 1000;
-    private static final Long ACCESS_TOKEN_VALIDATION_SECOND = 60L * 60 * 24 * 1000;
-    private static final Long REFRESH_TOKEN_VALIDATION_SECOND = 60L * 60 * 24 * 14 * 1000;
+    private static final Long ACCESS_TOKEN_VALIDATION_SECOND = 60L * 60 * 24 * 60 * 1000;
+    private static final Long REFRESH_TOKEN_VALIDATION_SECOND = 60L * 60 * 24 * 90 * 1000;
     private static final String BEARER_TYPE = "bearer";
 
     private final Key key;

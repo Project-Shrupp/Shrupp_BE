@@ -33,7 +33,4 @@ public class MemberService {
         return memberRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
-    public List<Member> findAll() {
-        return memberRepository.findAll();
-    }
 }
