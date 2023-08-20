@@ -30,7 +30,6 @@ import static com.shrupp.shrupp.support.docs.ApiDocumentUtils.getDocumentRequest
 import static com.shrupp.shrupp.support.docs.ApiDocumentUtils.getDocumentResponse;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willDoNothing;
 import static org.mockito.Mockito.mock;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*;
@@ -42,18 +41,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(PostController.class)
 class PostControllerTest extends RestDocsTest {
 
-    @Mock
-    private Member member;
-    @Mock
-    private Post post;
-    @MockBean
-    private PostService postService;
-    @MockBean
-    private PostReportService postReportService;
-    @MockBean
-    private PostLikeService postLikeService;
-    @MockBean
-    private CommentService commentService;
+    @Mock Member member;
+    @Mock Post post;
+    @MockBean PostService postService;
+    @MockBean PostReportService postReportService;
+    @MockBean PostLikeService postLikeService;
+    @MockBean CommentService commentService;
 
     @BeforeEach
     void initMock() {

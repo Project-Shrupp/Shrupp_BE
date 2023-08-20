@@ -36,6 +36,12 @@ spring:
             user-info-uri: https://kapi.kakao.com/v2/user/me
             user-name-attribute: id
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
+
 jwt:
   access-header: Authorization
   refresh-header: Refresh
@@ -44,7 +50,6 @@ jwt:
 client:
   host: .shrupp.net
   url: https://shrupp.net
-# url: http://localhost:3000
   endpoint: success
 
 #server:

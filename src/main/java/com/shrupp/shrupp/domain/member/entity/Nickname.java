@@ -14,12 +14,12 @@ public class Nickname {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String noun;
-
     private String adjective;
 
-    public Nickname(String noun, String adjective) {
-        this.noun = noun;
+    private String noun;
+
+    public Nickname(String adjective, String noun) {
         this.adjective = adjective;
+        this.noun = noun;
     }
 }

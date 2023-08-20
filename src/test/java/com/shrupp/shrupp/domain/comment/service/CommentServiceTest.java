@@ -8,7 +8,6 @@ import com.shrupp.shrupp.domain.member.entity.Member;
 import com.shrupp.shrupp.domain.member.service.MemberService;
 import com.shrupp.shrupp.domain.post.entity.Post;
 import com.shrupp.shrupp.domain.post.service.PostService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,7 +21,6 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -35,7 +33,7 @@ class CommentServiceTest {
     @InjectMocks CommentService commentService;
 
     @Test
-    @DisplayName("id를 통해 댓글 조회")
+    @DisplayName("id를 통해 댓글을 조회할 수 있다")
     public void findCommentById() {
         long id = 1L;
         given(commentRepository.findByIdFetchWithMember(any(Long.class))).willReturn(Optional.ofNullable(comment));
@@ -46,7 +44,7 @@ class CommentServiceTest {
     }
 
     @Test
-    @DisplayName("게시글 id를 통해 댓글 조회")
+    @DisplayName("게시글 id를 통해 댓글을 조회할 수 있다")
     public void findCommentsByPostId() {
         long postId = 1L;
         given(commentRepository.findByPostIdFetchWithMember(any(Long.class))).willReturn(List.of(comment));
@@ -57,7 +55,7 @@ class CommentServiceTest {
     }
 
     @Test
-    @DisplayName("댓글 추가")
+    @DisplayName("댓글을 추가할 수 있다")
     public void addComment() {
         Member member = new Member();
         given(commentRepository.save(any(Comment.class))).willReturn(comment);
@@ -70,11 +68,11 @@ class CommentServiceTest {
     }
 
     @Test
-    @DisplayName("댓글 수정")
+    @DisplayName("댓글을 수정할 수 있다")
     public void updateComment() {
         long id = 1L;
         long memberId = 1L;
-        given(commentRepository.findByIdFetchWithMemberId(any(Long.class), any(Long.class))).willReturn(Optional.ofNullable(comment));
+        given(commentRepository.findByIdAndMemberIdFetchWithMember(any(Long.class), any(Long.class))).willReturn(Optional.ofNullable(comment));
 
         Comment updatedComment = commentService.updateComment(id, new CommentUpdateRequest("content"), memberId);
 
@@ -82,10 +80,10 @@ class CommentServiceTest {
     }
 
     @Test
-    @DisplayName("댓글 삭제")
+    @DisplayName("댓글을 삭제할 수 있다")
     public void deleteComment() {
         given(comment.isDeleted()).willReturn(true);
-        given(commentRepository.findByIdAndMemberId(any(Long.class), any(Long.class))).willReturn(Optional.ofNullable(comment));
+        given(commentRepository.findByIdAndMemberIdFetchWithMember(any(Long.class), any(Long.class))).willReturn(Optional.ofNullable(comment));
         Comment comment = commentService.deleteComment(1L, 1L);
 
         assertThat(comment.isDeleted()).isTrue();

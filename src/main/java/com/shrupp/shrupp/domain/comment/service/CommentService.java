@@ -43,7 +43,7 @@ public class CommentService {
 
     @Transactional
     public Comment updateComment(Long id, CommentUpdateRequest commentUpdateRequest, Long memberId) {
-        Comment comment = commentRepository.findByIdFetchWithMemberId(id, memberId)
+        Comment comment = commentRepository.findByIdAndMemberIdFetchWithMember(id, memberId)
                 .orElseThrow(EntityNotFoundException::new);
 
         comment.updateComment(commentUpdateRequest.content());
@@ -53,7 +53,7 @@ public class CommentService {
 
     @Transactional
     public Comment deleteComment(Long id, Long memberId) {
-        Comment comment = commentRepository.findByIdAndMemberId(id, memberId)
+        Comment comment = commentRepository.findByIdAndMemberIdFetchWithMember(id, memberId)
                 .orElseThrow(EntityNotFoundException::new);
         comment.delete();
         return comment;

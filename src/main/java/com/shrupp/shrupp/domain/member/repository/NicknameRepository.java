@@ -6,9 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface NicknameRepository extends JpaRepository<Nickname, Long> {
 
-    @Query("select n.noun from Nickname n order by rand() limit 1")
-    String findRandomNoun();
-
     @Query("select n.adjective from Nickname n order by rand() limit 1")
     String findRandomAdjective();
+
+    @Query("select n.noun from Nickname n order by rand() limit 1")
+    String findRandomNoun();
 }

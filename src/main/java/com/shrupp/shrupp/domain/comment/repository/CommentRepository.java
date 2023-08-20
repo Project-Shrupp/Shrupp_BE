@@ -10,18 +10,17 @@ import java.util.Optional;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-    Optional<Comment> findByIdAndMemberId(Long id, Long memberId);
 
     @Query("select c from Comment c left join fetch c.member where c.deleted = false and c.id = :id")
     Optional<Comment> findByIdFetchWithMember(@Param("id") Long id);
 
     @Query("select c from Comment c left join fetch c.member " +
-            "where c.deleted = false and c.post.deleted = false and c.post.id = :postId")
+            "where c.post.deleted = false and c.deleted = false and c.post.id = :postId")
     List<Comment> findByPostIdFetchWithMember(@Param("postId") Long postId);
 
     @Query("select c from Comment c left join fetch c.member " +
-            "where c.deleted = false and c.member.deleted = false and c.id = :id and c.member.id = :memberId")
-    Optional<Comment> findByIdFetchWithMemberId(@Param("id") Long id, @Param("memberId") Long memberId);
+            "where c.member.deleted = false and c.deleted = false and c.id = :id and c.member.id = :memberId")
+    Optional<Comment> findByIdAndMemberIdFetchWithMember(@Param("id") Long id, @Param("memberId") Long memberId);
 
     Long countCommentsByPostId(Long postId);
 }

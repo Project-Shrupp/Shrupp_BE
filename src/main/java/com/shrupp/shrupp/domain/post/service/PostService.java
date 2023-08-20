@@ -1,9 +1,12 @@
 package com.shrupp.shrupp.domain.post.service;
 
+import com.shrupp.shrupp.domain.comment.entity.Comment;
+import com.shrupp.shrupp.domain.comment.service.CommentService;
 import com.shrupp.shrupp.domain.member.service.MemberService;
 import com.shrupp.shrupp.domain.post.entity.Post;
 import com.shrupp.shrupp.domain.post.dto.request.PostRegisterRequest;
 import com.shrupp.shrupp.domain.post.dto.request.PostUpdateRequest;
+import com.shrupp.shrupp.domain.post.repository.PostLikeRepository;
 import com.shrupp.shrupp.domain.post.repository.PostRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +23,8 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final PostLikeRepository postLikeRepository;
+    private final CommentService commentService;
     private final MemberService memberService;
 
     public Page<Post> findAllByPaging(Pageable pageable) {
@@ -37,7 +42,7 @@ public class PostService {
 
     @Transactional
     public Post updatePost(Long postId, PostUpdateRequest postUpdateRequest, Long memberId) {
-        Post post = postRepository.findByIdWithFetchMemberId(postId, memberId)
+        Post post = postRepository.findByIdAndMemberIdWithFetchMember(postId, memberId)
                 .orElseThrow(EntityNotFoundException::new);
 
         post.updatePost(postUpdateRequest.content(), postUpdateRequest.backgroundColor());
@@ -46,11 +51,18 @@ public class PostService {
 
     @Transactional
     public Post deletePost(Long postId, Long memberId) {
-        Post post = postRepository.findByDeletedFalseAndIdAndMemberId(postId, memberId)
+        Post post = postRepository.findByIdAndMemberIdWithFetchMember(postId, memberId)
                 .orElseThrow(EntityNotFoundException::new);
 
+        postLikeRepository.deleteByIdPostId(postId);
+        deleteCommentsByPostId(post.getId(), memberId);
         post.delete();
         return post;
+    }
+
+    private void deleteCommentsByPostId(Long postId, Long memberId) {
+        commentService.findCommentsByPostId(postId)
+                .forEach(comment -> commentService.deleteComment(comment.getId(), memberId));
     }
 
     public Long getPostCount() {

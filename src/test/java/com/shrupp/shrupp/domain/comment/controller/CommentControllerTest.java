@@ -36,14 +36,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(CommentController.class)
 class CommentControllerTest extends RestDocsTest {
 
-    @Mock
-    private Member member;
-    @Mock
-    private Comment comment;
-    @MockBean
-    private CommentService commentService;
-    @MockBean
-    private CommentReportService commentReportService;
+    @Mock private Member member;
+    @Mock private Comment comment;
+    @MockBean private CommentService commentService;
+    @MockBean private CommentReportService commentReportService;
 
     @BeforeEach
     void initMock() {

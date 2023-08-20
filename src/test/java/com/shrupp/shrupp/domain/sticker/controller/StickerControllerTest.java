@@ -33,12 +33,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(StickerController.class)
 class StickerControllerTest extends RestDocsTest {
 
-    @Mock
-    private Member member;
-    @Mock
-    private Sticker sticker;
-    @MockBean
-    private StickerService stickerService;
+    @Mock Member member;
+    @Mock Sticker sticker;
+    @MockBean StickerService stickerService;
 
     @BeforeEach
     void initMock() {
