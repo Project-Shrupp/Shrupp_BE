@@ -1,7 +1,7 @@
 package com.shrupp.shrupp.domain.post.service;
 
 import com.shrupp.shrupp.config.security.oauth2.AuthProvider;
-import com.shrupp.shrupp.domain.comment.service.CommentService;
+import com.shrupp.shrupp.domain.comment.repository.CommentRepository;
 import com.shrupp.shrupp.domain.member.entity.Member;
 import com.shrupp.shrupp.domain.member.entity.Oauth2;
 import com.shrupp.shrupp.domain.member.service.MemberService;
@@ -33,7 +33,7 @@ class PostServiceTest {
 
     @Mock PostRepository postRepository;
     @Mock PostLikeRepository postLikeRepository;
-    @Mock CommentService commentService;
+    @Mock CommentRepository commentRepository;
     @Mock MemberService memberService;
     @InjectMocks PostService postService;
 

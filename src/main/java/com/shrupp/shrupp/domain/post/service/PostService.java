@@ -1,7 +1,7 @@
 package com.shrupp.shrupp.domain.post.service;
 
 import com.shrupp.shrupp.domain.comment.entity.Comment;
-import com.shrupp.shrupp.domain.comment.service.CommentService;
+import com.shrupp.shrupp.domain.comment.repository.CommentRepository;
 import com.shrupp.shrupp.domain.member.service.MemberService;
 import com.shrupp.shrupp.domain.post.entity.Post;
 import com.shrupp.shrupp.domain.post.dto.request.PostRegisterRequest;
@@ -15,8 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -24,7 +22,7 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final PostLikeRepository postLikeRepository;
-    private final CommentService commentService;
+    private final CommentRepository commentRepository;
     private final MemberService memberService;
 
     public Page<Post> findAllByPaging(Pageable pageable) {
@@ -54,15 +52,14 @@ public class PostService {
         Post post = postRepository.findByIdAndMemberIdWithFetchMember(postId, memberId)
                 .orElseThrow(EntityNotFoundException::new);
 
-        postLikeRepository.deleteByIdPostId(postId);
-        deleteCommentsByPostId(post.getId(), memberId);
+        postLikeRepository.deleteByIdPostId(post.getId());
+        deleteCommentsByPostId(post.getId());
         post.delete();
         return post;
     }
 
-    private void deleteCommentsByPostId(Long postId, Long memberId) {
-        commentService.findCommentsByPostId(postId)
-                .forEach(comment -> commentService.deleteComment(comment.getId(), memberId));
+    private void deleteCommentsByPostId(Long postId) {
+        commentRepository.findByPostIdFetchWithMember(postId).forEach(Comment::delete);
     }
 
     public Long getPostCount() {
