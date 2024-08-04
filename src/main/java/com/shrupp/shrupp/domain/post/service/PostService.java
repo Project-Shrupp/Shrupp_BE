@@ -52,7 +52,7 @@ public class PostService {
         Post post = postRepository.findByIdAndMemberIdWithFetchMember(postId, memberId)
                 .orElseThrow(EntityNotFoundException::new);
 
-        postLikeRepository.deleteByIdPostId(post.getId());
+        postLikeRepository.deleteByPostId(post.getId());
         deleteCommentsByPostId(post.getId());
         post.delete();
         return post;
